@@ -2,7 +2,7 @@ import React from "react";
 export default class Login extends React.Component {
   render() {
     return (
-      <form className="  bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] sm:min-w-96 h-fit p-8 shadow-2xl shadow-blue-400/20 border-[1px] border-solid border-blue-400/20">
+      <form className="  bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] sm:min-w-96 h-fit p-8 shadow-0 shadow-blue-400/20 border-[1px] border-solid border-custom-blue">
         <label className="text-2xl font-semibold ">
           Sign in to your account
         </label>
