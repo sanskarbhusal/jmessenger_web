@@ -1,7 +1,5 @@
 import React from "react";
 import Login from "../Login";
-import Register from "../Register";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 export default class App extends React.Component {
   render() {
     return (
