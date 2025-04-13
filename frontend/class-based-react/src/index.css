@@ -1,1 +1,4 @@
 @tailwind utilities;
+body {
+  margin: 0;
+}
