@@ -5,7 +5,7 @@ export default class App extends React.Component {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
         <h3>&#127959; Under construction</h3>
-        <p>Testing CI/CD...</p>
+        <p>Kind of understood gh-pages</p>
         <Login />
       </div>
     );
