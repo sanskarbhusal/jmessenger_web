@@ -4,7 +4,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="w-full h-full flex flex-col justify-center items-center">
-        <h1>&#127959; Under construction</h1>
+        <h3>&#127959; Under construction</h3>
         <p>Testing CI/CD...</p>
         <Login />
       </div>
