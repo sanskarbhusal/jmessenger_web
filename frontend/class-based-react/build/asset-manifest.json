@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/JMessenger_V1.2_Web_AI-Powered/static/css/main.b73ef317.css",
-    "main.js": "/JMessenger_V1.2_Web_AI-Powered/static/js/main.dcf27086.js",
+    "main.js": "/JMessenger_V1.2_Web_AI-Powered/static/js/main.7262613d.js",
     "index.html": "/JMessenger_V1.2_Web_AI-Powered/index.html",
     "main.b73ef317.css.map": "/JMessenger_V1.2_Web_AI-Powered/static/css/main.b73ef317.css.map",
-    "main.dcf27086.js.map": "/JMessenger_V1.2_Web_AI-Powered/static/js/main.dcf27086.js.map"
+    "main.7262613d.js.map": "/JMessenger_V1.2_Web_AI-Powered/static/js/main.7262613d.js.map"
   },
   "entrypoints": [
     "static/css/main.b73ef317.css",
-    "static/js/main.dcf27086.js"
+    "static/js/main.7262613d.js"
   ]
 }
