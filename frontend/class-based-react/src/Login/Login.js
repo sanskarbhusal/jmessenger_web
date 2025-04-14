@@ -2,10 +2,8 @@ import React from "react";
 export default class Login extends React.Component {
   render() {
     return (
-      <form className="bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] h-fit border-[1px] sm:min-w-96 p-8 border-gray-200/70 shadow-2xl shadow-custom-blue-dark/30 sm:border sm:border-solid sm:border-gray-200/70">
-        <label className="text-2xl font-semibold ">
-          Sign in to your account
-        </label>
+      <div className="bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] h-fit border-[1px] sm:min-w-96 p-8 border-gray-200/70 shadow-2xl shadow-custom-blue-dark/30 sm:border sm:border-solid sm:border-gray-200/70">
+        <label className="text-2xl font-semibold ">Login to JMessenger</label>
 
         <div className="flex flex-col mx-4 my-4 w-full ">
           <label htmlFor="email" className="mb-2">
@@ -67,7 +65,7 @@ export default class Login extends React.Component {
             Don't have an account?
           </a>
         </div>
-      </form>
+      </div>
     );
   }
 }

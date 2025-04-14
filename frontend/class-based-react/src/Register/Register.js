@@ -2,7 +2,7 @@ import React from "react";
 export default class Register extends React.Component {
   render() {
     return (
-      <form className="bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] min-h-[55%] border-[1px] sm:min-w-96 p-8 border-gray-200/70 shadow-2xl shadow-custom-blue-dark/30 sm:border sm:border-solid sm:border-gray-200/70">
+      <div className="bg-white font-sans flex flex-col items-center rounded-lg p-8 w-[75%] border-[1px] sm:w-96 border-gray-200/70 shadow-2xl shadow-custom-blue-dark/30 sm:border sm:border-solid sm:border-gray-200/70">
         <label className="text-2xl font-semibold ">Sign up to JMessenger</label>
 
         <div className="flex flex-col mx-4 my-4 w-full ">
@@ -51,12 +51,12 @@ export default class Register extends React.Component {
           />
         </div>
 
-        <div className="w-full my-3">
+        <div className="w-full">
           <button className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 rounded-lg w-full font-sans text-base font-semibold ">
             Sign up
           </button>
         </div>
-      </form>
+      </div>
     );
   }
 }
