@@ -2,7 +2,7 @@ import React from "react";
 export default class Login extends React.Component {
   render() {
     return (
-      <form className="bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] min-h-[55%] border-[1px] sm:min-w-96 p-8 border-gray-200/70 shadow-2xl shadow-custom-blue-dark/30 sm:border sm:border-solid sm:border-gray-200/70">
+      <form className="bg-white font-sans flex flex-col items-center rounded-lg min-w-[75%] h-fit border-[1px] sm:min-w-96 p-8 border-gray-200/70 shadow-2xl shadow-custom-blue-dark/30 sm:border sm:border-solid sm:border-gray-200/70">
         <label className="text-2xl font-semibold ">
           Sign in to your account
         </label>
@@ -59,14 +59,10 @@ export default class Login extends React.Component {
             Log in to your account
           </button>
         </div>
-        <div className="my-5 p-10">
-          {/* login failure display*/}
-          <span className="text-red-700"> [Display credential error here]</span>
-        </div>
-        <div>
+        <div className="mt-1">
           <a
             className="no-underline hover:underline text-custom-blue"
-            href="put your link here"
+            href="Register"
           >
             Don't have an account?
           </a>
