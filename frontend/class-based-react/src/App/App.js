@@ -8,7 +8,8 @@ export default class App extends React.Component {
       <div className="h-full w-full flex flex-row  sm:justify-left items-center gap-5 bg-custom-blue/10 bg-white">
         {/* <h1>&#128679;Under construction</h1> <div className="mt-2"></div>*/}
 
-        <Register />
+        <Login />
+        <EmailVerification />
 
         <div className="mb-2"></div>
       </div>

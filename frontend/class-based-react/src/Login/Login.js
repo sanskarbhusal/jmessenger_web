@@ -3,7 +3,7 @@ export default class Login extends React.Component {
   render() {
     const login_failure_reason = "<reason>";
     return (
-      <div className="w-[76%] h-[65%] sm:h-96 sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-6 ml-9 sm:p-8 sm:border-gray-200/70 sm:border sm:border-solid sm:shadow-2xl shadow-custom-blue-dark/30 border border-solid border-l-2 border-b-0 border-t-0 border-r-0 border-custom-blue-dark ">
+      <div className="w-[76%] h-[50%] sm:h-96 sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-6 ml-9 sm:p-8 sm:border-gray-200/70 sm:border sm:border-solid sm:shadow-2xl shadow-custom-blue-dark/30 border border-solid border-l-2 border-b-0 border-t-0 border-r-0 border-custom-blue-dark ">
         <div className=" text-2xl font-semibold ">Login to JMessenger</div>
 
         <div className="flex flex-col w-full">
