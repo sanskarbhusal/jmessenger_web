@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,7 @@ class Login extends React.Component {
   render() {
     const login_failure_reason = "<reason>";
     return (
-      <div className="w-[76%] h-[450px] sm:h-96 sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-7 ml-7 sm:p-8 pt-0 sm:border-gray-200/70 sm:border sm:border-solid sm:shadow-2xl shadow-custom-blue-dark/30 border border-solid border-l-2 border-b-0 border-t-0 border-r-0 border-custom-blue-dark ">
+      <div className="w-[76%] h-[450px] sm:h-fit sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-7 ml-7 sm:p-8 pt-0 sm:border-custom-blue-dark sm:border sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
         <div className=" text-2xl font-semibold ">Login to JMessenger</div>
 
         <div className="flex flex-col w-full">
@@ -69,13 +69,13 @@ class Login extends React.Component {
             Log in
           </button>
         </div>
-        <div className="">
-          <a
+        <div>
+          <NavLink
             className=" no-underline hover:underline text-custom-blue"
-            href="Register"
+            to="/register"
           >
             Don't have an account?
-          </a>
+          </NavLink>
         </div>
       </div>
     );
