@@ -6,13 +6,20 @@ class Login extends React.Component {
     this.state = {};
   }
   onLogin = () => {
-    this.props.history.push("/otp");
+    this.props.history.push("/chat");
   };
   render() {
     const login_failure_reason = "<reason>";
     return (
       <div className="w-[76%] h-[450px] sm:h-fit sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-7 ml-7 sm:p-8 pt-0 sm:border-custom-blue-dark sm:border sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
         <div className=" text-2xl font-semibold ">Login to JMessenger</div>
+
+        <div
+          id="login-status"
+          className="text-red-600 w-fit border border-solid border-gray-300 "
+        >
+          {"<Wrong password!>/<Email not found!>"}
+        </div>
 
         <div className="flex flex-col w-full">
           <label htmlFor="email" className="mb-2 ">
@@ -64,14 +71,14 @@ class Login extends React.Component {
         <div className="w-full">
           <button
             onClick={this.onLogin}
-            className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 sm:rounded-lg w-full font-sans text-base font-semibold"
+            className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-lg w-full font-sans text-base font-semibold"
           >
             Log in
           </button>
         </div>
         <div>
           <NavLink
-            className=" no-underline hover:underline text-custom-blue"
+            className=" no-underline hover:underline text-base text-custom-blue"
             to="/register"
           >
             Don't have an account?

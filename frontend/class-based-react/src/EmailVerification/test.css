@@ -1,0 +1,35 @@
+t .letter-j {
+  width: 40px;
+  height: 100px;
+  position: relative;
+  background-color: transparent; /* Make the container transparent */
+}
+
+.j-top {
+  width: 30px;
+  height: 10px;
+  background-color: black; /* Adjust color as needed */
+  position: absolute;
+  top: 0;
+  left: 5px; /* Adjust position as needed */
+  border-radius: 5px 5px 0 0; /* Optional rounded corners */
+}
+
+.j-stem {
+  width: 10px;
+  height: 70px;
+  background-color: black; /* Adjust color as needed */
+  position: absolute;
+  top: 10px;
+  left: 5px; /* Align with the left of the top bar */
+}
+
+.j-curve {
+  width: 30px;
+  height: 30px;
+  background-color: black; /* Adjust color as needed */
+  position: absolute;
+  top: 70px;
+  left: 5px; /* Align with the left of the stem */
+  border-radius: 0 0 20px 0; /* Creates the curve */
+}

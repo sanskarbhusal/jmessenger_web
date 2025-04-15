@@ -2,6 +2,8 @@ import React from "react";
 import Login from "../Login";
 import Register from "../Register";
 import EmailVerification from "../EmailVerification";
+import Chat from "../Chat";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 export default class App extends React.Component {
   render() {
@@ -15,6 +17,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={Login} />
           <Route path="/otp" component={EmailVerification} />
           <Route path="/register" component={Register} />
+          <Route path="/chat" component={Chat} />
         </div>
       </Router>
     );
