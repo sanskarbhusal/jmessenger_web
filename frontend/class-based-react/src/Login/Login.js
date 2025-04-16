@@ -6,17 +6,18 @@ class Login extends React.Component {
     this.state = {};
   }
   onLogin = () => {
+    alert("You will be redirected to the chat interface");
     this.props.history.push("/chat");
   };
   render() {
     const login_failure_reason = "<reason>";
     return (
-      <div className="w-[76%] h-[450px] sm:h-fit sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-7 ml-7 sm:p-8 pt-0 sm:border-custom-blue-dark sm:border sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+      <div className="w-[76%] h-[450px] sm:h-fit sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-7 ml-7 sm:p-8 pt-0 sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
         <div className=" text-2xl font-semibold ">Login to JMessenger</div>
 
         <div
           id="login-status"
-          className="text-red-600 w-fit border border-solid border-gray-300 "
+          className="text-red-600 w-fit border border-solid border-gray-300 hidden"
         >
           {"<Wrong password!>/<Email not found!>"}
         </div>
@@ -59,12 +60,12 @@ class Login extends React.Component {
           </div>
 
           <div>
-            <a
+            <NavLink
               className=" no-underline hover:underline text-custom-blue"
-              href=" link "
+              to="/forgot-password"
             >
               Forgot password?
-            </a>
+            </NavLink>
           </div>
         </div>
 

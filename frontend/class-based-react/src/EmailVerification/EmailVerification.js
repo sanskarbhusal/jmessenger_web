@@ -9,7 +9,7 @@ class EmailVerification extends React.Component {
   render() {
     const email = "mail@sanskarbhusal.com.np";
     return (
-      <div className="font-sans h-[450px] w-[76%] sm:h-fit sm:w-fit flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-xl pl-7 ml-7 pt-0 sm:p-8 sm:shadow-custom-blue/30 sm:shadow-none sm:border bg-white  border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+      <div className="font-sans h-[450px] w-[76%] sm:h-fit sm:w-fit flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-xl pl-7 ml-7 pt-0 sm:p-8 sm:shadow-custom-blue/20 sm:shadow-2xl sm:border sm:border-custom-blue-dark/5 bg-white  border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
         <div className="text-2xl font-semibold">Email verification</div>
 
         <div className=" flex flex-col items-left sm:items-center w-fit">
@@ -18,7 +18,7 @@ class EmailVerification extends React.Component {
               Enter OTP{" "}
               <span
                 id="otp-status"
-                className="text-red-600 font-sans text-base"
+                className="text-red-600 font-sans text-base hidden"
               >
                 {"<Wrong OTP!>"}
               </span>
