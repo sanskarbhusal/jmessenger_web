@@ -7,7 +7,7 @@ class Register extends React.Component {
   };
   render() {
     return (
-      <div className="w-[76%] h-[510px] sm:h-fit sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-[6%] ml-[6%] mt-16 sm:mt-0 sm:p-8 pt-0 sm:border-custom-blue-dark/5 sm:border sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+      <div className="w-[76%] h-[510px] sm:h-fit sm:w-96 bg-white font-sans flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-[6%] ml-[6%] mt-16 sm:mt-0 sm:m-0 sm:p-8 pt-0 sm:border-custom-blue-dark/5 sm:border sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
         <div className="text-2xl font-semibold ">Sign up to JMessenger</div>
 
         <div className="flex flex-col w-full ">
