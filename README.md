@@ -9,4 +9,4 @@
 ![Alt text](images/login.png)
 
 ![Alt text](images/signup.png)
-![Alt text](images/otp)
+![Alt text](images/otp.png)
