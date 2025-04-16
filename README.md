@@ -1,12 +1,15 @@
 # UI design in progress...
 
-## Fire these commands to run the web app
+## Fire these commands in your terminal to run the web app
 
-### npm install
+## Any newest version of node will work
 
-### npm start
+```bash
+npm install
+npm start
 
 ![Alt text](images/login.png)
 
 ![Alt text](images/signup.png)
 ![Alt text](images/otp.png)
+```
