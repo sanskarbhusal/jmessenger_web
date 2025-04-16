@@ -1,1 +1,1 @@
-export { defautl } from "./Logo.js";
+export { default } from "./Logo.js";

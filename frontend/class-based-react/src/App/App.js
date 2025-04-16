@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "../Logo";
 import Login from "../Login";
 import Register from "../Register";
 import ForgotPassword from "../ForgotPassword";
@@ -12,7 +13,7 @@ export default class App extends React.Component {
       <Router>
         <div className="h-full w-full flex flex-col justify-center items-left sm:items-center sm:bg-custom-blue/5">
           {/* <h1>&#128679;Under construction</h1> <div className="mt-2"></div>*/}
-
+          <Logo path="logo" />
           <Route exact path="/" component={Login} />
           <Route path="/otp" component={EmailVerification} />
           <Route path="/register" component={Register} />

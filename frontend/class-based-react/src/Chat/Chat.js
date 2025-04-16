@@ -4,7 +4,7 @@ class Chat extends React.Component {
   render() {
     return (
       <div className="flex justify-center">
-        <h1>Chat UI is under construction</h1>
+        <h1 className="text-center">Chat UI is under construction</h1>
       </div>
     );
   }
