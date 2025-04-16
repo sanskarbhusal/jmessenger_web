@@ -1,7 +1,19 @@
 import React from "react";
-export default class Logo extends React.Component {
+import { withRouter } from "react-router-dom";
+class Logo extends React.Component {
   path = this.props.path;
+  className = this.props.className;
+  onClickLogo = () => {
+    this.props.history.push("/");
+  };
   render() {
-    return <img src={this.path} className="bg-red-600 w-20 h-20"></img>;
+    return (
+      <img
+        className={this.className}
+        onClick={this.onClickLogo}
+        src={this.path}
+      ></img>
+    );
   }
 }
+export default withRouter(Logo);
