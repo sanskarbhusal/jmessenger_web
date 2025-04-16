@@ -9,7 +9,7 @@ class EmailVerification extends React.Component {
   render() {
     const email = "mail@sanskarbhusal.com.np";
     return (
-      <div className="font-sans h-[450px] w-[76%] sm:h-fit sm:w-fit flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-xl pl-7 ml-7 pt-0 sm:p-8 sm:shadow-custom-blue/20 sm:shadow-2xl sm:border sm:border-custom-blue-dark/5 bg-white  border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+      <div className="font-sans h-[450px] w-[76%] sm:h-fit sm:w-fit flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-xl  pl-[6%] ml-[6%] sm:p-8 mt-16 sm:mt-0 sm:shadow-custom-blue/20 sm:shadow-2xl sm:border sm:border-custom-blue-dark/5 bg-white  border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
         <div className="text-2xl font-semibold">Email verification</div>
 
         <div className=" flex flex-col items-left sm:items-center w-fit">
@@ -27,7 +27,7 @@ class EmailVerification extends React.Component {
               type="number"
               id="otp"
               placeholder="6-digit number"
-              className="w-[220px] font-sans text-base p-2 sm:rounded-lg border border-solid border-gray-300 focus:outline-custom-blue"
+              className="w-[240px] font-sans text-base p-2 sm:rounded-lg border border-solid border-gray-300 focus:outline-custom-blue"
             />
           </div>
         </div>
@@ -41,7 +41,7 @@ class EmailVerification extends React.Component {
         </div>
         <div
           id="otp-instruction"
-          className=" w-[220px] text-left sm:text-center"
+          className=" w-[220px] text-left sm:text-center hidden"
         >
           We've sent a 6-digit code to your email.
         </div>
