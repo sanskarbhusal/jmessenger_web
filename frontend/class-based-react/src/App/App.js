@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="h-full w-full flex flex-col justify-top sm:gap-32 sm:items-center sm:bg-custom-blue/5">
+        <div className="relative h-full w-full flex flex-row sm:justify-center items-start sm:gap-32 sm:bg-custom-blue/5">
           <div className="flex justify-start w-full">
             <Logo
               path="images/logo-transparent.svg"
