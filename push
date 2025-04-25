@@ -1,3 +1,4 @@
 git add .
 git commit -m "This is a template commit message, I'm lazy to describe every fucking changes considering the fact that I'm solo on this project, so for who the fuck am I writing message to. Doesn't makes sense!"
 git push origin main
+#By the way, this a bash script that is supposed to be invoked as such: "./push" to push the changes to GitHub.
