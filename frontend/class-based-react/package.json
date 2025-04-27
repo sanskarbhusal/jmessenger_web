@@ -15,8 +15,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build && cp build/index.html build/404.html && echo 'chat.sanskarbhusal.com.np' >build/CNAME",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build && cp build/index.html build/404.html",
+    "deploy": "echo 'chat.sanskarbhsual.com.np' > CNAME && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
