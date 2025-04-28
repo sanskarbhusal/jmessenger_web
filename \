@@ -1,0 +1,16 @@
+import React from "react";
+import {NavLink}from "react-router-dom"
+import {
+  NavLink,
+  withRouter,
+  RouteComponentProps as Props,
+} from "react-router-dom";
+class PasswordChangeStatus extends React.Component<Props> {
+  return() {
+    <div>
+      Your password has been changed.
+      <NavLink to="/login">Go back to login</NavLink>
+    </div>;
+  }
+}
+export default withRouter(PasswordChangeStatus);

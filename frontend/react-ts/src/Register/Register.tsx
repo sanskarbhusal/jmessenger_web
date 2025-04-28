@@ -2,7 +2,9 @@ import React from "react";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
 class Register extends React.Component<Props> {
   onSignUp = () => {
-    this.props.history.push("/otp");
+    if (true) {
+      this.props.history.push("/otp-new-account");
+    }
   };
   render() {
     return (

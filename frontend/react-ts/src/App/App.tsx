@@ -4,7 +4,10 @@ import logoPath from "../assets/logo-transparent.svg";
 import Login from "../Login";
 import Register from "../Register";
 import ForgotPassword from "../ForgotPassword";
-import EmailVerification from "../EmailVerification";
+import OTPNewAccount from "../OTPNewAccount";
+import RegistrationStatus from "../RegistrationStatus";
+import OTPNewPassword from "../OTPNewPassword";
+import NewPasswordStatus from "../NewPasswordStatus";
 import Chat from "../Chat";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 export default class App extends React.Component {
@@ -20,7 +23,11 @@ export default class App extends React.Component {
           </div>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/otp" component={EmailVerification} />
+            <Route path="/otp-new-password" component={OTPNewPassword} />
+            <Route path="/new-password-status" component={NewPasswordStatus} />
+            <Route path="/registration-status" component={RegistrationStatus} />
+            <Route path="/otp-new-account" component={OTPNewAccount} />
+
             <Route path="/register" component={Register} />
             <Route path="/chat" component={Chat} />
             <Route path="/forgot-password" component={ForgotPassword} />
