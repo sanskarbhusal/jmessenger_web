@@ -6,26 +6,7 @@ import { IconBaseProps } from "react-icons/lib";
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 type Props = RouteComponentProps;
-const chatHistory = [
-  { name: "Sanskar", lastMessage: "I love you" },
-  { name: "Sujal", lastMessage: "hajur" },
-  { name: "Mom", lastMessage: "Bijuli ko bill tiris" },
-  { name: "Dad", lastMessage: "700 wala number ma 200 rupiya hadeu baabu" },
-];
-type ChatLetProps = {
-  data: {
-    name: string;
-    lastMessage: string;
-  };
-};
-const ChatLet = ({ data: { name, lastMessage } }: ChatLetProps) => {
-  return (
-    <div className="">
-      <div>Name:{name}</div>
-      <div>Message:{lastMessage}</div>
-    </div>
-  );
-};
+
 const NavBar = () => {
   interface CustomProps extends IconBaseProps {
     className?: string;
@@ -57,9 +38,6 @@ const NavBar = () => {
 };
 class Chat extends React.Component<Props> {
   render() {
-    const chatLets = chatHistory.map((item, index) => {
-      return <div key={index}>{<ChatLet data={item} />}</div>;
-    });
     return (
       <div className=" w-full h-full ">
         <NavBar />
