@@ -7,6 +7,9 @@ export default {
         "custom-blue-dark": "#0369A1",
         "custom-blue": "#0284C7",
       },
+      gridTemplateColumns: {
+        custom: "45px 1fr 45px",
+      },
     },
   },
   plugins: [],
