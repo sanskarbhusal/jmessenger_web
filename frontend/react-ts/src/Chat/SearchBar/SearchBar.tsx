@@ -59,13 +59,19 @@ export default class SearchBar
     });
   }
   doFocus() {
+    let crossIcon;
+    if (this.state.value === "") {
+      crossIcon = "transparent";
+    } else {
+      crossIcon = "gray-300/90";
+    }
     this.setState((prev) => {
       return {
         ...prev,
         innerBorderColor: "transparent",
         outerBorderColor: "highlight-color",
         iconColor: "highlight-color",
-        crossIcon: "highlight-color",
+        crossIcon: crossIcon,
       };
     });
   }
@@ -87,7 +93,7 @@ export default class SearchBar
     return (
       <div
         className={
-          "border-[2px] border-solid rounded-full" +
+          "border-[2px] border-solid rounded-full mt-5" +
           " " +
           "border-" +
           this.state.outerBorderColor
