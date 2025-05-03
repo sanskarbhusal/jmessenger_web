@@ -1,0 +1,43 @@
+import React from "react";
+import { HiOutlineSearch as SearchIcon } from "react-icons/hi";
+import { RxCross2 as CrossIcon } from "react-icons/rx";
+type Props = Required<typeof SearchBar.defaultProps> & {
+  /* extra props here*/
+};
+export default class SearchBar extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+  state = {
+    isFocused: false,
+    value: "",
+  };
+
+  static defaultProps = {
+    slot_1_icon: (className: string) => <SearchIcon className={className} />,
+    slot_2_icon: (className: string) => <CrossIcon className={className} />,
+  };
+  toogleTheme() {}
+  render() {
+    const SearchIconClassName = "w-[24px] h-auto text-gray-500/70 rounded-full";
+    const CrossIconClassName =
+      "w-[24px] h-auto rounded-full text-gray-500/70 active:bg-blue-200/60";
+    return (
+      <div className="grid grid-cols-custom grid-rows-1 border border-solid border-gray-300/90 rounded-full">
+        <div className="w-[40px]">
+          {this.props.slot_1_icon(SearchIconClassName)}
+        </div>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={(e) => {
+            this.setState({ ...this.state, value: e.target.value });
+          }}
+          placeholder="Search"
+          className="bg-green-500 w-full self-center  text-base font-medium font-sans placeholder-gray-500/70 border-none outline-none m-0 p-0 "
+        />
+        <div>{this.props.slot_2_icon(CrossIconClassName)}</div>
+      </div>
+    );
+  }
+}

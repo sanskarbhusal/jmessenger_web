@@ -1,0 +1,52 @@
+import React from "react";
+import { HiOutlineSearch as SearchIcon } from "react-icons/hi";
+import { RxCross2 as CrossIcon } from "react-icons/rx";
+type Props = Required<typeof SearchBar.defaultProps> & {
+  /* extra props here*/
+};
+export default class SearchBar extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+  state = {
+    isFocused: false,
+    value: "",
+  };
+
+  static defaultProps = {
+      style1={with:"23px"}
+    slot_1_icon: (style: React.CSSProperties) => <SearchIcon style={style} />,
+    slot_2_icon: (style: React.CSSProperties) => <CrossIcon style={style} />,
+  };
+  toogleTheme() {}
+  render() {
+    return (
+      <div className="w-fit h-10 flex flex-row border border-solid border-gray-300/90 rounded-full">
+        <label
+          htmlFor="search"
+          id="slot-1"
+          className=" flex flex-row justify-center items-center"
+        >
+          {this.props.slot_1_icon()}
+        </label>
+        <input
+          id="search"
+          type="text"
+          value={this.state.value}
+          onChange={(e) => {
+            this.setState({ ...this.state, value: e.target.value });
+          }}
+          placeholder="Search"
+          className="border-none outline-none m-0 p-0 "
+        />
+        <div
+          id="slot-2"
+          onClick={() => this.setState({ ...this.state, value: "" })}
+          className=" flex flex-row justify-center items-center h-full bg-green-500  "
+        >
+          {this.props.slot_2_icon()}
+        </div>
+      </div>
+    );
+  }
+}
