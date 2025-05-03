@@ -9,9 +9,10 @@ type State = {
   outerBorderColor: string;
   iconColor: string;
   value: string;
+  crossIcon: string;
 };
 interface myInterface {
-  searchBarRef: HTMLElement;
+  inputReference: React.RefObject<HTMLInputElement>;
 }
 export default class SearchBar
   extends React.Component<Props, State>
@@ -22,44 +23,56 @@ export default class SearchBar
     super(props);
 
     this.handleFocus = this.handleFocus.bind(this);
-    this.searchBarRef = document.getElementById("search")!;
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.inputReference = React.createRef<HTMLInputElement>();
   }
   state = {
     value: "",
     innerBorderColor: "gray-300/90",
     outerBorderColor: "transparent",
     iconColor: "gray-500/70",
+    crossIcon: "transparent",
   };
 
-  searchBarRef;
+  inputReference;
   componentDidMount() {
-    document.addEventListener("mousedown", this.handleFocus);
-    this.searchBarRef = document.getElementById("search")!;
+    document.addEventListener("mousedown", this.handleOutsideClick);
   }
   componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleFocus);
+    document.removeEventListener("mousedown", this.handleOutsideClick);
   }
-  handleFocus(e: MouseEvent) {
-    if (this.searchBarRef.contains(e.target as Node)) {
-      console.log("Clicked inside");
-      this.setState((prev) => {
-        return {
-          ...prev,
-          innerBorderColor: "transparent",
-          outerBorderColor: "highlight-color",
-          iconColor: "highlight-color",
-        };
-      });
+  doUnFocus() {
+    this.setState((prev) => {
+      return {
+        ...prev,
+        innerBorderColor: "gray-300/90",
+        outerBorderColor: "transparent",
+        iconColor: "gray-500/70",
+      };
+    });
+  }
+  doFocus() {
+    this.setState((prev) => {
+      return {
+        ...prev,
+        innerBorderColor: "transparent",
+        outerBorderColor: "highlight-color",
+        iconColor: "highlight-color",
+      };
+    });
+  }
+  handleFocus() {
+    if (document.activeElement === this.inputReference.current) {
+      this.doFocus();
     } else {
-      console.log("Clicked outside");
-      this.setState((prev) => {
-        return {
-          ...prev,
-          innerBorderColor: "gray-300/90",
-          outerBorderColor: "transparent",
-          iconColor: "gray-500/70",
-        };
-      });
+      this.doUnFocus();
+    }
+  }
+  handleOutsideClick(e: Event) {
+    const container = this.inputReference.current;
+    const target = e.target as Node;
+    if (container && !container.contains(target)) {
+      this.doUnFocus();
     }
   }
   render() {
@@ -95,21 +108,38 @@ export default class SearchBar
 
           <input
             id="search"
+            ref={this.inputReference}
             type="text"
+            autoComplete="off"
             value={this.state.value}
+            onFocus={this.handleFocus}
             onChange={(e) => {
-              this.setState({ ...this.state, value: e.target.value });
+              this.setState((prev) => {
+                return {
+                  ...prev,
+                  hidden: "",
+                  value: e.target.value,
+                  crossIcon: "highlight-color",
+                };
+              });
             }}
             placeholder="Search"
             className=" w-full self-center  text-base font-medium font-sans placeholder-gray-500/70 border-none outline-none m-0 p-0 "
           />
           <CrossIcon
-            onClick={() => this.setState({ ...this.state, value: "" })}
+            onClick={() =>
+              this.setState((prev) => {
+                return { ...prev, value: "", crossIcon: "transparent" };
+              })
+            }
             className={
               "min-w-[25px] h-auto ml-[12px] mr-[7px] p-[4px] rounded-full active:bg-blue-100" +
               " " +
               "text-" +
               this.state.iconColor +
+              " " +
+              "text-" +
+              this.state.crossIcon +
               " "
             }
           />
