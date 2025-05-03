@@ -1,0 +1,71 @@
+import React from "react";
+import { HiOutlineSearch as SearchIcon } from "react-icons/hi";
+import { RxCross2 as CrossIcon } from "react-icons/rx";
+type Props = Required<typeof SearchBar.defaultProps> & {
+  /* extra props here*/
+};
+type State = { isFocused: boolean; value: string };
+interface myInterface {
+  searchBarRef: HTMLElement;
+}
+export default class SearchBar
+  extends React.Component<Props, State>
+  implements myInterface
+{
+  static defaultProps = {};
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isFocused: false,
+      value: "",
+    };
+    this.handleFocus = this.handleFocus.bind(this);
+    this.searchBarRef = document.getElementById("search")!;
+  }
+  searchBarRef;
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleFocus);
+    this.searchBarRef = document.getElementById("search")!;
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleFocus);
+  }
+  handleFocus(e: MouseEvent) {
+    const focusClassName = "border-2 border-".split(" ");
+    const unFocusClassname="fukc-bitch".split(" ")
+    if (this.searchBarRef.contains(e.target as Node)) {
+      console.log("Clicked inside");
+      this.searchBarRef.classList.add(...focusClassname);
+    } else {
+      console.log("Clicked outside");
+      this.searchBarRef.classList.add(...unFocusClassname);
+    }
+  }
+  render() {
+    return (
+      <div
+        id="border"
+        className=" h-[43px] flex flex-row items-center border border-solid border-gray-300/90 bg-white rounded-full "
+      >
+        <label htmlFor="search" className=" mt-[5px]">
+          <SearchIcon className="w-[22px] h-auto ml-[12px] mr-[12px] text-gray-500/65 rounded-full " />
+        </label>
+
+        <input
+          id="search"
+          type="text"
+          value={this.state.value}
+          onChange={(e) => {
+            this.setState({ ...this.state, value: e.target.value });
+          }}
+          placeholder="Search"
+          className=" w-full self-center  text-base font-medium font-sans placeholder-gray-500/70 border-none outline-none m-0 p-0 "
+        />
+        <CrossIcon
+          onClick={() => this.setState({ ...this.state, value: "" })}
+          className="w-[39px] h-auto ml-[12px] mr-[7px] p-[4px] text-gray-500/65 rounded-full active:bg-blue-100"
+        />
+      </div>
+    );
+  }
+}

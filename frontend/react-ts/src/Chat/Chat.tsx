@@ -6,7 +6,7 @@ type Props = RouteComponentProps;
 class Chat extends React.Component<Props> {
   render() {
     return (
-      <div className=" w-full h-full bg-red-200">
+      <div className=" w-full h-full ">
         <NavBar />
       </div>
     );
