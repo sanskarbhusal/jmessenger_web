@@ -1,16 +1,19 @@
 import React from "react";
 import { HiOutlineSearch as SearchIcon } from "react-icons/hi";
 import { RxCross2 as CrossIcon } from "react-icons/rx";
+
 type Props = Required<typeof SearchBar.defaultProps> & {
   /* extra props here*/
 };
+
 type State = {
+  inputText: string;
   innerBorderColor: string;
   outerBorderColor: string;
-  iconColor: string;
-  value: string;
-  crossIcon: string;
+  searchIconColor: string;
+  crossIconColor: string;
 };
+
 interface myInterface {
   inputReference: React.RefObject<HTMLInputElement>;
 }
@@ -21,74 +24,62 @@ export default class SearchBar
   static defaultProps = {};
   constructor(props: Props) {
     super(props);
-
     this.handleFocus = this.handleFocus.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.doHighlight = this.doHighlight.bind(this);
+    this.doGrayout = this.doGrayout.bind(this);
     this.inputReference = React.createRef<HTMLInputElement>();
   }
   state = {
-    value: "",
+    inputText: "",
     innerBorderColor: "gray-300/90",
     outerBorderColor: "transparent",
-    iconColor: "gray-500/70",
-    crossIcon: "transparent",
+    searchIconColor: "gray-500/70",
+    crossIconColor: "transparent",
   };
 
   inputReference;
   componentDidMount() {
-    document.addEventListener("mousedown", this.handleOutsideClick);
+    document.addEventListener("mousedown", this.handleFocus);
   }
   componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleOutsideClick);
+    document.removeEventListener("mousedown", this.handleFocus);
   }
-  doUnFocus() {
-    let crossIcon;
-    if (this.state.value === "") {
-      crossIcon = "transparent";
-    } else {
-      crossIcon = "gray-300/90";
-    }
+
+  doHighlight() {
     this.setState((prev) => {
+      const crossIconColor =
+        prev.inputText === "" ? "transparent" : "highlight-color";
       return {
-        ...prev,
-        innerBorderColor: "gray-300/90",
-        outerBorderColor: "transparent",
-        iconColor: "gray-500/70",
-        crossIcon: crossIcon,
-      };
-    });
-  }
-  doFocus() {
-    let crossIcon;
-    if (this.state.value === "") {
-      crossIcon = "transparent";
-    } else {
-      crossIcon = "gray-300/90";
-    }
-    this.setState((prev) => {
-      return {
-        ...prev,
         innerBorderColor: "transparent",
         outerBorderColor: "highlight-color",
-        iconColor: "highlight-color",
-        crossIcon: crossIcon,
+        searchIconColor: "highlight-color",
+        crossIconColor: crossIconColor,
       };
     });
   }
-  handleFocus() {
-    if (document.activeElement === this.inputReference.current) {
-      this.doFocus();
-    } else {
-      this.doUnFocus();
-    }
+
+  doGrayout() {
+    this.setState((prev) => {
+      const crossIconColor =
+        prev.inputText === "" ? "transparent" : "gray-300/90";
+      return {
+        innerBorderColor: "gray-300/90",
+        outerBorderColor: "transparent",
+        searchIconColor: "gray-500/70",
+        crossIconColor: crossIconColor,
+      };
+    });
   }
-  handleOutsideClick(e: Event) {
+
+  handleFocus(e: any) {
     const container = this.inputReference.current;
     const target = e.target as Node;
+    this.doHighlight();
     if (container && !container.contains(target)) {
-      this.doUnFocus();
+      this.doGrayout();
     }
   }
+
   render() {
     return (
       <div
@@ -114,7 +105,7 @@ export default class SearchBar
                 "w-[22px] h-auto ml-[12px] mr-[12px] rounded-full" +
                 " " +
                 "text-" +
-                this.state.iconColor +
+                this.state.searchIconColor +
                 " "
               }
             />
@@ -125,35 +116,31 @@ export default class SearchBar
             ref={this.inputReference}
             type="text"
             autoComplete="off"
-            value={this.state.value}
+            value={this.state.inputText}
             onFocus={this.handleFocus}
             onChange={(e) => {
-              this.setState((prev) => {
-                return {
-                  ...prev,
-                  hidden: "",
-                  value: e.target.value,
-                  crossIcon: "highlight-color",
-                };
+              const crossIconColor =
+                e.target.value === "" ? "transparent" : "hightlight-color";
+              this.setState({
+                inputText: e.target.value,
+                crossIconColor: crossIconColor,
               });
             }}
             placeholder="Search"
             className=" w-full self-center  text-base font-medium font-sans placeholder-gray-500/70 border-none outline-none m-0 p-0 "
           />
           <CrossIcon
-            onClick={() =>
-              this.setState((prev) => {
-                return { ...prev, value: "", crossIcon: "transparent" };
-              })
-            }
+            onClick={() => {
+              this.setState({ inputText: "", crossIconColor: "transparent" });
+            }}
             className={
               "min-w-[25px] h-auto ml-[12px] mr-[7px] p-[4px] rounded-full active:bg-blue-100" +
               " " +
               "text-" +
-              this.state.iconColor +
+              this.state.searchIconColor +
               " " +
               "text-" +
-              this.state.crossIcon +
+              this.state.crossIconColor +
               " "
             }
           />
