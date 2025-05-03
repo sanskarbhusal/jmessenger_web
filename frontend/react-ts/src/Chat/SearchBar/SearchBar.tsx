@@ -42,12 +42,19 @@ export default class SearchBar
     document.removeEventListener("mousedown", this.handleOutsideClick);
   }
   doUnFocus() {
+    let crossIcon;
+    if (this.state.value === "") {
+      crossIcon = "transparent";
+    } else {
+      crossIcon = "gray-300/90";
+    }
     this.setState((prev) => {
       return {
         ...prev,
         innerBorderColor: "gray-300/90",
         outerBorderColor: "transparent",
         iconColor: "gray-500/70",
+        crossIcon: crossIcon,
       };
     });
   }
@@ -58,6 +65,7 @@ export default class SearchBar
         innerBorderColor: "transparent",
         outerBorderColor: "highlight-color",
         iconColor: "highlight-color",
+        crossIcon: "highlight-color",
       };
     });
   }
