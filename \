@@ -37,7 +37,7 @@ export default class SearchBar
     outerBorderColor: "transparent",
     searchIconColor: "gray-500/70",
     crossIconColor: "highlight-color",
-    crossIconDisplay: "hidden",
+    crossIconDisplay: "block",
   };
 
   inputReference;
@@ -87,7 +87,7 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          " border-[2px] h-[41px] border-solid rounded-full mt-5" +
+          " border-[2px] border-solid rounded-full mt-5" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -95,7 +95,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[42px] grid grid-cols-custom grid-row-1 bg-transparent border border-solid rounded-full" +
+            "min-h-[42px] grid grid-cols-custom grid-row-1 bg-white border border-solid rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
@@ -133,16 +133,13 @@ export default class SearchBar
             placeholder="Search"
             className=" w-full self-center  text-base font-medium font-sans placeholder-gray-500/70 border-none outline-none m-0 p-0 "
           />
-          <label
-            htmlFor="search"
-            className="relative mb-[1px] flex flex-row items-center"
-          >
+          <label htmlFor="search" className="flex flex-row items-center">
             <CrossIcon
               onClick={() => {
                 this.setState({ inputText: "", crossIconDisplay: "hidden" });
               }}
               className={
-                " min-w-[25px] h-auto p-[4px] absolute left-[12px] self-center rounded-full active:bg-highlight-color/10" +
+                " bg-green-500 min-w-[25px] h-auto p-[4px] justify-self-start self-center rounded-full active:bg-highlight-color/10" +
                 " " +
                 this.state.crossIconDisplay +
                 " " +

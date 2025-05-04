@@ -6,10 +6,10 @@ export default {
       colors: {
         "custom-blue-dark": "#0369A1",
         "custom-blue": "#0284C7",
-        "highlight-color": "#3390EC",
+        "highlight-color": "#0284C7",
       },
       gridTemplateColumns: {
-        custom: "45px 1fr 45px",
+        custom: "49px 1fr 49px",
       },
     },
   },
@@ -17,7 +17,7 @@ export default {
   safelist: [
     "border-highlight-color",
     "border-transparent",
-    "border-gray-300/90",
+    "border-gray-300",
     "text-highlight-color",
     "text-gray-500/70",
     "text-transparent",

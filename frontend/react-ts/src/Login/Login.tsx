@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 class Login extends React.Component<Props> {
   onLogin = () => {
-    alert("You will be redirected to the chat interface");
+    //alert("You will be redirected to the chat interface");
     this.props.history.push("/chat");
   };
   render() {
