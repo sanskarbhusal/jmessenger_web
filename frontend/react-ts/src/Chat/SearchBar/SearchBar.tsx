@@ -23,7 +23,7 @@ export default class SearchBar
   extends React.Component<Props, State>
   implements myInterface
 {
-  static defaultProps = {};
+  static defaultProps = { className: "w-[100%]" };
   constructor(props: Props) {
     super(props);
     this.handleMousedown = this.handleMousedown.bind(this);
@@ -32,6 +32,7 @@ export default class SearchBar
     this.inputReference = React.createRef<HTMLInputElement>();
   }
   state = {
+    className: this.props.className,
     inputText: "",
     innerBorderColor: "gray-300",
     outerBorderColor: "transparent",
@@ -55,6 +56,7 @@ export default class SearchBar
         innerBorderColor: "transparent",
         outerBorderColor: "highlight-color",
         searchIconColor: "highlight-color",
+        crossIconColor: "highlight-color",
         crossIconDisplay: crossIconDisplay,
       };
     });
@@ -67,6 +69,7 @@ export default class SearchBar
         innerBorderColor: "gray-300",
         outerBorderColor: "transparent",
         searchIconColor: "gray-500/70",
+        crossIconColor: "gray-500/70",
         crossIconDisplay: crossIconDisplay,
       };
     });
@@ -87,7 +90,9 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          " border-[2px] h-[41px] border-solid rounded-full mt-5" +
+          "border-[2px] h-[41px] border-solid rounded-full" +
+          " " +
+          this.state.className +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -103,7 +108,7 @@ export default class SearchBar
         >
           <label
             htmlFor="search"
-            className="flex flex-row items-center justify-self-center self-center "
+            className="flex flex-row items-center mb-[1px] justify-self-center self-center "
           >
             <SearchIcon
               className={
@@ -131,7 +136,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className=" w-full self-center  text-base font-medium font-sans placeholder-gray-500/70 border-none outline-none m-0 p-0 "
+            className=" w-full self-center  text-base font-medium font-sans bg-transparent placeholder-gray-500/70 border-none outline-none m-0 p-0 "
           />
           <label
             htmlFor="search"

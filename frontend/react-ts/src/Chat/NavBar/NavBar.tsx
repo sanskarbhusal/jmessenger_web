@@ -5,8 +5,8 @@ import SearchBar from "../SearchBar";
 export default class NavBar extends React.Component {
   render() {
     return (
-      <div>
-        <SearchBar />
+      <div className="flex flex-row justify-center">
+        <SearchBar className="w-[80%] mt-10" />
       </div>
     );
   }
