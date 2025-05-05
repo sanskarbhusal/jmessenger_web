@@ -9,7 +9,8 @@ export default {
         "highlight-color": "#0284C7",
       },
       gridTemplateColumns: {
-        custom: "49px 1fr 49px",
+        search_bar: "49px 1fr 49px",
+        nav_bar: "60px 1fr",
       },
     },
   },
