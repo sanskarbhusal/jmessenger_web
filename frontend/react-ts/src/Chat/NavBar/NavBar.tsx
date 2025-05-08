@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBar from "../SearchBar";
-import MenuButton from "../MenuButton";
+import SearchBar from "./SearchBar";
+import MenuButton from "./MenuButton";
 
 export default class NavBar extends React.Component {
   render() {

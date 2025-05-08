@@ -87,7 +87,7 @@ export default class SearchBar
 
   render() {
     return (
-      <div
+      <label
         ref={this.inputReference}
         className={
           "border-[2px] min-h-[41px] border-solid rounded-full" +
@@ -158,7 +158,7 @@ export default class SearchBar
             />
           </label>
         </div>
-      </div>
+      </label>
     );
   }
 }
