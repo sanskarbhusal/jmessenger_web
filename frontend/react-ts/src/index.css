@@ -1,7 +1,1 @@
 @tailwind utilities;
-.show {
-  width: 100px;
-  height: 20px;
-  background-color: green;
-  margin: 1px;
-}

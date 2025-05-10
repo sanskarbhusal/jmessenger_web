@@ -1,6 +1,4 @@
 import React from "react";
-import Logo from "../Logo";
-import logoPath from "../assets/logo-transparent.svg";
 import Login from "../Login";
 import Register from "../Register";
 import ForgotPassword from "../ForgotPassword";
@@ -14,13 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="relative h-dvh w-dvw flex flex-row sm:justify-center items-start sm:gap-32 sm:bg-custom-blue/5">
-          <div className="flex justify-start w-full ">
-            <Logo
-              path={logoPath}
-              className="flex  flex-col justify-center items-center w-24 sm:w-32 h-auto ml-[-11px] mt-[-6px] "
-            />
-          </div>
+        <div className="h-dvh w-dvw">
           <Switch>
             <Route exact path="/" component={Login} />
             <Route path="/otp-new-password" component={OTPNewPassword} />

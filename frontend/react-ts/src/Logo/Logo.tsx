@@ -1,9 +1,8 @@
 import React from "react";
+import logoPath from "../assets/logo-transparent.svg";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 type Props = RouteComponentProps & {
-  /**Add optoinal props here */
-  path: string;
-  className: string;
+  className?: string;
 };
 class Logo extends React.Component<Props> {
   onClickLogo = () => {
@@ -12,9 +11,13 @@ class Logo extends React.Component<Props> {
   render() {
     return (
       <img
-        className={this.props.className}
+        className={
+          "flex flex-col justify-center items-center w-24 sm:w-32 h-auto ml-[-11px] mt-[-6px] " +
+          " " +
+          this.props.className
+        }
         onClick={this.onClickLogo}
-        src={this.props.path}
+        src={logoPath}
       ></img>
     );
   }
