@@ -17,7 +17,7 @@ type State = {
 };
 
 interface myInterface {
-  inputReference: React.RefObject<HTMLInputElement>;
+  inputReference: React.RefObject<HTMLLabelElement>;
 }
 export default class SearchBar
   extends React.Component<Props, State>
@@ -29,7 +29,7 @@ export default class SearchBar
     this.handleMousedown = this.handleMousedown.bind(this);
     this.doHighlight = this.doHighlight.bind(this);
     this.doGrayout = this.doGrayout.bind(this);
-    this.inputReference = React.createRef<HTMLInputElement>();
+    this.inputReference = React.createRef<HTMLLabelElement>();
   }
   state = {
     className: this.props.className,
