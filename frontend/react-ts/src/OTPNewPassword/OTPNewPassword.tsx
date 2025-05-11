@@ -3,9 +3,6 @@ import Logo from "../Logo";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
 class EmailVerification extends React.Component<Props> {
   onClickVerifyOTP = () => {
-    alert(
-      "At this point auth sever is going to verify the change and redirect you to a status page."
-    );
     this.props.history.push("/new-password-status");
   };
   render() {
