@@ -12,9 +12,9 @@ class EmailVerification extends React.Component<Props> {
     return (
       <div className="h-full w-full grid grid-cols-[1fr_1fr_1fr] grid-rows-[1fr_1fr_1fr] sm:bg-custom-blue/5">
         <Logo />
-        <div className="sm:justify-self-center col-span-3 self-center font-sans h-[450px] w-[76%] sm:h-fit sm:w-fit flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-xl  pl-[6%] ml-[6%] sm:p-8 mt-16 sm:m-0 sm:shadow-custom-blue/20 sm:shadow-2xl sm:border sm:border-custom-blue-dark/5 bg-white  border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
-          <div className="text-2xl font-semibold">
-            Authorize account ownership
+        <div className="sm:justify-self-center self-center col-span-3 w-[77%] h-[550px] sm:h-fit sm:w-fit font-sans sm:bg-white flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-[6%] ml-[6%] sm:m-0 sm:p-8 pt-0  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+          <div className="text-2xl font-semibold mt-[-8px]">
+            Authorize change
           </div>
 
           <div className=" flex flex-col items-left sm:items-center w-fit">
@@ -32,11 +32,11 @@ class EmailVerification extends React.Component<Props> {
                 type="number"
                 id="otp"
                 placeholder="6-digit number"
-                className="w-[240px] font-sans text-base p-2 sm:rounded-lg border border-solid border-gray-300 focus:outline-custom-blue"
+                className="w-[202px] font-sans text-base p-2 sm:rounded-lg border border-solid border-gray-300 focus:outline-custom-blue"
               />
             </div>
           </div>
-          <div className="w-[240px] flex flex-row justify-left sm:justify-center mb-2">
+          <div className="w-[220px] flex flex-row justify-left sm:justify-center mb-2">
             <button
               onClick={this.onClickVerifyOTP}
               className=" w-full font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 sm:rounded-lg font-semibold "
@@ -46,7 +46,7 @@ class EmailVerification extends React.Component<Props> {
           </div>
           <div
             id="otp-instruction"
-            className=" w-[220px] text-left sm:text-center hidden"
+            className=" w-[220px] text-left sm:text-center"
           >
             We've sent a 6-digit code to your email.
           </div>

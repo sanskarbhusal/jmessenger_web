@@ -10,8 +10,10 @@ class OTPNewPassword extends React.Component<Props> {
       <div className="h-full w-full grid grid-cols-[1fr_1fr_1fr] grid-rows-[1fr_1fr_1fr] sm:bg-custom-blue/5">
         <Logo />
 
-        <div className="sm:justify-self-center self-center col-span-3 w-[77%] h-[450px] sm:h-fit sm:w-fit font-sans sm:bg-white flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-[6%] ml-[6%] sm:m-0 sm:p-8 pt-0  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
-          <div className="text-2xl font-semibold">Email verification</div>
+        <div className="sm:justify-self-center self-center col-span-3 w-[77%] h-[550px] sm:h-fit sm:w-fit font-sans sm:bg-white flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-[6%] ml-[6%] sm:m-0 sm:p-8 pt-0  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+          <div className="text-2xl font-semibold mt-[-8px]">
+            Email verification
+          </div>
 
           <div className=" flex flex-col items-left sm:items-center w-fit">
             <div className="w-fit flex flex-col">
