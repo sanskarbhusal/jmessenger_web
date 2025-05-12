@@ -3,12 +3,12 @@ import Contact from "./Contact";
 export default class Contacts extends React.Component {
   render() {
     const Contacts = () =>
-      ["", "", "", "", "", "", "", "", "", "", "", ""].map(() => <Contact />);
+      ["", "", "", "", "", "", "", "", "", "", "", ""].map((item, index) => (
+        <Contact key={index + item} />
+      ));
     return (
-      <div
-        id="contact-list"
-        className="bg-green-200 h-full w-full scroll-hidden"
-      >
+      <div className="h-full w-full overflow-auto scrollbar-hidden">
+        <div className="min-h-[48px]"></div>
         <Contacts />
       </div>
     );
