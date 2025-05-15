@@ -20,7 +20,8 @@ export default {
     "border-transparent",
     "border-gray-300",
     "text-highlight-color",
-    "text-gray-500/70",
+    "text-gray-500/60",
+    "text-gray-600/85",
     "text-transparent",
   ],
 };

@@ -34,9 +34,9 @@ export default class SearchBar
   state = {
     className: this.props.className,
     inputText: "",
-    innerBorderColor: "gray-300",
+    innerBorderColor: "transparent",
     outerBorderColor: "transparent",
-    searchIconColor: "gray-500/70",
+    searchIconColor: "gray-500/60",
     crossIconColor: "highlight-color",
     crossIconDisplay: "hidden",
   };
@@ -66,10 +66,10 @@ export default class SearchBar
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "gray-300";
       return {
-        innerBorderColor: "gray-300",
+        innerBorderColor: "transparent",
         outerBorderColor: "transparent",
-        searchIconColor: "gray-500/70",
-        crossIconColor: "gray-500/70",
+        searchIconColor: "gray-500/60",
+        crossIconColor: "gray-600/85",
         crossIconDisplay: crossIconDisplay,
       };
     });
@@ -90,7 +90,7 @@ export default class SearchBar
       <label
         ref={this.inputReference}
         className={
-          "border-[2px] min-h-[41px] border-solid rounded-full" +
+          "border-[2px] min-h-[40px] max-h-[40px] border-solid rounded-full bg-gray-200/50" +
           " " +
           this.state.className +
           " " +
@@ -112,7 +112,7 @@ export default class SearchBar
           >
             <SearchIcon
               className={
-                "w-[25px] h-auto rounded-full" +
+                "w-[25px] h-[25px] rounded-full" +
                 " " +
                 "text-" +
                 this.state.searchIconColor +
