@@ -23,7 +23,7 @@ export default class SearchBar
   extends React.Component<Props, State>
   implements myInterface
 {
-  static defaultProps = { className: "w-[100%]" };
+  static defaultProps = {};
   constructor(props: Props) {
     super(props);
     this.handleMousedown = this.handleMousedown.bind(this);
@@ -32,13 +32,12 @@ export default class SearchBar
     this.inputReference = React.createRef<HTMLLabelElement>();
   }
   state = {
-    className: this.props.className,
     inputText: "",
     innerBorderColor: "transparent",
     outerBorderColor: "transparent",
     searchIconColor: "gray-500/60",
     crossIconColor: "highlight-color",
-    crossIconDisplay: "hidden",
+    crossIconDisplay: "block",
   };
 
   inputReference;
@@ -90,9 +89,7 @@ export default class SearchBar
       <label
         ref={this.inputReference}
         className={
-          "border-[2px] min-h-[40px] max-h-[40px] border-solid rounded-full bg-gray-200/50" +
-          " " +
-          this.state.className +
+          "border-[2px] min-h-[42px]border-solid rounded-full bg-gray-200/50" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -108,7 +105,7 @@ export default class SearchBar
         >
           <label
             htmlFor="search"
-            className="flex flex-row items-center mb-[1px] justify-self-center self-center "
+            className="flex flex-row items-center justify-self-center self-center "
           >
             <SearchIcon
               className={
@@ -147,7 +144,7 @@ export default class SearchBar
                 this.setState({ inputText: "", crossIconDisplay: "hidden" });
               }}
               className={
-                " min-w-[25px] h-auto p-[4px] absolute left-[12px] self-center rounded-full active:bg-highlight-color/10" +
+                " min-w-[34px] h-auto p-[4px] absolute left-[8px] self-center rounded-full active:bg-highlight-color/10" +
                 " " +
                 this.state.crossIconDisplay +
                 " " +
