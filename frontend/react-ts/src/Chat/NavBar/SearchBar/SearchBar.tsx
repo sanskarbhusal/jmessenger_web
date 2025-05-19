@@ -37,7 +37,7 @@ export default class SearchBar
     outerBorderColor: "transparent",
     searchIconColor: "gray-500/60",
     crossIconColor: "highlight-color",
-    crossIconDisplay: "block",
+    crossIconDisplay: "hidden",
   };
 
   inputReference;
@@ -97,7 +97,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[42px] grid grid-cols-search_bar grid-row-1 bg-transparent border border-solid rounded-full" +
+            "min-h-[41px] grid grid-cols-search_bar grid-row-1 bg-transparent border border-solid rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
