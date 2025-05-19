@@ -37,7 +37,7 @@ export default class SearchBar
     outerBorderColor: "transparent",
     searchIconColor: "gray-500/60",
     crossIconColor: "highlight-color",
-    crossIconDisplay: "block",
+    crossIconDisplay: "hidden",
   };
 
   inputReference;
