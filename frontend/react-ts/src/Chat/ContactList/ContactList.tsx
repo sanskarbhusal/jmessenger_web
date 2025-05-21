@@ -29,10 +29,18 @@ const Contacts = () => {
   });
   return new_arr;
 };
-export default class ContactList extends React.Component {
+type Props = Required<typeof ContactList.defaultProps> & { className?: string };
+export default class ContactList extends React.Component<Props> {
+  static defaultProps = {};
   render() {
     return (
-      <div className="h-full w-full overflow-auto scrollbar-hidden">
+      <div
+        className={
+          "h-full w-full overflow-scroll sm:scrollbar-hidden" +
+          " " +
+          this.props.className
+        }
+      >
         <Contacts />
       </div>
     );
