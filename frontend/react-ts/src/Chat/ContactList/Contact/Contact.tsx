@@ -9,7 +9,7 @@ export default class Contact extends React.Component {
   };
   render() {
     return (
-      <div className="bg-red-300 mb-2 w-full h-fit font-sans p-[9px] flex flex-row items-center">
+      <div className="bg-red-300 mb-2 w-full sm:w-[388px] h-fit font-sans p-[9px] flex flex-row items-center">
         <div className=" min-h-[54px] min-w-[54px] bg-gradient-to-b from-orange-400/90 to-orange-500/90  flex justify-center items-center  rounded-full">
           <div className="font-sans font-extrabold text-3xl text-white">S</div>
         </div>
@@ -24,7 +24,7 @@ export default class Contact extends React.Component {
             <div className="bg-blue-300 mr-[4px] text-custom-blue font-medium">
               {this.obj.lastPersonToMessage + ":"}
             </div>
-            <div className="bg-blue-300 overflow-hidden text-overflow-ellipsis text-gray-500 font-medium">
+            <div className="bg-blue-300 overflow-hidden text-gray-500 font-medium">
               {this.obj.lastMessage}
             </div>
           </div>
