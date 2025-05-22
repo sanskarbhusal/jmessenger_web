@@ -4,7 +4,15 @@ export default class ChatBody extends React.Component<Props> {
   static defaultProps = {};
   render() {
     return (
-      <div className={"text-center" + " " + this.props.className}>ChatBody</div>
+      <div
+        className={
+          "w-full hidden sm:flex sm:flex-row sm:justify-center sm:items-center" +
+          " " +
+          this.props.className
+        }
+      >
+        <div>ChatBody</div>
+      </div>
     );
   }
 }

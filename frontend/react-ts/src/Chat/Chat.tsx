@@ -13,7 +13,7 @@ class Chat extends React.Component<Props> {
           <NavBar className="" />
           <ContactList className="" />
         </div>
-        <ChatBody className="bg-green-300 w-full hidden sm:block" />
+        <ChatBody />
       </div>
     );
   }
