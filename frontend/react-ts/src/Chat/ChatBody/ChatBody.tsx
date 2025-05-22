@@ -6,7 +6,7 @@ export default class ChatBody extends React.Component<Props> {
     return (
       <div
         className={
-          "w-full hidden sm:flex sm:flex-row sm:justify-center sm:items-center" +
+          "bg-green-300 w-full hidden sm:flex sm:flex-row sm:justify-center sm:items-center" +
           " " +
           this.props.className
         }
