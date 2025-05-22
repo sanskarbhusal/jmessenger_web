@@ -9,8 +9,8 @@ class Chat extends React.Component<Props> {
   render() {
     return (
       <div className="h-full w-full flex flex-col sm:flex-row">
-        <div className="h-full w-full sm:w-fit">
-          <NavBar className="" />
+        <div className="h-full w-full flex flex-col sm:w-fit">
+          <NavBar />
           <ContactList className="" />
         </div>
         <ChatBody />
