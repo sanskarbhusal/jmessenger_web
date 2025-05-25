@@ -11,7 +11,7 @@ class Chat extends React.Component<Props> {
       <div className="h-full w-full flex flex-col sm:flex-row">
         <div className="h-full w-full flex flex-col sm:w-fit">
           <NavBar />
-          <ContactList className="" />
+          <ContactList />
         </div>
         <ChatBody />
       </div>
