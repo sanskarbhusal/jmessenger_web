@@ -1,10 +1,9 @@
 import React from "react";
 export default class Contact extends React.Component {
   obj = {
-    chatName: "Sharing is caring",
+    chatName: "Sanskar",
     lastPersonToMessage: "Kaustuv",
-    lastMessage:
-      "message message message message message message message message message message message message message message message ",
+    lastMessage: "Hi, whats up!",
     dateOfLastMessage: "Mar 19",
   };
   render() {
