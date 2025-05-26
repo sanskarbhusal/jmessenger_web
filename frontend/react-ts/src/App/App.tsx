@@ -7,7 +7,6 @@ import RegistrationStatus from "../RegistrationStatus";
 import OTPNewPassword from "../OTPNewPassword";
 import NewPasswordStatus from "../NewPasswordStatus";
 import Chat from "../Chat";
-import ChatBody from "../Chat/ChatBody";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 export default class App extends React.Component {
   render() {
@@ -22,7 +21,6 @@ export default class App extends React.Component {
             <Route path="/otp-new-account" component={OTPNewAccount} />
             <Route path="/register" component={Register} />
             <Route path="/chat" component={Chat} />
-            <Route path="/chatBody" component={ChatBody} />
             <Route path="/forgot-password" component={ForgotPassword} />
           </Switch>
         </div>
