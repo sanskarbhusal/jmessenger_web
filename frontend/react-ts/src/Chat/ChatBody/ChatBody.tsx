@@ -8,7 +8,7 @@ class ChatBody extends React.Component<Props> {
     return (
       <div
         className={
-          "bg-green-300 w-full hidden sm:flex sm:flex-row sm:justify-center sm:items-center" +
+          "bg-green-300 w-full h-full hidden sm:flex sm:flex-row sm:justify-center sm:items-center" +
           " " +
           this.props.className
         }
