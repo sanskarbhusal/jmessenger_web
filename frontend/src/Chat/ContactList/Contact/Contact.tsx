@@ -19,7 +19,9 @@ export default class Contact extends React.Component {
   render() {
     return (
       <div
-        onClick={this.handleClick}
+        onClick={() => {
+          this.context();
+        }}
         className="w-full sm:w-[388px] h-fit font-sans p-[9px] flex flex-row items-center bg-white active:bg-gray-300"
       >
         <div className=" min-h-[54px] min-w-[54px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center  rounded-full">

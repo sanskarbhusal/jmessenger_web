@@ -21,14 +21,20 @@ class ChatBody extends React.Component<Props, State> {
     return (
       <div
         className={
-          "bg-green-300 w-full h-full flex flex-row justify-center items-center" +
+          "absolute left-96 bg-green-300 w-full h-full flex flex-row justify-center items-center" +
           " " +
           this.props.className +
           " " +
           this.state.visibility
         }
       >
-        <button onClick={this.handleClick}>ChatBody</button>
+        <button
+          onClick={() => {
+            this.context();
+          }}
+        >
+          ChatBody
+        </button>
       </div>
     );
   }
