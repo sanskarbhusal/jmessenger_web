@@ -15,9 +15,7 @@ class ChatBody extends React.Component<Props, State> {
       visibility: "block",
     };
   }
-  handleClick() {
-    this.context.show();
-  }
+  handleClick() {}
   declare context: React.ContextType<typeof ChatContext>;
   render() {
     return (

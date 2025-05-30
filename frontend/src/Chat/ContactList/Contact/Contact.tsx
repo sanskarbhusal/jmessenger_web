@@ -15,9 +15,7 @@ export default class Contact extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
-    this.context.hide();
-  }
+  handleClick() {}
   render() {
     return (
       <div

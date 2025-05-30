@@ -5,40 +5,31 @@ import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
 type State = {
-  visibility: string;
+  z_index: string;
 };
 class Chat extends React.Component<RouteComponentProps, State> {
   constructor(props: RouteComponentProps) {
     super(props);
     this.state = {
-      visibility: "block",
+      z_index: "",
     };
-    this.hideContact = this.hideContact.bind(this);
-    this.showContact = this.showContact.bind(this);
+    this.liftChatBody = this.liftChatBody.bind(this);
+    this.liftContact = this.liftContact.bind(this);
   }
-  hideContact() {
-    this.setState({ visibility: "hidden" });
-  }
-  showContact() {
-    this.setState({ visibility: "block" });
-  }
+  liftChatBody() {}
+  liftContact() {}
+
+  handlersBundle = {
+    liftContact: this.liftContact,
+    liftChatBody: this.liftChatBody,
+  };
   render() {
     return (
-      <div className="h-full w-full flex flex-col sm:flex-row">
-        <ChatContext.Provider
-          value={{ show: this.showContact, hide: this.hideContact }}
-        >
-          <div
-            className={
-              "h-full w-full flex flex-col sm:w-fit" +
-              " " +
-              this.state.visibility
-            }
-          >
-            <NavBar className="relative z-10" />
-            <ContactList className="relative z-10" />
-          </div>
-          <ChatBody className="absolute z-0" />
+      <div className="h-full w-full flex flex-col">
+        <ChatContext.Provider value={this.handlersBundle}>
+          <NavBar className="relative z-20" />
+          <ContactList className="relative z-20" />
+          <ChatBody className="absolute z-10" />
         </ChatContext.Provider>
       </div>
     );

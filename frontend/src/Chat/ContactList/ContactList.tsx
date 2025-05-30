@@ -35,6 +35,7 @@ export default class ContactList extends React.Component<Props> {
   render() {
     return (
       <div
+        id="contact-list"
         className={
           "h-full overflow-scroll scrollbar-custom " +
           " " +
