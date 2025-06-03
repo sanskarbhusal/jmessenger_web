@@ -10,18 +10,16 @@ class ChatBody extends React.Component<Props, State> {
   static defaultProps = {};
   constructor(props: Props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
       visibility: "block",
     };
   }
-  handleClick() {}
   declare context: React.ContextType<typeof ChatContext>;
   render() {
     return (
       <div
         className={
-          "relative left-96 bg-green-300 w-full h-full flex flex-row justify-center items-center" +
+          "bg-green-300 w-full h-full flex flex-row justify-center items-center" +
           " " +
           this.props.className +
           " " +
@@ -31,6 +29,7 @@ class ChatBody extends React.Component<Props, State> {
         <button
           onClick={() => {
             this.context();
+            console.log("ChatBody button is clicked");
           }}
         >
           ChatBody

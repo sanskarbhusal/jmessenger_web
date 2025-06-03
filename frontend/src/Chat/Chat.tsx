@@ -29,13 +29,13 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div className="h-full w-full flex flex-row">
+      <div className="bg-red-400 h-dvh w-dvw flex flex-row">
         <ChatContext.Provider value={this.state.swap}>
-          <div>
-            <NavBar className={this.state.z1} />
-            <ContactList className={this.state.z1} />
+          <div className="w-full sm:w-[388px]">
+            <NavBar className="" />
+            <ContactList className="" />
           </div>
-          <ChatBody className={this.state.z2} />
+          <ChatBody className="hidden sm:flex" />
         </ChatContext.Provider>
       </div>
     );
