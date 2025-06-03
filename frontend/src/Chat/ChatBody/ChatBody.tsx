@@ -21,7 +21,7 @@ class ChatBody extends React.Component<Props, State> {
     return (
       <div
         className={
-          "absolute left-96 bg-green-300 w-full h-full flex flex-row justify-center items-center" +
+          "relative left-96 bg-green-300 w-full h-full flex flex-row justify-center items-center" +
           " " +
           this.props.className +
           " " +
