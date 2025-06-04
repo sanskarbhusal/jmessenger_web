@@ -35,7 +35,11 @@ export default class ContactList extends React.Component<Props> {
   render() {
     return (
       <div
-        className={"h-full w-full overflow-scroll" + " " + this.props.className}
+        className={
+          "h-full w-full overflow-y-scroll overflow-x-hidden" +
+          " " +
+          this.props.className
+        }
       >
         <Contacts />
       </div>
