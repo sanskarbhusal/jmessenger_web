@@ -29,7 +29,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div className="relative bg-red-400 h-full w-full flex flex-col sm:flex-row">
+      <div className="relative h-full w-full flex flex-col sm:flex-row">
         <ChatContext.Provider value={this.state.swap}>
           <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
             <NavBar className={"relative" + " " + this.state.z1} />
