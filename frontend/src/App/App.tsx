@@ -12,7 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="fixed h-full w-full overflow-none">
+        <div className="fixed h-dvh w-dvw overflow-none">
           <Switch>
             <Route exact path="/" component={Login} />
             <Route path="/otp-new-password" component={OTPNewPassword} />

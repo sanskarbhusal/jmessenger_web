@@ -23,5 +23,7 @@ export default {
     "text-gray-500/60",
     "text-gray-600/85",
     "text-transparent",
+    "block",
+    "hidden",
   ],
 };
