@@ -19,7 +19,11 @@ class ChatBody extends React.Component<Props, State> {
   declare context: React.ContextType<typeof ChatContext>;
   render() {
     return (
-      <div className={"w-dvw h-dvh flex flex-row" + " " + this.props.className}>
+      <div
+        className={
+          "w-dvw h-dvh flex flex-row bg-white" + " " + this.props.className
+        }
+      >
         <div className="bg-blue-400 min-w-[388px] hidden sm:block"></div>
         <div className="w-full grid grid-rows-[minmax(50px,70px)_1fr_minmax(50px,70px)]">
           <div>
