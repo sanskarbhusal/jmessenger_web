@@ -38,7 +38,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
   }
 
   is_mobile() {
-    return true;
+    return false;
   }
 
   componentDidMount() {}
