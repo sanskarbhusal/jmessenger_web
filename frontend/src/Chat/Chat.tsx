@@ -8,7 +8,6 @@ import ChatContext from "./ChatContext.tsx";
 type State = {
   z1: string;
   z2: string;
-  is_mobile: boolean;
   swap: () => void;
 };
 
@@ -17,15 +16,15 @@ class Chat extends React.Component<RouteComponentProps, State> {
   constructor(props: RouteComponentProps) {
     super(props);
     this.myRef = React.createRef();
+    this.getWidth = this.getWidth.bind(this);
     this.state = {
       z1: "z-10",
       z2: "z-0",
-      is_mobile: this.is_mobile(),
       swap: () => {
         this.setState((prev) => {
           let z1 = prev.z1;
           let z2 = prev.z2;
-          if (prev.is_mobile) {
+          if (this.getWidth() < 640) {
             const tmp = z1;
             z1 = z2;
             z2 = tmp;
@@ -34,14 +33,12 @@ class Chat extends React.Component<RouteComponentProps, State> {
         });
       },
     };
-    this.is_mobile = this.is_mobile.bind(this);
   }
-
-  is_mobile() {
-    return false;
+  getWidth() {
+    const screen_width = this.myRef.current!.offsetWidth;
+    this.myRef.current!.onresize;
+    return screen_width;
   }
-
-  componentDidMount() {}
 
   render() {
     return (
