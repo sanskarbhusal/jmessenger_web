@@ -2,7 +2,7 @@ import React from "react";
 export default class ChatTitleAvatar extends React.Component {
   static defaultProps = {};
   obj = {
-    chatName: "Bipul",
+    chatName: "Sanskar",
     lastPersonToMessage: "Someone",
     lastMessage: "Hi, whats up!",
     dateOfLastMessage: "Mar 19",
