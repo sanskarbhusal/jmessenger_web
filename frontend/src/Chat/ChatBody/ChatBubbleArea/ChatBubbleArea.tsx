@@ -10,7 +10,6 @@ export default class ChatBubbleArea extends React.Component<Props, State> {
   render() {
     return (
       <div className="bg-red-300 w-full h-full">
-        ChatBubbleArea
         <ChatBubble />
       </div>
     );

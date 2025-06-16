@@ -133,7 +133,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className=" w-full self-center  text-base font-medium font-sans bg-transparent placeholder-gray-500/70 border-none outline-none m-0 p-0 "
+            className=" w-full self-center text-base font-medium font-sans bg-transparent placeholder-gray-500/60 border-none outline-none m-0 p-0 "
           />
           <label
             htmlFor="search"
