@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build && cp dist/index.html dist/404.html",
-    "deploy": "echo 'chat.sanskarbhusal.com.np' > dist/CNAME && gh-pages -d dist",
+    "deploy": "echo chat.sanskarbhusal.com.np > dist/CNAME && gh-pages -d dist",
     "predeploy-test": "npm run build && cp dist/index.html dist/404.html",
     "deploy-test": "echo 'test.sanskarbhusal.com.np' > dist/CNAME && gh-pages -d dist"
   },

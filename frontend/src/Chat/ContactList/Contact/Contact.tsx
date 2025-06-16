@@ -29,16 +29,16 @@ export default class Contact extends React.Component {
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
-            <div className="font-bold">{this.obj.chatName}</div>
+            <div className="font-semibold">{this.obj.chatName}</div>
             <div className="text-gray-600 text-sm pr-[3px] font-normal">
               {this.obj.dateOfLastMessage}
             </div>
           </div>
           <div className="h-[24px] flex flex-row">
-            <div className="mr-[4px] text-custom-blue font-medium">
+            <div className="mr-[4px] text-custom-blue">
               {this.obj.lastPersonToMessage + ":"}
             </div>
-            <div className="overflow-hidden text-gray-500 font-medium">
+            <div className="overflow-hidden text-gray-500">
               {this.obj.lastMessage}
             </div>
           </div>
