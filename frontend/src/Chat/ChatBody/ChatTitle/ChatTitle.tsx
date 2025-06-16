@@ -5,6 +5,6 @@ export default class ChatTitle extends React.Component<Props, State> {
   static defaultProps = { foo: "foo" };
   state = {};
   render() {
-    return <div>Chat Title</div>;
+    return <div className="bg-green-300 w-full h-full">Chat Title</div>;
   }
 }
