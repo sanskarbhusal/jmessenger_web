@@ -1,12 +1,10 @@
 import React from "react";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
-
 import { RxCross2 as CrossIcon } from "react-icons/rx";
 
 type Props = Required<typeof SearchBar.defaultProps> & {
   /* extra props here*/
 };
-
 type State = {
   inputText: string;
   innerBorderColor: string;
@@ -30,8 +28,7 @@ export default class SearchBar
     this.doHighlight = this.doHighlight.bind(this);
     this.doGrayout = this.doGrayout.bind(this);
     this.inputReference = React.createRef<HTMLDivElement>();
-  }
-  state = {
+    this.state = {
     inputText: "",
     innerBorderColor: "transparent",
     outerBorderColor: "transparent",
@@ -39,7 +36,7 @@ export default class SearchBar
     crossIconColor: "highlight-color",
     crossIconDisplay: "hidden",
   };
-
+  }
   inputReference;
   componentDidMount() {
     document.addEventListener("mousedown", this.handleMousedown);
