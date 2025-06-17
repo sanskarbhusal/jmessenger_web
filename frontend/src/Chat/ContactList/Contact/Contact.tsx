@@ -10,18 +10,18 @@ const obj = {
 
 type Props = Required<typeof Contact.defaultProps> & {};
 type State = {
-  isSearchBarFocused: boolean;
-}
-const contactUtil = {
-  preventClick: (state: State) => { console.log(state) }, //did console.log to avoid "declared but not never read" warning
 }
 export default class Contact extends React.Component<Props, State> {
   static defaultProps = {};
   static contextType = ChatContext;
   declare context: React.ContextType<typeof ChatContext>;
 
-  state = {
-    isSearchBarFocused: true,
+  constructor(props: Props) {
+    super(props)
+    this.preventClick = this.preventClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.state = {
+    }
   }
 
   preventClick(state: State) {
@@ -29,7 +29,6 @@ export default class Contact extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    contactUtil.preventClick = this.preventClick
     //theses data should come from api
     obj.chatName = "Sanskar";
     obj.lastPersonToMessage = "Someone";
@@ -37,14 +36,12 @@ export default class Contact extends React.Component<Props, State> {
     obj.dateOfLastMessage = "Mar 19";
   }
 
+  handleClick() { }
+
   render() {
     return (
       <div
-        onClick={() => {
-          if (!this.state.isSearchBarFocused) {
-            this.context();
-          }
-        }}
+        onClick={this.handleClick}
         className="w-full sm:w-full h-fit font-sans p-[9px] flex flex-row items-center bg-white active:bg-gray-300"
       >
         <div className=" min-h-[54px] min-w-[54px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center  rounded-full">
@@ -71,4 +68,3 @@ export default class Contact extends React.Component<Props, State> {
     );
   }
 }
-export { contactUtil }

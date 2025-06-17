@@ -50,8 +50,6 @@ export default class SearchBar
     document.removeEventListener("mousedown", this.handleMousedown);
   }
 
-  componentDidUpdate() { }
-
   doHighlight() {
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
@@ -91,7 +89,6 @@ export default class SearchBar
   }
 
   render() {
-    console.log("render called")
     return (
       <div
         ref={this.inputReference}
