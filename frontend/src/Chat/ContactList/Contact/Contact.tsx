@@ -29,8 +29,8 @@ export default class Contact extends React.Component {
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
-            <div className="font-semibold">{this.obj.chatName}</div>
-            <div className="text-gray-600 text-sm pr-[3px] font-normal">
+            <div className="font-medium text-lg">{this.obj.chatName}</div>
+            <div className="text-gray-500 text-xs pr-[3px] font-normal">
               {this.obj.dateOfLastMessage}
             </div>
           </div>

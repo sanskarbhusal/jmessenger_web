@@ -17,7 +17,7 @@ type State = {
 };
 
 interface myInterface {
-  inputReference: React.RefObject<HTMLLabelElement>;
+  inputReference: React.RefObject<HTMLDivElement>;
 }
 export default class SearchBar
   extends React.Component<Props, State>
@@ -29,13 +29,13 @@ export default class SearchBar
     this.handleMousedown = this.handleMousedown.bind(this);
     this.doHighlight = this.doHighlight.bind(this);
     this.doGrayout = this.doGrayout.bind(this);
-    this.inputReference = React.createRef<HTMLLabelElement>();
+    this.inputReference = React.createRef<HTMLDivElement>();
   }
   state = {
     inputText: "",
     innerBorderColor: "transparent",
     outerBorderColor: "transparent",
-    searchIconColor: "gray-500/60",
+    searchIconColor: "gray-500/65",
     crossIconColor: "highlight-color",
     crossIconDisplay: "hidden",
   };
@@ -52,7 +52,7 @@ export default class SearchBar
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
       return {
-        innerBorderColor: "transparent",
+        innerBorderColor: "highlight-color",
         outerBorderColor: "highlight-color",
         searchIconColor: "highlight-color",
         crossIconColor: "highlight-color",
@@ -67,7 +67,7 @@ export default class SearchBar
       return {
         innerBorderColor: "transparent",
         outerBorderColor: "transparent",
-        searchIconColor: "gray-500/60",
+        searchIconColor: "gray-500/65",
         crossIconColor: "gray-600/85",
         crossIconDisplay: crossIconDisplay,
       };
@@ -86,10 +86,10 @@ export default class SearchBar
 
   render() {
     return (
-      <label
+      <div
         ref={this.inputReference}
         className={
-          "mr-[18px] border-[2px] min-h-[42px] border-solid rounded-full bg-gray-200/50" +
+          "mr-[18px] border min-h-[41px] border-solid rounded-full bg-gray-300/80 hover:bg-gray-400/60" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -97,7 +97,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[41px] grid grid-cols-search_bar grid-row-1 bg-transparent border border-solid rounded-full" +
+            "min-h-[40px] grid grid-cols-search_bar grid-row-1 border border-solid bg-white rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
@@ -133,7 +133,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className=" w-full self-center text-base font-medium font-sans bg-transparent placeholder-gray-500/60 border-none outline-none m-0 p-0 "
+            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-transparent placeholder-gray-500/80 border-none outline-none m-0 p-0 "
           />
           <label
             htmlFor="search"
@@ -155,7 +155,7 @@ export default class SearchBar
             />
           </label>
         </div>
-      </label>
+      </div>
     );
   }
 }
