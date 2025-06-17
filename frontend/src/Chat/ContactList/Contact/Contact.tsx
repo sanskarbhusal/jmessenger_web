@@ -1,26 +1,49 @@
 import React from "react";
 import ChatContext from "../../ChatContext.tsx";
+
+const obj = {
+  chatName: "Sanskar",
+  lastPersonToMessage: "Someone",
+  lastMessage: "Hi, what's up",
+  dateOfLastMessage: "Mar 19",
+};
+
 type Props = Required<typeof Contact.defaultProps> & {};
-export default class Contact extends React.Component {
+type State = {
+  isSearchBarFocused: boolean;
+}
+const contactUtil = {
+  preventClick: (state: State) => { console.log(state) }, //did console.log to avoid "declared but not never read" warning
+}
+export default class Contact extends React.Component<Props, State> {
   static defaultProps = {};
   static contextType = ChatContext;
   declare context: React.ContextType<typeof ChatContext>;
-  obj = {
-    chatName: "Sanskar",
-    lastPersonToMessage: "Someone",
-    lastMessage: "Hi, whats up!",
-    dateOfLastMessage: "Mar 19",
-  };
-  constructor(props: Props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+
+  state = {
+    isSearchBarFocused: true,
   }
-  handleClick() {}
+
+  preventClick(state: State) {
+    this.setState(state)
+  }
+
+  componentDidMount() {
+    contactUtil.preventClick = this.preventClick
+    //theses data should come from api
+    obj.chatName = "Sanskar";
+    obj.lastPersonToMessage = "Someone";
+    obj.lastMessage = "Hi, whats up!";
+    obj.dateOfLastMessage = "Mar 19";
+  }
+
   render() {
     return (
       <div
         onClick={() => {
-          this.context();
+          if (!this.state.isSearchBarFocused) {
+            this.context();
+          }
         }}
         className="w-full sm:w-full h-fit font-sans p-[9px] flex flex-row items-center bg-white active:bg-gray-300"
       >
@@ -29,17 +52,17 @@ export default class Contact extends React.Component {
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
-            <div className="font-medium text-lg">{this.obj.chatName}</div>
+            <div className="font-medium text-lg">{obj.chatName}</div>
             <div className="text-gray-500 text-xs pr-[3px] font-normal">
-              {this.obj.dateOfLastMessage}
+              {obj.dateOfLastMessage}
             </div>
           </div>
           <div className="h-[24px] flex flex-row">
             <div className="mr-[4px] text-custom-blue">
-              {this.obj.lastPersonToMessage + ":"}
+              {obj.lastPersonToMessage + ":"}
             </div>
             <div className="overflow-hidden text-gray-500">
-              {this.obj.lastMessage}
+              {obj.lastMessage}
             </div>
           </div>
         </div>
@@ -48,3 +71,4 @@ export default class Contact extends React.Component {
     );
   }
 }
+export { contactUtil }

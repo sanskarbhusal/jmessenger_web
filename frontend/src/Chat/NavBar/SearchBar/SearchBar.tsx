@@ -1,11 +1,11 @@
 import React from "react";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
 import { RxCross2 as CrossIcon } from "react-icons/rx";
-
 type Props = Required<typeof SearchBar.defaultProps> & {
   /* extra props here*/
 };
 type State = {
+  isFocused: string;
   inputText: string;
   innerBorderColor: string;
   outerBorderColor: string;
@@ -17,10 +17,10 @@ type State = {
 interface myInterface {
   inputReference: React.RefObject<HTMLDivElement>;
 }
+
 export default class SearchBar
   extends React.Component<Props, State>
-  implements myInterface
-{
+  implements myInterface {
   static defaultProps = {};
   constructor(props: Props) {
     super(props);
@@ -28,7 +28,10 @@ export default class SearchBar
     this.doHighlight = this.doHighlight.bind(this);
     this.doGrayout = this.doGrayout.bind(this);
     this.inputReference = React.createRef<HTMLDivElement>();
-    this.state = {
+  }
+
+  state = {
+    isFocused: "false",
     inputText: "",
     innerBorderColor: "transparent",
     outerBorderColor: "transparent",
@@ -36,19 +39,24 @@ export default class SearchBar
     crossIconColor: "highlight-color",
     crossIconDisplay: "hidden",
   };
-  }
+
   inputReference;
+
   componentDidMount() {
     document.addEventListener("mousedown", this.handleMousedown);
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleMousedown);
   }
+
+  componentDidUpdate() { }
 
   doHighlight() {
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
       return {
+        isFocused: "true",
         innerBorderColor: "highlight-color",
         outerBorderColor: "highlight-color",
         searchIconColor: "highlight-color",
@@ -62,6 +70,7 @@ export default class SearchBar
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "gray-300";
       return {
+        isFocused: "false",
         innerBorderColor: "transparent",
         outerBorderColor: "transparent",
         searchIconColor: "gray-500/65",
@@ -82,6 +91,7 @@ export default class SearchBar
   }
 
   render() {
+    console.log("render called")
     return (
       <div
         ref={this.inputReference}
