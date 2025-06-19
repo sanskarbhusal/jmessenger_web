@@ -36,7 +36,7 @@ export default class Contact extends React.Component<Props, State> {
     obj.dateOfLastMessage = "Mar 19";
   }
 
-  handleClick() { }
+  handleClick() { this.context() }
 
   render() {
     return (
