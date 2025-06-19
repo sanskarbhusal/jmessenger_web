@@ -6,3 +6,36 @@ body {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
+/* Example: Custom Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(178, 178, 178, 0.5); /* slate-500/50 */
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+
+
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Show Scrollbar Normally */
+.scrollbar-show {
+  -ms-overflow-style: auto;
+  scrollbar-width: auto;
+}
