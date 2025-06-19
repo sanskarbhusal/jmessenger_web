@@ -42,7 +42,7 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="w-full sm:w-full h-fit font-sans p-[9px] flex flex-row items-center bg-transparent active:bg-gray-300"
+        className="w-full sm:w-full h-fit font-sans p-[9px] flex flex-row items-center bg-white active:bg-gray-300"
       >
         <div className=" min-h-[54px] min-w-[54px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center  rounded-full">
           <div className="font-sans font-extrabold text-3xl text-white">S</div>
