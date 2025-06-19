@@ -36,7 +36,6 @@ class Chat extends React.Component<RouteComponentProps, State> {
   }
   getWidth() {
     const screen_width = this.myRef.current!.offsetWidth;
-    this.myRef.current!.onresize;
     return screen_width;
   }
 
