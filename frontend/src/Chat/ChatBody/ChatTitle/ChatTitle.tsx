@@ -8,9 +8,9 @@ export default class ChatTitle extends React.Component<Props, State> {
   static defaultProps = { foo: "foo" };
 
   declare context: React.ContextType<typeof ChatContext>;
-  render() {
+  render() {//border-gray-300/85
     return (
-      <div className="w-full h-full grid grid-cols-[60px_1fr] sm:flex border-gray-300/85 border-l-[1px]">
+      <div className="w-full h-full grid grid-cols-[60px_1fr] sm:flex border-l-[0px]">
         <div className="w-full h-full sm:hidden flex flex-row justify-center items-center">
           <ArrowLeft
             onClick={() => this.context()}

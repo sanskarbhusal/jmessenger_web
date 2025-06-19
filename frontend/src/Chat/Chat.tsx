@@ -42,17 +42,20 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div
-        ref={this.myRef}
-        className="relative h-full w-full flex flex-col sm:flex-row"
-      >
-        <ChatContext.Provider value={this.state.swap}>
-          <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
-            <NavBar className={"relative" + " " + this.state.z1} />
-            <ContactList className={"relative " + " " + this.state.z1} />
-          </div>
-          <ChatBody className={"absolute" + " " + this.state.z2} />
-        </ChatContext.Provider>
+      <div className="w-full h-full 2xl:bg-custom-blue/5 flex flex-row justify-center items-center">
+
+        <div
+          ref={this.myRef}
+          className="relative h-full w-full 2xl:h-[90vh] 2xl:w-[83vw] top-[-20px] 2xl:border-[1px] 2xl:border-custom-blue/20 2xl:shadow-2xl 2xl:shadow-custom-blue/20 flex flex-col sm:flex-row"
+        >
+          <ChatContext.Provider value={this.state.swap}>
+            <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
+              <NavBar className={"relative" + " " + this.state.z1} />
+              <ContactList className={"relative " + " " + this.state.z1} />
+            </div>
+            <ChatBody className={"absolute" + " " + this.state.z2} />
+          </ChatContext.Provider>
+        </div>
       </div>
     );
   }
