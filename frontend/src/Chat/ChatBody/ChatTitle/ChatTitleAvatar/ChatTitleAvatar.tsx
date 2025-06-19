@@ -1,5 +1,11 @@
 import React from "react";
-export default class ChatTitleAvatar extends React.Component {
+type Props = Required<typeof ChatTitleAvatar.defaultProps> & {
+  className?: string;
+}
+type State = {
+
+}
+export default class ChatTitleAvatar extends React.Component<Props, State> {
   static defaultProps = {};
   obj = {
     chatName: "Sanskar",
@@ -9,7 +15,7 @@ export default class ChatTitleAvatar extends React.Component {
   };
   render() {
     return (
-      <div className="w-fit h-full sm:ml-[18px] font-sans flex flex-row items-center bg-white">
+      <div className={"w-fit h-full sm:ml-[18px] font-sans flex flex-row items-center bg-white" + " " + this.props.className}>
         <div className="min-h-[42px] min-w-[42px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center  rounded-full">
           <div className="font-sans font-extrabold text-2xl text-white">S</div>
         </div>
