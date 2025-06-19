@@ -37,7 +37,7 @@ export default class ContactList extends React.Component<Props> {
     return (
       <div
         className={
-          "h-full w-full p-[15px] pt-[6px] gap-[10px] border-gray-300/85 border-r-[1px] flex flex-col 2xl:bg-transparent overflow-y-scroll overflow-x-hidden scrollbar-thin drop-shadow-sm" +
+          "h-full w-full pl-6 pr-6 sm:pt-[6px] sm:pb-[12px] gap-[12px] border-gray-300/85 border-r-[1px] flex flex-col items-center 2xl:bg-transparent overflow-y-scroll overflow-x-hidden scrollbar-thin drop-shadow-sm" +
           " " +
           this.props.className
         }
