@@ -41,11 +41,11 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div className="w-full h-full 2xl:bg-custom-blue/5 flex flex-row justify-center items-center">
+      <div className="w-full h-full 2xl:bg-custom-blue/5 flex flex-row justify-center items-center drop-shadow-2xl">
 
         <div
           ref={this.myRef}
-          className="relative h-full w-full 2xl:top-[-5px] 2xl:h-[93vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue-dark/20 2xl:shadow-xl 2xl:shadow-custom-blue-dark/20 flex flex-col sm:flex-row"
+          className="relative h-full w-full 2xl:top-[-5px] 2xl:h-[93vh] 2xl:w-[83vw] 2xl:border-[0px] 2xl:border-custom-blue-dark/20 2xl:border-b-0 2xl:shadow-custom-blue-dark/20 2xl:bg-custom-blue/5 shadow-inner flex flex-col sm:flex-row"
         >
           <ChatContext.Provider value={this.state.swap}>
             <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">

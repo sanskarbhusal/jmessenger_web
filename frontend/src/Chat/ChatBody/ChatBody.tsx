@@ -26,7 +26,7 @@ class ChatBody extends React.Component<Props, State> {
         }
       >
         <div className="min-w-[388px] hidden sm:block"></div>
-        <div className="w-full grid grid-rows-[minmax(56px,56px)_1fr_minmax(50px,70px)]">
+        <div className="w-full grid grid-rows-[54px_1fr_70px]">
           <ChatTitle />
           <ChatBubbleArea className="block" />
           <MessageBox className="block" />

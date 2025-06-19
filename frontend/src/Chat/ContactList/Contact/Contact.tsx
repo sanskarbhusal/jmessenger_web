@@ -32,7 +32,7 @@ export default class Contact extends React.Component<Props, State> {
     //theses data should come from api
     obj.chatName = "Sanskar";
     obj.lastPersonToMessage = "Someone";
-    obj.lastMessage = "Hi, whats up!";
+    obj.lastMessage = "Clicked";
     obj.dateOfLastMessage = "Mar 19";
   }
 
@@ -42,15 +42,15 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="w-full sm:w-full h-fit font-sans p-[9px] flex flex-row items-center bg-white active:bg-gray-300"
+        className="w-full h-fit rounded-full font-sans p-[7px] border-[1px] border-gray-300/85 flex flex-row items-center bg-gray-100 active:bg-gray-300"
       >
-        <div className=" min-h-[54px] min-w-[54px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center  rounded-full">
+        <div className=" min-h-[54px] min-w-[54px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center rounded-full">
           <div className="font-sans font-extrabold text-3xl text-white">S</div>
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
             <div className="font-medium text-lg">{obj.chatName}</div>
-            <div className="text-gray-500 text-xs pr-[3px] font-normal">
+            <div className="text-gray-500 text-xs pr-[30px] font-normal">
               {obj.dateOfLastMessage}
             </div>
           </div>

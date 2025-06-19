@@ -38,3 +38,14 @@ body {
   -ms-overflow-style: auto !important;     /* Override hide */
   scrollbar-width: auto !important;        /* Override hide */
 }
+
+
+@media (min-width:640) {
+  .sm\:scrollbar-hide{
+  -ms-overflow-style: none;      /* IE and Edge */
+  scrollbar-width: none;         /* Firefox */
+  }
+  .sm\:scrollbar-hide::-webkit-scrollbar{
+   display:none;
+  }
+}
