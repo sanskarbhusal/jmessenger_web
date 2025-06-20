@@ -15,7 +15,7 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
   };
   render() {
     return (
-      <div className={"w-fit h-full sm:ml-[18px] font-sans flex flex-row items-center bg-white" + " " + this.props.className}>
+      <div className={"w-fit h-full sm:ml-[18px] font-sans flex flex-row items-center bg-white sm:bg-transparent" + " " + this.props.className}>
         <div className="min-h-[42px] min-w-[42px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center  rounded-full">
           <div className="font-sans font-extrabold text-2xl text-white">S</div>
         </div>
