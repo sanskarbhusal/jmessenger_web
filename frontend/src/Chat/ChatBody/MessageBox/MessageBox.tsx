@@ -5,7 +5,10 @@ export default class MessageBox extends React.Component<Props, State> {
   static defaultProps = { foo: "foo" };
   state = {};
   render() {
-    return <div className={"hover:bg-green-300 w-full h-full" + " " + this.props.className}>
+    return <div className={"w-full h-full flex flex-row justify-center items-center drop-shadow-lg" + " " + this.props.className}>
+      <div className="h-[50px] w-[90%] bg-white rounded-3xl border-[1px] border-gray-300/85">
+        <input placeholder="Message" className="h-full w-full bg-transparent pl-10 pr-10 text-lg font-normal font-sans placeholder-gray-500/80 outline-none"></input>
+      </div>
     </div>;
   }
 }
