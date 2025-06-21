@@ -93,7 +93,7 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          "mr-[18px] min-h-[41px] sm:border rounded-full bg-transparent hover:bg-gray-500" +
+          "mr-[18px] min-h-[41px] rounded-full bg-transparent sm:border-[1px] sm:border-gray-300/85 sm:hover:border-gray-500" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -101,7 +101,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[41px] grid grid-cols-search_bar grid-row-1 border-[2px] sm:border bg-gray-100 rounded-full" +
+            "min-h-[41px] grid grid-cols-search_bar grid-row-1 border-[2px] sm:border bg-white rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
@@ -137,7 +137,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-gray-100 placeholder-gray-500/80 border-none outline-none m-0 p-0 "
+            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-white placeholder-gray-500/80 border-none outline-none m-0 p-0 "
           />
           <label
             htmlFor="search"
