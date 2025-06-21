@@ -126,6 +126,7 @@ export default class SearchBar
             id="search"
             type="text"
             autoComplete="off"
+            spellCheck="false"
             value={this.state.inputText}
             onFocus={this.handleMousedown}
             onChange={(e) => {

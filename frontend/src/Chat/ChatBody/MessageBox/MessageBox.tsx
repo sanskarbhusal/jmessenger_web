@@ -8,7 +8,7 @@ export default class MessageBox extends React.Component<Props, State> {
     return <div className={"w-full h-full flex flex-row justify-center items-start sm:items-center sm:focus:drop-shadow-md sm:bg-white" + " " + this.props.className}>
       <div className="w-[90%] sm:w-[70%] h-[50px] sm:h-[53px] rounded-full bg-white">
 
-        <input type="text" placeholder="Message" className="h-full w-full text-lg text-black font-normal font-sans rounded-full border-[1px] border-gray-400/50 drop-shadow-md shadow-inner focus:bg-custom-blue/5 pl-10 pr-10 placeholder-gray-500/80 outline-none"></input>
+        <input type="text" autoComplete="off" spellCheck="false" placeholder="Message" className="h-full w-full text-lg text-black font-medium font-sans rounded-full border-[1px] border-gray-400 hover:border-gray-500 focus:border-custom-blue focus:border-[2px] shadow-sm sm:bg-custom-blue/5 focus:bg-white focus:shadow-inner pl-10 pr-10 placeholder-gray-500/80 outline-none"></input>
       </div>
     </div>;
   }
