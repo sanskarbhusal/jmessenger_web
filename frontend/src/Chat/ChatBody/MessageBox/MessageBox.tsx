@@ -6,7 +6,7 @@ export default class MessageBox extends React.Component<Props, State> {
   state = {};
   render() {
     return <div className={"w-full h-full flex flex-row justify-center items-start sm:items-center sm:bg-custom-blue/5" + " " + this.props.className}>
-      <div className="w-[90%] sm:w-[96%] h-[50px] sm:h-[52px]">
+      <div className="relative sm:bottom-[8px] w-[90%] sm:w-[96%] h-[50px] sm:h-[52px]">
         <input type="text" autoComplete="off" spellCheck="false" placeholder="Message" className="h-full w-full text-lg text-black font-medium font-sans rounded-3xl border-[1px] border-gray-300 focus:border-gray-400 bg-white drop-shadow-sm shadow-inner pl-10 pr-10 placeholder-gray-500/80 outline-none"></input>
       </div>
     </div>;
