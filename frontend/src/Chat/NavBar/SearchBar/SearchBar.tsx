@@ -93,7 +93,7 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          "mr-[18px] min-h-[41px] rounded-full bg-transparent sm:border-[1px] sm:border-gray-300/85 sm:hover:border-gray-500" +
+          "mr-[18px] min-h-[41px] rounded-full border-[1px] bg-gray-300/85" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -101,7 +101,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[41px] grid grid-cols-search_bar grid-row-1 border-[2px] sm:border bg-white rounded-full" +
+            "min-h-[41px] grid grid-cols-search_bar grid-row-1 border-[1px] bg-white rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
