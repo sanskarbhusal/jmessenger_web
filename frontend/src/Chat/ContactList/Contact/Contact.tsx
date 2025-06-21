@@ -42,7 +42,7 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="w-full h-fit hover:drop-shadow-md bg-transparent hover:bg-custom-blue/5 hover:shadow-md active:bg-custom-blue/10 font-sans border-[0px] border-gray-300/85 flex flex-row items-center"
+        className="w-full h-fit rounded-full hover:drop-shadow-md bg-white hover:bg-custom-blue/5 hover:shadow-md active:bg-custom-blue/10 font-sans border-[1px] border-gray-300/85 flex flex-row items-center"
       >
         <div className="min-h-[62px] min-w-[62px] ml-[12px] flex flex-row justify-center items-center bg-white rounded-full shadow-md border-[1px] border-gray-200 peer" >
 
