@@ -10,7 +10,7 @@ export default class ChatTitle extends React.Component<Props, State> {
   declare context: React.ContextType<typeof ChatContext>;
   render() {//border-gray-300/85
     return (
-      <div className="w-full h-full grid grid-cols-[60px_1fr] sm:flex sm:shadow-none shadow-lg sm:bg-custom-blue/5 sm:border-b-[1px] border-gray-300/85">
+      <div className="w-full h-full grid grid-cols-[60px_1fr] sm:flex sm:shadow-none shadow-lg bg-white sm:border-b-[1px] border-gray-300/85">
         <div className="w-full h-full sm:hidden flex flex-row justify-center items-center">
           <ArrowLeft
             onClick={() => this.context()}

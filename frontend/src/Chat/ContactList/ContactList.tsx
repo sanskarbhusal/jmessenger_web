@@ -26,7 +26,9 @@ const Contacts = () => {
     ""
   ).map((item, index) => {
     console.log(item);
-    return <Contact key={index} />;
+    return (
+      <Contact key={index} />
+    )
   });
   return new_arr;
 };
@@ -37,7 +39,7 @@ export default class ContactList extends React.Component<Props> {
     return (
       <div
         className={
-          "h-full w-full p-[12px] sm:pl-6 sm:pr-6 sm:pt-[6px] sm:pb-[12px] gap-[12px] bg-white sm:bg-custom-blue/5 border-gray-300/85 sm:border-r-[1px] flex flex-col items-center overflow-y-scroll overflow-x-hidden scrollbar-thin drop-shadow-sm" +
+          "h-full w-full gap-[12px] bg-white border-gray-300/85 sm:border-r-[1px] flex flex-col items-center overflow-y-scroll overflow-x-hidden scrollbar-thin drop-shadow-sm" +
           " " +
           this.props.className
         }
