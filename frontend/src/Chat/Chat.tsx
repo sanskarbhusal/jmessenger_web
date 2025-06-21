@@ -4,7 +4,6 @@ import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
-import Logo from "../Logo";
 
 type State = {
   z1: string;
