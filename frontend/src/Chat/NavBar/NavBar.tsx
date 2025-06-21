@@ -9,7 +9,7 @@ export default class NavBar extends React.Component<Props> {
       <div
         id="nav-bar"
         className={
-          "h-fit w-full pt-[6px] pb-[6px] grid grid-cols-nav_bar grid-rows-nav_bar bg-white border-gray-300/85 sm:border-r-[1px]" +
+          "h-fit w-full pt-[6px] pb-[6px] grid grid-cols-nav_bar grid-rows-nav_bar bg-white border-gray-300/85 sm:border-r-[0px]" +
           " " +
           this.props.className
         }

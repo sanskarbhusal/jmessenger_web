@@ -5,7 +5,7 @@ body {
 }
 /* Example: Custom Scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
-  width: 4px;
+  width: 0px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {

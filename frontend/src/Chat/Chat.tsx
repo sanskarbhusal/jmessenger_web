@@ -4,6 +4,7 @@ import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
+import Logo from "../Logo";
 
 type State = {
   z1: string;
@@ -41,8 +42,8 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div className="w-full h-full 2xl:bg-custom-bluee/5 flex flex-row justify-center items-center drop-shadow-2xl">
-
+      <div className="w-full h-full 2xl:bg-custom-blue/5 flex flex-row justify-center items-center drop-shadow-2xl">
+        <Logo />
         <div
           ref={this.myRef}
           className="relative h-full w-full 2xl:top-[-5px] 2xl:h-[93vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-gray-300/85 2xl:border-b-0 flex flex-col sm:flex-row"
@@ -55,7 +56,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
             <ChatBody className={"absolute" + " " + this.state.z2} />
           </ChatContext.Provider>
         </div>
-      </div>
+      </div >
     );
   }
 }
