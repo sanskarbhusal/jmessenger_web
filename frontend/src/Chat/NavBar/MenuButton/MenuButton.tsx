@@ -13,7 +13,7 @@ export default class MenuButton extends React.Component<Props, State> {
   handleMenuClick() { }
   render() {
     return (
-      <div className="justify-self-center self-center bg-white">
+      <div className="justify-self-center self-center bg-white sm:bg-transparent">
         <MenuIcon
           onClick={this.handleMenuClick}
           className="min-w-[24px] h-auto text-gray-500/90"
