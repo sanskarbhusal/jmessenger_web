@@ -26,6 +26,7 @@ export default class Contact extends React.Component<Props, State> {
 
   preventClick(state: State) {
     this.setState(state)
+    this.context.swap()
   }
 
   componentDidMount() {
@@ -36,7 +37,10 @@ export default class Contact extends React.Component<Props, State> {
     obj.dateOfLastMessage = "Mar 19";
   }
 
-  handleClick() { this.context() }
+
+  handleClick() {
+    this.context.swap()
+  }
 
   render() {
     return (
