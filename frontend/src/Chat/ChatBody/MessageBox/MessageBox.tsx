@@ -11,9 +11,9 @@ export default class MessageBox extends React.Component<Props, State> {
           autoComplete="off"
           spellCheck="false"
           placeholder="Message"
-          className="peer relative z-10 sm:bottom-[6px] w-[90%] sm:w-[96%] min-h-[50px] sm:h-[52px] text-lg text-black font-medium font-sans rounded-3xl border-[1px] border-gray-300 focus:border-gray-400 sm:border-transparent bg-white  drop-shadow-sm sm:drop-shadow-none shadow-inner pl-10 pr-10 placeholder-gray-500/80  outline-none ring-0 focus:ring-0 focus:outline-none">
+          className="peer relative z-10 sm:bottom-[6px] w-[90%] sm:w-[96%] min-h-[50px] sm:h-[52px] text-lg text-black font-medium font-sans rounded-3xl border-[1px] border-gray-300 bg-white sm:drop-shadow-none shadow-inner pl-10 pr-10 placeholder-gray-500/80 outline-none ring-0 focus:ring-0 focus:outline-none">
         </input>
-        <div className="hidden peer-focus:block sm:block absolute z-0 bottom-[24px] h-[55px] w-[96%] blur-sm rounded-3xl bg-custom-blue/10"></div>
+        <div className="peer-a hidden sm:peer-focus:block absolute z-0 bottom-[18px] h-[74%] w-[97%] blur-sm rounded-3xl bg-custom-blue/10 "></div>
       </div>
     </div>;
   }
