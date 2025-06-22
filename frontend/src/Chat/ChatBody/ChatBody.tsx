@@ -22,14 +22,14 @@ class ChatBody extends React.Component<Props, State> {
     return (
       <div
         className={
-          "w-dvw h-dvh flex flex-row bg-white" + " " + this.props.className
+          "w-full h-full flex flex-row bg-white" + " " + this.props.className
         }
       >
         <div className="min-w-[388px] hidden sm:block"></div>
-        <div className="w-full grid grid-rows-[minmax(56px,56px)_1fr_minmax(50px,70px)]">
+        <div className="w-full grid grid-rows-[54px_1fr_90px]">
           <ChatTitle />
-          <ChatBubbleArea />
-          <MessageBox />
+          <ChatBubbleArea className="block" />
+          <MessageBox className="block" />
         </div>
       </div>
     );

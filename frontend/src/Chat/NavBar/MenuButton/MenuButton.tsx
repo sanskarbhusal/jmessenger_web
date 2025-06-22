@@ -10,10 +10,10 @@ export default class MenuButton extends React.Component<Props, State> {
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.state = {};
   }
-  handleMenuClick() {}
+  handleMenuClick() { }
   render() {
     return (
-      <div className="justify-self-center self-center">
+      <div className="justify-self-center self-center bg-white sm:bg-transparent">
         <MenuIcon
           onClick={this.handleMenuClick}
           className="min-w-[24px] h-auto text-gray-500/90"

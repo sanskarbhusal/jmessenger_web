@@ -1,13 +1,11 @@
 import React from "react";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
-
 import { RxCross2 as CrossIcon } from "react-icons/rx";
-
 type Props = Required<typeof SearchBar.defaultProps> & {
   /* extra props here*/
 };
-
 type State = {
+  isFocused: string;
   inputText: string;
   innerBorderColor: string;
   outerBorderColor: string;
@@ -19,10 +17,10 @@ type State = {
 interface myInterface {
   inputReference: React.RefObject<HTMLDivElement>;
 }
+
 export default class SearchBar
   extends React.Component<Props, State>
-  implements myInterface
-{
+  implements myInterface {
   static defaultProps = {};
   constructor(props: Props) {
     super(props);
@@ -31,7 +29,9 @@ export default class SearchBar
     this.doGrayout = this.doGrayout.bind(this);
     this.inputReference = React.createRef<HTMLDivElement>();
   }
+
   state = {
+    isFocused: "false",
     inputText: "",
     innerBorderColor: "transparent",
     outerBorderColor: "transparent",
@@ -41,9 +41,11 @@ export default class SearchBar
   };
 
   inputReference;
+
   componentDidMount() {
     document.addEventListener("mousedown", this.handleMousedown);
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleMousedown);
   }
@@ -52,6 +54,7 @@ export default class SearchBar
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
       return {
+        isFocused: "true",
         innerBorderColor: "highlight-color",
         outerBorderColor: "highlight-color",
         searchIconColor: "highlight-color",
@@ -65,6 +68,7 @@ export default class SearchBar
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "gray-300";
       return {
+        isFocused: "false",
         innerBorderColor: "transparent",
         outerBorderColor: "transparent",
         searchIconColor: "gray-500/65",
@@ -89,7 +93,7 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          "mr-[18px] border min-h-[41px] border-solid rounded-full bg-gray-300/80 hover:bg-gray-400/60" +
+          "mr-[18px] min-h-[41px] rounded-full border-[1px] bg-gray-300/85" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -97,7 +101,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[40px] grid grid-cols-search_bar grid-row-1 border border-solid bg-white rounded-full" +
+            "min-h-[41px] grid grid-cols-search_bar grid-row-1 border-[1px] bg-white rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
@@ -122,6 +126,7 @@ export default class SearchBar
             id="search"
             type="text"
             autoComplete="off"
+            spellCheck="false"
             value={this.state.inputText}
             onFocus={this.handleMousedown}
             onChange={(e) => {
@@ -133,7 +138,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-transparent placeholder-gray-500/80 border-none outline-none m-0 p-0 "
+            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-white placeholder-gray-500/80 border-none outline-none m-0 p-0 "
           />
           <label
             htmlFor="search"

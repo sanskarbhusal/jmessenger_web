@@ -3,6 +3,54 @@
 body {
   margin: 0;
 }
-.scrollbar-hidden::-webkit-scrollbar {
+/* Example: Custom Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 0px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background:transparent ;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color:#0285c77d;
+}
+
+.scrollbar-thin {
+  scrollbar-width: none; /* Options: auto | thin | none */
+  scrollbar-color: #0285c77d transparent; /* thumb | track */
+}
+
+
+
+
+/* Hide Scrollbar Completely */
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;      /* IE and Edge */
+  scrollbar-width: none;         /* Firefox */
+}
+
+/* Show Scrollbar Again (Override Hide) */
+.scrollbar-show::-webkit-scrollbar {
+  display: initial;
+}
+
+.scrollbar-show {
+  -ms-overflow-style: auto !important;     /* Override hide */
+  scrollbar-width: auto !important;        /* Override hide */
+}
+
+
+@media (min-width:640) {
+  .sm\:scrollbar-hide{
+  -ms-overflow-style: none;      /* IE and Edge */
+  scrollbar-width: none;         /* Firefox */
+  }
+  .sm\:scrollbar-hide::-webkit-scrollbar{
+   display:none;
+  }
 }
