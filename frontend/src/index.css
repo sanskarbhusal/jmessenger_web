@@ -16,6 +16,11 @@ body {
   background-color:#0285c77d;
 }
 
+.scrollbar-thin {
+  scrollbar-width: none; /* Options: auto | thin | none */
+  scrollbar-color: #0285c77d transparent; /* thumb | track */
+}
+
 
 
 
