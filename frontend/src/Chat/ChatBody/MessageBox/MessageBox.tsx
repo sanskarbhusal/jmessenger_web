@@ -11,7 +11,7 @@ export default class MessageBox extends React.Component<Props, State> {
           autoComplete="off"
           spellCheck="false"
           placeholder="Message"
-          className="relative sm:bottom-[6px] w-[90%] sm:w-[96%] min-h-[50px] sm:h-[52px] text-lg text-black font-medium font-sans rounded-3xl border-[1px] border-gray-300 focus:border-gray-400 bg-white drop-shadow-sm shadow-inner pl-10 pr-10 placeholder-gray-500/80 outline-none">
+          className="relative sm:bottom-[6px] w-[90%] sm:w-[96%] min-h-[50px] sm:h-[52px] text-lg text-black font-medium font-sans rounded-3xl border-[1px] border-gray-300 focus:border-gray-400 bg-white drop-shadow-sm shadow-inner pl-10 pr-10 placeholder-gray-500/80  outline-none ring-0 focus:ring-0 focus:outline-none">
         </input>
       </div>
     </div>;
