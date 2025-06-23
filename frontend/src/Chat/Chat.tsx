@@ -44,7 +44,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
       <div className="w-full h-full 2xl:bg-custom-blue/5 flex flex-row justify-center items-center drop-shadow-2xl">
         <div
           ref={this.myRef}
-          className="relative h-full w-full bg-white sm:bg-custom-blue 2xl:top-[-5px] 2xl:h-[93vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-gray-300/85 2xl:border-b-0 flex flex-col sm:flex-row"
+          className="relative h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-5px] 2xl:h-[93vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-gray-300/85 2xl:border-b-0 flex flex-col sm:flex-row"
         >
           <ChatContext.Provider value={{ swap: this.state.swap }}>
             <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
@@ -52,7 +52,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
               <ContactList className={"relative " + " " + this.state.z1 + " "} />
 
             </div>
-            <ChatBody className={"absolute" + " " + this.state.z2 + " "} />
+            <ChatBody className={"absolute" + " " + this.state.z2 + "block"} />
           </ChatContext.Provider>
         </div>
       </div >
