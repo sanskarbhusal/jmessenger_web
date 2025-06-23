@@ -93,7 +93,7 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          "mr-[18px] min-h-[41px] rounded-full border-[1px] bg-gray-300/85" +
+          "transition mr-[18px] min-h-[41px] rounded-full border-[1px] bg-gray-300/85" +
           " " +
           "border-" +
           this.state.outerBorderColor
