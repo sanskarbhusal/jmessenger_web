@@ -35,7 +35,7 @@ export default class SearchBar
     isFocused: "false",
     inputText: "",
     innerBorderColor: "transparent",
-    outerBorderColor: "gray-400",
+    outerBorderColor: "gray-400/85",
     searchIconColor: "gray-500/65",
     crossIconColor: "highlight-color",
     crossIconDisplay: "hidden",
@@ -71,7 +71,7 @@ export default class SearchBar
       return {
         isFocused: "false",
         innerBorderColor: "transparent",
-        outerBorderColor: "gray-400",
+        outerBorderColor: "gray-400/85",
         searchIconColor: "gray-500/65",
         crossIconColor: "gray-600/85",
         crossIconDisplay: crossIconDisplay,

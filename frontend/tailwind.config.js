@@ -17,7 +17,7 @@ export default {
   safelist: [
     "border-highlight-color",
     "border-transparent",
-    "border-gray-400",
+    "border-gray-400/85",
     "text-highlight-color",
     "text-gray-500/65",
     "text-gray-600/85",
