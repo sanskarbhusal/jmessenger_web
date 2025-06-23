@@ -2,7 +2,7 @@ import React from "react";
 import ChatContext from "../../ChatContext.tsx";
 
 const obj = {
-  chatName: "Sanskar",
+  chatName: "Person",
   lastPersonToMessage: "Someone",
   lastMessage: "Hi, what's up",
   dateOfLastMessage: "Mar 19",
