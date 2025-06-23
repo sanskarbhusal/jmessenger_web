@@ -18,7 +18,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
     this.myRef = React.createRef();
     this.getWidth = this.getWidth.bind(this);
     this.state = {
-      z1: "z-10",
+      z1: "z-20",
       z2: "z-0",
       swap: () => {
         this.setState((prev) => {
@@ -43,7 +43,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
     return (
       <div className="bg-white w-full h-full">
 
-        <div className="w-full h-full sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
+        <div className="w-full h-full bg-white sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
           <div
             ref={this.myRef}
             className="relative rounded-lg h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-5px] 2xl:h-[94%] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row"
