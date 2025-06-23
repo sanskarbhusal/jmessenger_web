@@ -32,14 +32,14 @@ export default class Contact extends React.Component<Props, State> {
   }
 
   handleClick() {
-    this.context.swap?.()
+    this.context.swap()
   }
 
   render() {
     return (
       <div
         onClick={this.handleClick}
-        className="w-full h-fit rounded-full hover:drop-shadow-md bg-white hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/20 font-sans border border-gray-300/85 flex flex-row items-center"
+        className="w-full h-fit rounded-full hover:drop-shadow-md bg-white hover:bg-custom-blue/20 hover:shadow-md active:bg-custom-blue/40 font-sans border border-gray-300/85 flex flex-row items-center"
       >
         <div className="min-h-[66px] min-w-[66px] flex flex-row justify-center items-center bg-white rounded-full shadow-inner" >
 
