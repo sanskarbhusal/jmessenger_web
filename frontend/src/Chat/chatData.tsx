@@ -1,10 +1,10 @@
-type ChatData = {
+interface ChatData {
     payload: Contact[]
 }
 const chatData: ChatData = {
     payload: [] as Contact[]
 }
-type Contact = {
+interface Contact {
     chatName?: string
     chatId?: string
     chatType?: string
