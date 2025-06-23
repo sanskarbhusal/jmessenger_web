@@ -25,7 +25,7 @@ export default class Contact extends React.Component<Props, State> {
 
   componentDidMount() {
     //theses data should come from api
-    obj.chatName = "Sanskar";
+    obj.chatName = "Person";
     obj.lastPersonToMessage = "Someone";
     obj.lastMessage = "Clicked";
     obj.dateOfLastMessage = "Mar 19";
