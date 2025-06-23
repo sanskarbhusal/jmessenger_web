@@ -4,6 +4,7 @@ import { RxCross2 as CrossIcon } from "react-icons/rx";
 type Props = Required<typeof SearchBar.defaultProps> & {
   /* extra props here*/
 };
+
 type State = {
   isFocused: string;
   inputText: string;
@@ -55,10 +56,10 @@ export default class SearchBar
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
       return {
         isFocused: "true",
-        innerBorderColor: "highlight-color",
-        outerBorderColor: "highlight-color",
-        searchIconColor: "highlight-color",
-        crossIconColor: "highlight-color",
+        innerBorderColor: "custom-blue",
+        outerBorderColor: "custom-blue",
+        searchIconColor: "custom-blue",
+        crossIconColor: "custom-blue",
         crossIconDisplay: crossIconDisplay,
       };
     });
