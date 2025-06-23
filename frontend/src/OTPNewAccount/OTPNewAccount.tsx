@@ -7,7 +7,7 @@ class OTPNewPassword extends React.Component<Props> {
   };
   render() {
     return (
-      <div className="h-full w-full flex items-center sm:justify-center sm:bg-custom-blue/5">
+      <div className="h-full w-full flex items-center sm:justify-center sm:bg-custom-blue/10">
         <Logo />
 
         <div className="w-[77%] h-[550px] sm:h-fit sm:w-fit font-sans sm:bg-white flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-lg pl-[6%] ml-[6%] sm:m-0 sm:p-8 pt-0  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
