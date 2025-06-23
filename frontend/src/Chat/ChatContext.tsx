@@ -1,2 +1,10 @@
 import React from "react";
-export default React.createContext({});
+interface chatContext {
+    swap: () => void;
+    setChatName: () => void;
+    setChatId: () => void;
+    getChatName: () => string;
+    getChatId: () => string;
+
+}
+export default React.createContext<chatContext>({} as chatContext);
