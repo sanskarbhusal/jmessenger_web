@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
 
 type State = {

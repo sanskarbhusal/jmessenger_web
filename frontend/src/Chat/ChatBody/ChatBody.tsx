@@ -11,6 +11,7 @@ type State = {
 };
 class ChatBody extends React.Component<Props, State> {
   static defaultProps = {};
+  static contextType = ChatContext;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -36,4 +37,3 @@ class ChatBody extends React.Component<Props, State> {
   }
 }
 export default withRouter(ChatBody);
-ChatBody.contextType = ChatContext;
