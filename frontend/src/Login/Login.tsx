@@ -33,7 +33,7 @@ class Login extends React.Component<Props> {
                 type="email"
                 id="email"
                 placeholder="Email"
-                className=" font-sans text-base p-2 sm:rounded-lg border-[1px] border-solid sm:bg-transparent border-gray-300 focus:outline-custom-blue "
+                className=" font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] border-solid sm:bg-transparent border-gray-300 focus:outline-custom-blue "
               />
             </div>
             <div className="flex flex-col w-full">
@@ -44,7 +44,7 @@ class Login extends React.Component<Props> {
                 type="password"
                 id="password"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-                className="font-sans text-base p-2 sm:rounded-lg border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
+                className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
               />
             </div>
 
@@ -75,7 +75,7 @@ class Login extends React.Component<Props> {
             <div className="w-full">
               <button
                 onClick={this.onLogin}
-                className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-lg w-full font-sans text-base font-semibold"
+                className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-sans text-base font-semibold"
               >
                 Log in
               </button>
