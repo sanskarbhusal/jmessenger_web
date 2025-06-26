@@ -4,8 +4,7 @@ import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
-import data from "./chatData.tsx"
-import type { ChatData } from "./chatData.tsx"
+import chatData from "./chatData.tsx"
 
 type State = {
   z1: string;
@@ -17,23 +16,17 @@ type State = {
 class Chat extends React.Component<RouteComponentProps, State> {
 
   myRef: React.RefObject<HTMLDivElement>;
-  chatData: ChatData
-
+  chatData: typeof chatData
   getWidth() {
     const screen_width = this.myRef.current!.offsetWidth;
     return screen_width;
-  }
-
-  componentDidMount() {
-    //simulating data fetching from database
-    this.chatData = data
   }
 
   constructor(props: RouteComponentProps) {
     super(props);
     this.myRef = React.createRef();
     this.getWidth = this.getWidth.bind(this);
-    this.chatData = {} as ChatData
+    this.chatData = chatData
     this.state = {
       z1: "z-20",
       z2: "z-0",

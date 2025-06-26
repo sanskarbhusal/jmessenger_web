@@ -6,23 +6,6 @@ import type { ContactPropsType } from "./Contact/Contact.tsx"
 type Props = Required<typeof ContactList.defaultProps> & { className?: string };
 type State = { msg: string }
 
-
-function Contacts() {
-  const arr = this.context.chatData.chatList
-  const ContactArray = arr.map((item, index) => {
-    const { chatName, chatId, history } = item
-    const contactProps: ContactPropsType = {} as ContactPropsType
-    const lastElement = history[history.length - 1] //extracting last element
-    contactProps.chatName = chatName
-    contactProps.chatId = chatId
-    contactProps.lastMessage = lastElement.content
-    contactProps.lastPersonToMessage = lastElement.sender
-    contactProps.dateOfLastMessage = lastElement.timestamp
-    return <Contact key={index} {...contactProps} />
-  })
-  return ContactArray
-};
-
 export default class ContactList extends React.Component<Props, State> {
 
   static defaultProps = {};
@@ -31,9 +14,31 @@ export default class ContactList extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-    this.state = {} as State
+    this.state = { msg: "ContactList state updated" } as State
   }
 
+  Contacts = () => {
+    const chatList = this.context.chatData.chatList
+    const ContactArray = chatList.map((item, index) => {
+      const { chatName, chatId, history } = item
+      const contactProps: ContactPropsType = {} as ContactPropsType
+      const lastElement = history[history.length - 1] //extracting last element
+      contactProps.chatName = chatName
+      contactProps.chatId = chatId
+      contactProps.lastMessage = lastElement.content
+      contactProps.dateOfLastMessage = lastElement.timestamp
+      switch (lastElement.sender) {
+        case "you":
+          contactProps.lastPersonToMessage = lastElement.sender
+          break;
+        case "chat":
+          contactProps.lastPersonToMessage = chatName
+          break;
+      }
+      return <Contact key={index} {...contactProps} />
+    })
+    return ContactArray
+  };
 
   render() {
     console.log(this.state.msg)
@@ -45,7 +50,7 @@ export default class ContactList extends React.Component<Props, State> {
           this.props.className
         }
       >
-        <this.Contacts />
+        {this.Contacts()}
       </div>
     );
   }

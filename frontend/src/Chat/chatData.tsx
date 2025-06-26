@@ -53,7 +53,7 @@ const chat2: Chat = {
         },
         {
             type: "text", //remember, we only will implement text type for now.
-            content: "Hello, Hello Rojisha",
+            content: "Hello, Rojisha",
             sender: "you",
             timestamp: "2025-02-16"
         }
@@ -86,8 +86,8 @@ const chatData: ChatData = {
 }
 
 //To serialize the chatData into JSON to send it to the database server
-const json = JSON.stringify(chatData)
-console.log(json)
+// const json = JSON.stringify(chatData)
+// console.log(json)
 
 export default chatData
 export type { Message, Chat, ChatData }

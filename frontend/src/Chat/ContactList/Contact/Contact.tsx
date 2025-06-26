@@ -4,9 +4,9 @@ import ChatContext from "../../ChatContext.tsx";
 type Props = Required<typeof Contact.defaultProps> & {
   chatName: string
   chatId: string
-  dateOfLastMessage: string
-  lastPersonToMessage: string
-  lastMessage: string
+  dateOfLastMessage?: string
+  lastPersonToMessage?: string
+  lastMessage?: string
 };
 
 type State = {
@@ -33,7 +33,7 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="group sm:transition ease-out w-full h-fit rounded-full hover:drop-shadow-md bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center"
+        className="group sm:transition ease-out w-full h-fit rounded-full hover:drop-shadow-md bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center  select-none"
       >
         <div className="sm:transition min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
 
@@ -43,7 +43,7 @@ export default class Contact extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
-            <div className="font-medium text-lg">{this.props.chatName}</div>
+            <div className="font-medium text-lg select-none">{this.props.chatName}</div>
             <div className="text-gray-500 text-xs pr-[30px] font-normal">
               {this.props.dateOfLastMessage}
             </div>
@@ -57,7 +57,6 @@ export default class Contact extends React.Component<Props, State> {
             </div>
           </div>
         </div>
-        <div id="highlights">Can't die easily, can't survive easily. Life sucks!</div>
       </div>
     );
   }

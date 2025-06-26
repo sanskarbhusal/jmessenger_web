@@ -139,7 +139,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-white sm:bg-transparent placeholder-gray-500/80 border-none outline-none m-0 p-0 "
+            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-white sm:bg-transparent placeholder-gray-500/80 border-none outline-none m-0 p-0 select-none"
           />
           <label
             htmlFor="search"
