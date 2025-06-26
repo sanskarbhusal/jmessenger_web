@@ -1,17 +1,19 @@
 import React from "react";
 import ChatContext from "../../ChatContext.tsx";
 
-const obj = {
-  chatName: "Person",
-  lastPersonToMessage: "Someone",
-  lastMessage: "Hi, what's up",
-  dateOfLastMessage: "Mar 19",
+type Props = Required<typeof Contact.defaultProps> & {
+  chatName: string
+  chatId: string
+  dateOfLastMessage?: string
+  lastPersonToMessage?: string
+  lastMessage?: string
 };
 
-type Props = Required<typeof Contact.defaultProps> & {};
 type State = {
 }
+
 export default class Contact extends React.Component<Props, State> {
+
   static defaultProps = {};
   static contextType = ChatContext;
   declare context: React.ContextType<typeof ChatContext>;
@@ -23,14 +25,6 @@ export default class Contact extends React.Component<Props, State> {
     }
   }
 
-  componentDidMount() {
-    //theses data should come from api
-    obj.chatName = "Person";
-    obj.lastPersonToMessage = "Someone";
-    obj.lastMessage = "Clicked";
-    obj.dateOfLastMessage = "Mar 19";
-  }
-
   handleClick() {
     this.context.swap()
   }
@@ -39,7 +33,7 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="group sm:transition ease-out w-full h-fit rounded-full hover:drop-shadow-md bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center"
+        className="group sm:transition ease-out w-full h-fit rounded-full hover:drop-shadow-md bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center  select-none"
       >
         <div className="sm:transition min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
 
@@ -49,22 +43,22 @@ export default class Contact extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
-            <div className="font-medium text-lg">{obj.chatName}</div>
+            <div className="font-medium text-lg select-none">{this.props.chatName}</div>
             <div className="text-gray-500 text-xs pr-[30px] font-normal">
-              {obj.dateOfLastMessage}
+              {this.props.dateOfLastMessage}
             </div>
           </div>
           <div className="h-[24px] flex flex-row">
             <div className="mr-[4px] text-custom-blue">
-              {obj.lastPersonToMessage + ":"}
+              {this.props.lastPersonToMessage + ":"}
             </div>
             <div className="overflow-hidden text-gray-600">
-              {obj.lastMessage}
+              {this.props.lastMessage}
             </div>
           </div>
         </div>
-        <div id="highlights"></div>
       </div>
     );
   }
 }
+export type { Props as ContactPropsType }
