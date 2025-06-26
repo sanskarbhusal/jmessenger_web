@@ -1,37 +1,95 @@
+//Defing structure of the chatData object and it's nested objects
+interface Message {
+    type: "text" | "file" | "photo" | "url" //Only implement text for now. We don't have time to develop every freakin' feature.
+    content: string; //Since, only text will be implemented, string is okay for now.
+    sender: "user" | "chat" //Required to distinguish messages that are of the user from the chat's.
+    timestamp: string; // ISO 8601 time format. 
+}
+
 interface Chat {
-    chatName?: string
-    chatType?: string
-    chatId?: string
-    history?: {}
+    chatName: string //Full name that the chat (not the user).
+    chatType: "private" | "group"
+    chatId: string //This should hold the unique id representing the chat (not the user)
+    history: Message[] //"history" is an array because, messages are stacked based on time. Array serves the purpose of stack.
 }
 
 interface ChatData {
     chatList: Chat[]
 }
 
+// Hard coding a dummy chatData object for testing
 const chat1: Chat = {
-    chatName: "Anil",
-    chatType: "Private",
+    chatName: "Anil Gyawali",
+    chatType: "private",
     chatId: "001",
-    history: { user: "Hi, I'm Sanskar", chat: "Hi, I'm Anil" },
+    history: [
+        {
+            type: "text", //remember, we only will implement text type for now.
+            content: "Hi, sanskar",
+            sender: "chat",
+            timestamp: "2025-01-13"
+        },
+        {
+
+            type: "text", //remember, we only will implement text type for now.
+            content: "Hello, Anil",
+            sender: "user",
+            timestamp: "2025-01-13"
+        }
+    ],
 }
 
+
 const chat2: Chat = {
-    chatName: "Himal",
-    chatType: "Private",
+    chatName: "Rojisha",
+    chatType: "private",
     chatId: "002",
-    history: { user: "Hey, I'm Sanskar", chat: "Hi, I'm Himal" },
+    history: [
+        {
+            type: "text", //remember, we only will implement text type for now.
+            content: "Hi, sanskar",
+            sender: "chat",
+            timestamp: "2025-01-13"
+        },
+        {
+
+            type: "text", //remember, we only will implement text type for now.
+            content: "Hello, Hello Rojisha",
+            sender: "user",
+            timestamp: "2025-01-13"
+        }
+    ],
 }
 
 const chat3: Chat = {
-    chatName: "Rojisha",
+    chatName: "Himal Rawat",
     chatType: "private",
     chatId: "003",
-    history: { user: "Hey, I'm Sanskar", chat: "Hello, I'm Rojisha" },
+    history: [
+        {
+            type: "text", //remember, we only will implement text type for now.
+            content: "Hi, sanskar",
+            sender: "chat",
+            timestamp: "2025-01-13"
+        },
+        {
+
+            type: "text", //remember, we only will implement text type for now.
+            content: "Hello, Himal",
+            sender: "user",
+            timestamp: "2025-01-13"
+
+        }
+    ]
 }
 
 const chatData: ChatData = {
     chatList: [chat1, chat2, chat3]
 }
 
+//To serialize the chatData into JSON to send it to the database server
+const json = JSON.stringify(chatData)
+console.log(json)
+
 export default chatData
+export type { ChatData }

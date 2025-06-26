@@ -4,7 +4,8 @@ import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
-import data from "./chatData"
+import data from "./chatData.tsx"
+import type { ChatData } from "./chatData.tsx"
 
 type State = {
   z1: string;
@@ -13,11 +14,25 @@ type State = {
 };
 
 class Chat extends React.Component<RouteComponentProps, State> {
+
   myRef: React.RefObject<HTMLDivElement>;
+  chatData: ChatData
+
+  getWidth() {
+    const screen_width = this.myRef.current!.offsetWidth;
+    return screen_width;
+  }
+
+  componentDidMount() {
+    //simulating data fetching from database
+    this.chatData = data
+  }
+
   constructor(props: RouteComponentProps) {
     super(props);
     this.myRef = React.createRef();
     this.getWidth = this.getWidth.bind(this);
+    this.chatData = {} as ChatData
     this.state = {
       z1: "z-20",
       z2: "z-0",
@@ -35,16 +50,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
       },
     };
   }
-  getWidth() {
-    const screen_width = this.myRef.current!.offsetWidth;
-    return screen_width;
-  }
 
-  componentDidMount() {
-    //simulating data fetching from database
-    const chatData = data
-
-  }
   render() {
     return (
       <div className="bg-white w-full h-full">
@@ -54,7 +60,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
             ref={this.myRef}
             className="relative rounded-lg h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-5px] 2xl:h-[94%] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row"
           >
-            <ChatContext.Provider value={{ swap: this.state.swap }}>
+            <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData }}>
               <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
                 <NavBar className={"relative" + " " + this.state.z1 + " "} />
                 <ContactList className={"relative " + " " + this.state.z1 + " "} />
