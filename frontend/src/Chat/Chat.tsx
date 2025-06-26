@@ -10,6 +10,7 @@ import type { ChatData } from "./chatData.tsx"
 type State = {
   z1: string;
   z2: string;
+  visibility?: string
   swap: () => void;
 };
 
@@ -63,10 +64,10 @@ class Chat extends React.Component<RouteComponentProps, State> {
             <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData }}>
               <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
                 <NavBar className={"relative" + " " + this.state.z1 + " "} />
-                <ContactList className={"relative " + " " + this.state.z1 + " "} />
+                <ContactList className={"relative " + " " + this.state.z1} />
 
               </div>
-              <ChatBody className={"absolute" + " " + this.state.z2 + "block"} />
+              <ChatBody className={"absolute" + " " + this.state.z2 + " " + ""} />
             </ChatContext.Provider>
           </div>
         </div >

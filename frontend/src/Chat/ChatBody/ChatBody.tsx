@@ -23,7 +23,7 @@ class ChatBody extends React.Component<Props, State> {
     return (
       <div
         className={
-          "w-full h-full flex flex-row bg-white sm:bg-transparent" + " " + this.props.className
+          "w-full h-full flex flex-row bg-white sm:bg-transparent " + " " + this.props.className
         }
       >
         <div className="min-w-[388px] hidden sm:block bg-transparent"></div>

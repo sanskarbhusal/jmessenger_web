@@ -1,17 +1,19 @@
 import React from "react";
 import ChatContext from "../../ChatContext.tsx";
 
-const obj = {
-  chatName: "Person",
-  lastPersonToMessage: "Someone",
-  lastMessage: "Hi, what's up",
-  dateOfLastMessage: "Mar 19",
+type Props = Required<typeof Contact.defaultProps> & {
+  chatName: string
+  chatId: string
+  dateOfLastMessage: string
+  lastPersonToMessage: string
+  lastMessage: string
 };
 
-type Props = Required<typeof Contact.defaultProps> & {};
 type State = {
 }
+
 export default class Contact extends React.Component<Props, State> {
+
   static defaultProps = {};
   static contextType = ChatContext;
   declare context: React.ContextType<typeof ChatContext>;
@@ -21,14 +23,6 @@ export default class Contact extends React.Component<Props, State> {
     this.handleClick = this.handleClick.bind(this)
     this.state = {
     }
-  }
-
-  componentDidMount() {
-    //theses data should come from api
-    obj.chatName = "Person";
-    obj.lastPersonToMessage = "Someone";
-    obj.lastMessage = "Clicked";
-    obj.dateOfLastMessage = "Mar 19";
   }
 
   handleClick() {
@@ -49,22 +43,23 @@ export default class Contact extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
           <div className="flex flex-row justify-between">
-            <div className="font-medium text-lg">{obj.chatName}</div>
+            <div className="font-medium text-lg">{this.props.chatName}</div>
             <div className="text-gray-500 text-xs pr-[30px] font-normal">
-              {obj.dateOfLastMessage}
+              {this.props.dateOfLastMessage}
             </div>
           </div>
           <div className="h-[24px] flex flex-row">
             <div className="mr-[4px] text-custom-blue">
-              {obj.lastPersonToMessage + ":"}
+              {this.props.lastPersonToMessage + ":"}
             </div>
             <div className="overflow-hidden text-gray-600">
-              {obj.lastMessage}
+              {this.props.lastMessage}
             </div>
           </div>
         </div>
-        <div id="highlights"></div>
+        <div id="highlights">Can't die easily, can't survive easily. Life sucks!</div>
       </div>
     );
   }
 }
+export type { Props as ContactPropsType }
