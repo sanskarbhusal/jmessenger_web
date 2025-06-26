@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
 
 type State = {
@@ -18,7 +18,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
     this.myRef = React.createRef();
     this.getWidth = this.getWidth.bind(this);
     this.state = {
-      z1: "z-10",
+      z1: "z-20",
       z2: "z-0",
       swap: () => {
         this.setState((prev) => {
@@ -41,20 +41,24 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div className="w-full h-full 2xl:bg-custom-blue/5 flex flex-row justify-center items-center drop-shadow-2xl">
-        <div
-          ref={this.myRef}
-          className="relative h-full w-full bg-white 2xl:top-[-5px] 2xl:h-[93vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-gray-300/85 2xl:border-b-0 flex flex-col sm:flex-row"
-        >
-          <ChatContext.Provider value={this.state.swap}>
-            <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
-              <NavBar className={"relative" + " " + this.state.z1} />
-              <ContactList className={"relative " + " " + this.state.z1} />
-            </div>
-            <ChatBody className={"absolute" + " " + this.state.z2} />
-          </ChatContext.Provider>
-        </div>
-      </div >
+      <div className="bg-white w-full h-full">
+
+        <div className="w-full h-full bg-white sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
+          <div
+            ref={this.myRef}
+            className="relative rounded-lg h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-5px] 2xl:h-[94%] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row"
+          >
+            <ChatContext.Provider value={{ swap: this.state.swap }}>
+              <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
+                <NavBar className={"relative" + " " + this.state.z1 + " "} />
+                <ContactList className={"relative " + " " + this.state.z1 + " "} />
+
+              </div>
+              <ChatBody className={"absolute" + " " + this.state.z2 + "block"} />
+            </ChatContext.Provider>
+          </div>
+        </div >
+      </div>
     );
   }
 }

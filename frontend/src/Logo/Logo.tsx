@@ -12,7 +12,7 @@ class Logo extends React.Component<Props> {
     return (
       <img
         className={
-          "fixed inset-0 flex flex-col justify-center items-center w-20 sm:w-24 h-auto ml-[-11px] mt-[-6px] " +
+          "fixed inset-0 flex flex-col justify-center items-center w-20 sm:w-24 h-auto ml-[-11px] mt-[-6px] fill-current text-blue-500" +
           " " +
           this.props.className
         }

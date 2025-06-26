@@ -1,2 +1,5 @@
 import React from "react";
-export default React.createContext(() => {});
+interface ChatContext {
+    swap: () => void;
+}
+export default React.createContext<ChatContext>({} as ChatContext);

@@ -4,6 +4,7 @@ import { RxCross2 as CrossIcon } from "react-icons/rx";
 type Props = Required<typeof SearchBar.defaultProps> & {
   /* extra props here*/
 };
+
 type State = {
   isFocused: string;
   inputText: string;
@@ -34,7 +35,7 @@ export default class SearchBar
     isFocused: "false",
     inputText: "",
     innerBorderColor: "transparent",
-    outerBorderColor: "transparent",
+    outerBorderColor: "gray-400/85",
     searchIconColor: "gray-500/65",
     crossIconColor: "highlight-color",
     crossIconDisplay: "hidden",
@@ -55,10 +56,10 @@ export default class SearchBar
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
       return {
         isFocused: "true",
-        innerBorderColor: "highlight-color",
-        outerBorderColor: "highlight-color",
-        searchIconColor: "highlight-color",
-        crossIconColor: "highlight-color",
+        innerBorderColor: "custom-blue",
+        outerBorderColor: "custom-blue",
+        searchIconColor: "custom-blue",
+        crossIconColor: "custom-blue",
         crossIconDisplay: crossIconDisplay,
       };
     });
@@ -70,7 +71,7 @@ export default class SearchBar
       return {
         isFocused: "false",
         innerBorderColor: "transparent",
-        outerBorderColor: "transparent",
+        outerBorderColor: "gray-400/85",
         searchIconColor: "gray-500/65",
         crossIconColor: "gray-600/85",
         crossIconDisplay: crossIconDisplay,
@@ -93,7 +94,7 @@ export default class SearchBar
       <div
         ref={this.inputReference}
         className={
-          "mr-[18px] min-h-[41px] rounded-full border-[1px] bg-gray-300/85" +
+          "transition mr-[18px] min-h-[41px] rounded-full border-[1px] bg-gray-300/85 sm:bg-transparent" +
           " " +
           "border-" +
           this.state.outerBorderColor
@@ -101,7 +102,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[41px] grid grid-cols-search_bar grid-row-1 border-[1px] bg-white rounded-full" +
+            "min-h-[40px] grid grid-cols-search_bar grid-row-1 border-[1px] bg-white sm:bg-transparent rounded-full" +
             " " +
             "border-" +
             this.state.innerBorderColor
@@ -138,7 +139,7 @@ export default class SearchBar
               });
             }}
             placeholder="Search"
-            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-white placeholder-gray-500/80 border-none outline-none m-0 p-0 "
+            className="relative top-[-1px] w-full self-center text-lg font-normal font-sans bg-white sm:bg-transparent placeholder-gray-500/80 border-none outline-none m-0 p-0 "
           />
           <label
             htmlFor="search"

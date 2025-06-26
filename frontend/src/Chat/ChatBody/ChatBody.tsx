@@ -11,6 +11,7 @@ type State = {
 };
 class ChatBody extends React.Component<Props, State> {
   static defaultProps = {};
+  static contextType = ChatContext;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -22,10 +23,10 @@ class ChatBody extends React.Component<Props, State> {
     return (
       <div
         className={
-          "w-full h-full flex flex-row bg-white" + " " + this.props.className
+          "w-full h-full flex flex-row bg-white sm:bg-transparent" + " " + this.props.className
         }
       >
-        <div className="min-w-[388px] hidden sm:block"></div>
+        <div className="min-w-[388px] hidden sm:block bg-transparent"></div>
         <div className="w-full grid grid-rows-[54px_1fr_90px]">
           <ChatTitle />
           <ChatBubbleArea className="block" />
@@ -36,4 +37,3 @@ class ChatBody extends React.Component<Props, State> {
   }
 }
 export default withRouter(ChatBody);
-ChatBody.contextType = ChatContext;

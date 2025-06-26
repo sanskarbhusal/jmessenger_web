@@ -2,7 +2,7 @@ import React from "react";
 import ChatContext from "../../ChatContext.tsx";
 
 const obj = {
-  chatName: "Sanskar",
+  chatName: "Person",
   lastPersonToMessage: "Someone",
   lastMessage: "Hi, what's up",
   dateOfLastMessage: "Mar 19",
@@ -18,36 +18,33 @@ export default class Contact extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-    this.preventClick = this.preventClick.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.state = {
     }
   }
 
-  preventClick(state: State) {
-    this.setState(state)
-  }
-
   componentDidMount() {
     //theses data should come from api
-    obj.chatName = "Sanskar";
+    obj.chatName = "Person";
     obj.lastPersonToMessage = "Someone";
     obj.lastMessage = "Clicked";
     obj.dateOfLastMessage = "Mar 19";
   }
 
-  handleClick() { this.context() }
+  handleClick() {
+    this.context.swap()
+  }
 
   render() {
     return (
       <div
         onClick={this.handleClick}
-        className="w-full h-fit rounded-full hover:drop-shadow-md bg-white hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/20 font-sans border border-gray-300/85 flex flex-row items-center"
+        className="group sm:transition ease-out w-full h-fit rounded-full hover:drop-shadow-md bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center"
       >
-        <div className="min-h-[66px] min-w-[66px] flex flex-row justify-center items-center bg-white rounded-full shadow-inner" >
+        <div className="sm:transition min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
 
-          <div className=" min-h-[50px] min-w-[50px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center rounded-full">
-            <div className="font-sans font-extrabold text-3xl text-white">S</div>
+          <div className="group min-h-[48px] min-w-[48px] sm:group-hover:min-w-[58px] sm:group-hover:min-h-[58px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center rounded-full">
+            <div className="font-sans font-extrabold text-3xl text- group-hover:text-4xl text-white">S</div>
           </div>
         </div>
         <div className="w-full ml-[8px] flex flex-col justify-between">
@@ -61,7 +58,7 @@ export default class Contact extends React.Component<Props, State> {
             <div className="mr-[4px] text-custom-blue">
               {obj.lastPersonToMessage + ":"}
             </div>
-            <div className="overflow-hidden text-gray-500">
+            <div className="overflow-hidden text-gray-600">
               {obj.lastMessage}
             </div>
           </div>
