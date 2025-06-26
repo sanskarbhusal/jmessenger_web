@@ -27,10 +27,11 @@ export default class App extends React.Component {
 
   appRef = React.createRef<HTMLDivElement>()
   state = { isDesktop: false }
+
   componentDidMount() {
     const width = this.appRef.current!.offsetWidth
     if (width <= 640) {
-      this.setState({ isDesktop: false })
+      this.setState({ isDesktop: false }): width
     } else {
       this.setState({ isDesktop: true })
     }
