@@ -4,6 +4,7 @@ import ContactList from "./ContactList";
 import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
+import data from "./chatData"
 
 type State = {
   z1: string;
@@ -39,6 +40,11 @@ class Chat extends React.Component<RouteComponentProps, State> {
     return screen_width;
   }
 
+  componentDidMount() {
+    //simulating data fetching from database
+    const chatData = data
+
+  }
   render() {
     return (
       <div className="bg-white w-full h-full">
