@@ -18,7 +18,7 @@ class ForgotPassword extends React.Component<Props> {
                 type="password"
                 id="pass"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-                className="font-sans text-base p-2 sm:rounded-lg border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
+                className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
               />
             </div>
 
@@ -30,7 +30,7 @@ class ForgotPassword extends React.Component<Props> {
                 type="password"
                 id="confirm-pass"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-                className="font-sans text-base p-2 sm:rounded-lg border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
+                className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
               />
             </div>
 
@@ -39,7 +39,7 @@ class ForgotPassword extends React.Component<Props> {
                 onClick={() => {
                   this.props.history.push("/otp-new-password");
                 }}
-                className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-lg w-full font-semibold "
+                className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold "
               >
                 Next
               </button>
