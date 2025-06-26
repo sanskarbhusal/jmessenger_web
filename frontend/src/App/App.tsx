@@ -31,7 +31,7 @@ export default class App extends React.Component {
   componentDidMount() {
     const width = this.appRef.current!.offsetWidth
     if (width <= 640) {
-      this.setState({ isDesktop: false }): width
+      this.setState({ isDesktop: false })
     } else {
       this.setState({ isDesktop: true })
     }
