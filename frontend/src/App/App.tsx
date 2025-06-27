@@ -41,7 +41,7 @@ export default class App extends React.Component {
               Please visit the site from your laptop/desktop.
             </span>
             <span>
-              Sorry for the inconvenience.
+              Sorry for the inconvenience.	&#128517;
             </span>
 
 
