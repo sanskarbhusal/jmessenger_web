@@ -18,14 +18,14 @@ type Props = Required<typeof ChatBubble.defaultProps> & {
   timestamp?: string;
 };
 
-function temp(props: Props) {
-  return (
-    <div className="
-   
-   ">
-    </div>
-  )
-}
+// function temp() {
+//   return (
+//     <div className="
+
+//    ">
+//     </div>
+//   )
+// }
 
 
 export default class ChatBubble extends React.Component<Props, State> {
