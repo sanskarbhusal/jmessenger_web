@@ -41,7 +41,7 @@ export default class App extends React.Component {
               Please visit the site from your laptop/desktop.
             </span>
             <span>
-              Sorry for the inconvenience.	&#128517;
+              Sorry for the inconvenience.	&#128517;  {/* &#128517; renders embarrassed emoji character */}
             </span>
 
 
