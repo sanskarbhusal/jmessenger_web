@@ -41,7 +41,6 @@ export default class ContactList extends React.Component<Props, State> {
   };
 
   render() {
-    console.log(this.state.msg)
     return (
       <div
         className={

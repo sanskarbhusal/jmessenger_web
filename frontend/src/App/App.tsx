@@ -43,8 +43,6 @@ export default class App extends React.Component {
             <span>
               Sorry for the inconvenience.	&#128517;  {/* &#128517; renders embarrassed emoji character */}
             </span>
-
-
           </div>
           {this.state.isDesktop && <Routes />}
         </div>
