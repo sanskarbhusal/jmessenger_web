@@ -38,11 +38,11 @@ export default class ChatBubble extends React.Component<Props, State> {
     const utc = new Date(iso)
     const time = removeSeconds(utc.toLocaleTimeString())
 
-    return <div className="w-[100%] min-h-[8%] max-h-fit group self-end flex flex-col justify-center items-center sm:ml-5 sm:mr-5 bg-custom-blue/10 sm:border border-custom-blue/30 rounded-xl selection:bg-custom-blue selection:text-thite">
-      <div>CContent Content Content Content Content Content content</div>
-      <div className="pl-10 flex flex-row items-center gap-1 text-gray-400 text-xs">
+    return <div className="max-w-[20%] max-h-[30%] scrollbar-thin overflow-auto group self-end flex flex-col justify-center items-center sm:mt-2 sm:mr-24 bg-custom-blue/10 sm:border border-custom-blue/30 rounded-xl selection:bg-custom-blue selection:text-thite">
+      <div className="p-2 font-medium text-base">Text text</div>
+      <div className="">
         <div>{time}</div>
-        <div className="flex flex-row justify-center items-center">
+        <div className="">
           <DoubleCheckIcon className=" text-custom-blue/90 group-hover:text-gray-400 text-sm" />
         </div>
       </div>
