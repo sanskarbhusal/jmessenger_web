@@ -37,7 +37,7 @@ export default class App extends React.Component {
       <Router>
         <div ref={this.appRef} className="fixed h-full w-full overflow-none">
           <div className="h-full flex flex-col justify-center items-center sm:hidden font-extrabold text-2xl gap-2 bg-custom-blue/10 text-custom-blue-dark">
-            <span>
+            <span className="m-4 text-center">
               Please visit the site from your laptop/desktop.
             </span>
             <span>
