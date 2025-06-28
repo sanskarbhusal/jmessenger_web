@@ -20,7 +20,7 @@ interface ChatData {
 
 // Hard coding a dummy chatData object for testing
 const chat1: Chat = {
-    chatName: "Anil Gyawali",
+    chatName: "Suman",
     chatType: "private",
     chatId: "001",
     history: [
@@ -32,7 +32,7 @@ const chat1: Chat = {
         },
         {
             contentType: "text", //remember, we only will implement text type for now.
-            content: "Hello, Anil",
+            content: "Hello, Suman!",
             sender: "You",
             timestamp: "2025-01-14"
         }
@@ -40,7 +40,7 @@ const chat1: Chat = {
 }
 
 const chat2: Chat = {
-    chatName: "Rojisha",
+    chatName: "Santosh",
     chatType: "private",
     chatId: "002",
     history: [
@@ -52,7 +52,7 @@ const chat2: Chat = {
         },
         {
             contentType: "text", //remember, we only will implement text type for now.
-            content: "Hello, Rojisha",
+            content: "Hi, Santosh",
             sender: "You",
             timestamp: "2025-02-16"
         }
@@ -60,7 +60,7 @@ const chat2: Chat = {
 }
 
 const chat3: Chat = {
-    chatName: "Himal Rawat",
+    chatName: "Sanskar",
     chatType: "private",
     chatId: "003",
     history: [
@@ -72,7 +72,7 @@ const chat3: Chat = {
         },
         {
             contentType: "text", //remember that we only will implement text type for now.
-            content: "Hello, Himal",
+            content: " Web frontend is so easy. Lots of complicated graphics programming and data encoding/decoding is abstrated and automated. Like for example this emoji works out of the box 😆. You just copy the emojy from any platfrom and the emoji data is decoded and rendered properly in the browser. You need not be a programming wizard to be able to show emojis.",
             sender: "You",
             timestamp: "2025-03-18"
         }
