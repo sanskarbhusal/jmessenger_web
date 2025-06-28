@@ -2,7 +2,7 @@
 interface Message {
     contentType: "text" | "file" | "photo" | "url" //Only implement text for now. We don't have time to develop every freakin' feature.
     content: string; //Since, only text will be implemented, string is okay for now.
-    sender: "you" | "chat" //Required to distinguish messages that are of the user from the chat's.
+    sender: "You" | "chat" //Required to distinguish messages that are of the user from the chat's.
     timestamp: string; // ISO 8601 time format. 
 }
 
@@ -33,7 +33,7 @@ const chat1: Chat = {
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hello, Anil",
-            sender: "you",
+            sender: "You",
             timestamp: "2025-01-14"
         }
     ],
@@ -53,7 +53,7 @@ const chat2: Chat = {
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hello, Rojisha",
-            sender: "you",
+            sender: "You",
             timestamp: "2025-02-16"
         }
     ],
@@ -73,7 +73,7 @@ const chat3: Chat = {
         {
             contentType: "text", //remember that we only will implement text type for now.
             content: "Hello, Himal",
-            sender: "you",
+            sender: "You",
             timestamp: "2025-03-18"
         }
     ]

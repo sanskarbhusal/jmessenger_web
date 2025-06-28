@@ -28,7 +28,7 @@ export default class ContactList extends React.Component<Props, State> {
       contactProps.lastMessage = lastElement.content
       contactProps.dateOfLastMessage = lastElement.timestamp
       switch (lastElement.sender) {
-        case "you":
+        case "You":
           contactProps.lastPersonToMessage = lastElement.sender
           break;
         case "chat":
