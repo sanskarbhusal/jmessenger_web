@@ -6,7 +6,7 @@ body {
 /*This code is suggested by chat-GPT*/
 /* Example: Custom Scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
-  width: 20px;
+  width: 0px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
