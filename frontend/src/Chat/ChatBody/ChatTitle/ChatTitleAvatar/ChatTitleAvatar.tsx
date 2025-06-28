@@ -11,7 +11,7 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
     chatName: "Sanskar",
     lastPersonToMessage: "Someone",
     lastMessage: "Hi, whats up!",
-    dateOfLastMessage: "Mar 19",
+    dateOfLastMessage: "today at 9:28 AM",
   };
   render() {
     return (
@@ -21,8 +21,8 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[18px] flex flex-col">
           <div className="font-medium text-lg">{this.obj.chatName}</div>
-          <div className="relative top-[-2px] text-gray-500 font-normal text-sm">
-            {"last seen on " + this.obj.dateOfLastMessage}
+          <div className="relative top-[-2px] text-gray-500 font-medium text-xs">
+            {"last seen " + this.obj.dateOfLastMessage}
           </div>
         </div>
         <div id="highlights"></div>
