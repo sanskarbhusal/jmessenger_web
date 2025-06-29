@@ -33,7 +33,7 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="group sm:transition delay-0 linear w-full h-fit rounded-full hover:drop-shadow-lg bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center select-none"
+        className="group sm:transition delay-0 linear w-[370px] h-fit rounded-full hover:drop-shadow-lg bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center select-none"
       >
         <div className="sm:transition delay-0 linear min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
 
@@ -52,7 +52,7 @@ export default class Contact extends React.Component<Props, State> {
             <div className="mr-[4px] text-custom-blue font-medium text-sm">
               {this.props.lastPersonToMessage + ":"}
             </div>
-            <div className="overflow-hidden text-gray-500 font-normal text-sm">
+            <div className="overflow-hidden w-[245px] text-nowrap text-ellipsis text-gray-500 font-normal text-sm">
               {this.props.lastMessage}
             </div>
           </div>
