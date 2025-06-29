@@ -1,5 +1,4 @@
 clear
-git branch
 git add --all
 git commit --message "This is an autmated commit"
 git branch
