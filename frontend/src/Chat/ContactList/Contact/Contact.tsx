@@ -44,7 +44,7 @@ export default class Contact extends React.Component<Props, State> {
         <div className="w-full ml-[8px] flex flex-col sm:drop-shadow-sm">
           <div className="flex flex-row justify-between">
             <div className="font-medium text-lg select-none mt-[5px]">{this.props.chatName}</div>
-            <div className="text-gray-500 pr-[15px] font-normal text-xs">
+            <div className="text-gray-500 pr-[15px] font-medium text-xs">
               {this.props.dateOfLastMessage}
             </div>
           </div>
