@@ -52,7 +52,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
         <div className="w-full h-full bg-white sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
           <div
             ref={this.myRef}
-            className="relative rounded-lg h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-5px] 2xl:h-[94%] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row"
+            className="relative rounded-none 2xl:rounded-lg h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-5px] 2xl:h-[94%] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row sm:shadow-inner sm:shadow-custom-blue/25 2xl:shadow-none"
           >
             <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData }}>
               <div className="flex flex-col w-full sm:w-[388px] overflow-y-hidden">
