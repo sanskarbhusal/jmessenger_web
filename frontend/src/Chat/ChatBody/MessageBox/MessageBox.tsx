@@ -7,7 +7,7 @@ export default class MessageBox extends React.Component<Props, State> {
   state = {};
   render() {
     return (
-      <div className={"group relative w-ful h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
+      <div className={"relative w-ful h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
         <div className="relative z-10 w-[96%] m-[6px] bottom-[10px] flex flex-row justify-center items-start bg-transparent">
           <textarea
             id="textarea"
