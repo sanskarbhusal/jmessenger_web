@@ -13,7 +13,8 @@ export default class ChatBubbleArea extends React.Component<Props, State> {
         <div className="hidden sm:block blur-sm rounded-3xl absolute z-0 top-[11px] w-[97%] h-full bg-custom-blue-dark/30"></div>
         <div className="hidden sm:block relative z-10 top-[11px] bg-white w-[96%] h-[98%] rounded-3xl">
           <div
-            className={"relative z-20 w-full h-full flex flex-col bg-white sm:bg-custom-blue/5 rounded-3xl border border-custom-blue/15" + " " + this.props.className}>
+            className={"relative z-20 overflow-auto w-full h-full flex flex-col bg-white sm:bg-custom-blue/5 rounded-3xl border border-custom-blue/15" + " " + this.props.className}>
+            <ChatBubble />
             <ChatBubble />
           </div>
         </div>

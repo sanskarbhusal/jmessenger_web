@@ -21,7 +21,7 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[18px] flex flex-col">
           <div className="font-medium text-lg">{this.obj.chatName}</div>
-          <div className="relative top-[-2px] text-gray-500 font-normal text-xs">
+          <div className="relative top-[-2px] text-gray-500 font-medium text-xs">
             {"last seen " + this.obj.dateOfLastMessage}
           </div>
         </div>
