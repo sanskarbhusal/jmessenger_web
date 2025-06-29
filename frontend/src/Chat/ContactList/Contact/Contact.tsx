@@ -37,7 +37,7 @@ export default class Contact extends React.Component<Props, State> {
       >
         <div className="sm:transition delay-0 linear min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
 
-          <div className="group min-h-[48px] min-w-[48px] sm:group-hover:min-w-[58px] sm:group-hover:min-h-[58px] bg-gradient-to-b from-custom-blue/50 to-custom-blue-dark flex justify-center items-center rounded-full">
+          <div className="group min-h-[48px] min-w-[48px] sm:group-hover:min-w-[58px] sm:group-hover:min-h-[58px] bg-gradient-to-br from-custom-blue/50 to-gray-950 flex justify-center items-center rounded-full">
             <div className="font-sans font-extrabold text-3xl text- group-hover:text-4xl text-white">S</div>
           </div>
         </div>

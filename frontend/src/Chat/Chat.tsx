@@ -47,24 +47,21 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   render() {
     return (
-      <div className="bg-white w-full h-full">
+      <div className="w-full h-full bg-white sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
+        <div
+          ref={this.myRef}
+          className="relative rounded-none 2xl:rounded-lg h-full w-full bg-white bg-gradient-to-br from-custom-blue/5 to-custom-blue/30 2xl:top-[-2px] 2xl:h-[97vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row sm:shadow-inner sm:shadow-custom-blue/25 2xl:shadow-none"
+        >
+          <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData }}>
+            <div className="flex flex-col w-full h-full sm:w-[388px] overflow-y-hidden">
+              <NavBar className={"relative" + " " + this.state.z1 + " "} />
+              <ContactList className={"relative " + " " + this.state.z1} />
 
-        <div className="w-full h-full bg-white sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
-          <div
-            ref={this.myRef}
-            className="relative rounded-none 2xl:rounded-lg h-full w-full bg-white sm:bg-custom-blue/5 2xl:top-[-2px] 2xl:h-[97vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row sm:shadow-inner sm:shadow-custom-blue/25 2xl:shadow-none"
-          >
-            <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData }}>
-              <div className="flex flex-col w-full h-full sm:w-[388px] overflow-y-hidden">
-                <NavBar className={"relative" + " " + this.state.z1 + " "} />
-                <ContactList className={"relative " + " " + this.state.z1} />
-
-              </div>
-              <ChatBody className={"absolute" + " " + this.state.z2 + " " + ""} />
-            </ChatContext.Provider>
-          </div>
-        </div >
-      </div>
+            </div>
+            <ChatBody className={"absolute" + " " + this.state.z2 + " " + ""} />
+          </ChatContext.Provider>
+        </div>
+      </div >
     );
   }
 }

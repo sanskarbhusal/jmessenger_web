@@ -102,7 +102,7 @@ export default class SearchBar
       >
         <div
           className={
-            "min-h-[40px] grid grid-cols-search_bar grid-row-1 border-[1px] bg-white sm:bg-transparent rounded-full  " +
+            "min-h-[40px] grid grid-cols-search_bar grid-row-1 border-[1px] bg-white sm:bg-transparent rounded-full shadow-inner" +
             " " +
             "border-" +
             this.state.innerBorderColor
