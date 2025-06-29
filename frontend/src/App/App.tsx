@@ -36,11 +36,9 @@ export default class App extends React.Component {
     return (
       <Router>
         <div ref={this.appRef} className="fixed h-full w-full overflow-none">
-          <div className="h-full flex flex-col justify-center items-center sm:hidden font-extrabold text-xl gap-2 bg-custom-blue/10 text-custom-blue-dark">
-            <span>
-              Please visit the site from your laptop/desktop.
-            </span>
-            <span>
+          <div className="h-full flex flex-col text-center justify-center items-center sm:hidden font-extrabold text-xl gap-5 bg-custom-blue/10 text-custom-blue-dark">
+            Please visit the site from your laptop/desktop.
+            <span className="m">
               Sorry for the inconvenience.	&#128517;  {/* &#128517; renders embarrassed emoji character */}
             </span>
           </div>
