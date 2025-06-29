@@ -33,9 +33,9 @@ export default class Contact extends React.Component<Props, State> {
     return (
       <div
         onClick={this.handleClick}
-        className="group sm:transition ease-out w-full h-fit rounded-full hover:drop-shadow-lg bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center select-none"
+        className="group sm:transition delay-0 linear w-full h-fit rounded-full hover:drop-shadow-lg bg-white sm:bg-transparent hover:bg-custom-blue/10 hover:shadow-md active:bg-custom-blue/30 font-sans border border-gray-300/85 sm:border-transparent flex flex-row items-center select-none"
       >
-        <div className="sm:transition min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
+        <div className="sm:transition delay-0 linear min-h-[60px] min-w-[60px] flex flex-row justify-center items-center bg-white sm:bg-transparent rounded-full shadow-md sm:group-hover:shadow-none" >
 
           <div className="group min-h-[48px] min-w-[48px] sm:group-hover:min-w-[58px] sm:group-hover:min-h-[58px] bg-gradient-to-b from-orange-400/90 to-orange-500/90 flex justify-center items-center rounded-full">
             <div className="font-sans font-extrabold text-3xl text- group-hover:text-4xl text-white">S</div>
