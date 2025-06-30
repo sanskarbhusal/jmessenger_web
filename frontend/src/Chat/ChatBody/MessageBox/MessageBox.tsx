@@ -4,10 +4,22 @@ type State = {};
 type Props = Required<typeof MessageBox.defaultProps> & { className?: string };
 export default class MessageBox extends React.Component<Props, State> {
   static defaultProps = { foo: "foo" };
+  messageBoxRef = React.createRef<HTMLTextAreaElement>()
   state = {};
+
+  componentDidMount() {
+    const textarea = document.getElementById("textarea")
+    textarea?.addEventListener("keydown", (e) => {
+      if (e.repeat) {
+        console.log(`Key "${e.key}" input [event: input]`);
+      }
+    });
+
+  }
+
   render() {
     return (
-      <div className={"group relative w-ful h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
+      <div className={"relative max-w-full min-w-full h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
         <div className="relative z-10 w-[96%] m-[6px] bottom-[10px] flex flex-row justify-center items-start bg-transparent">
           <textarea
             id="textarea"
