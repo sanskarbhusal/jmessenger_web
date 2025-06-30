@@ -3,6 +3,7 @@
 body {
   margin: 0;
 }
+/*This code is suggested by chat-GPT*/
 /* Example: Custom Scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
   width: 0px;
@@ -21,16 +22,7 @@ body {
   scrollbar-color: #0285c77d transparent; /* thumb | track */
 }
 
-
-
-/* Remove arrows in Chrome, Safari, Edge, Opera */
-.no-spinner::-webkit-inner-spin-button,
-.no-spinner::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Remove arrows in Firefox */
-.no-spinner {
-  -moz-appearance: textfield;
+/*This code is by Sanskar Bhusal*/
+#textarea{
+  field-sizing: content;
 }
