@@ -23,6 +23,10 @@ body {
 }
 
 /*This code is by Sanskar Bhusal*/
-#textarea{
+.auto_resize{
   field-sizing: content;
+}
+.no_resize{
+  field-sizing: fixed;
+  rows:1;
 }

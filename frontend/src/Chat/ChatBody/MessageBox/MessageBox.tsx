@@ -1,20 +1,51 @@
 import React from "react";
 import { BiSolidSend as SendButton } from "react-icons/bi";
-type State = {};
-type Props = Required<typeof MessageBox.defaultProps> & { className?: string };
+
+const defaultProps = {
+  foo: "foo"
+}
+
+type State = {
+  fieldSizing: string
+  value: string
+  textAreaRows: number
+};
+type Props = Required<typeof defaultProps> & { className?: string };
+
+/* class Dummy extends React.Component {
+  state = {}
+  render() {
+    return (
+      <div>
+        <textarea id="dummy" className=""></textarea>
+      </div>
+    )
+  }
+}
+ */
 export default class MessageBox extends React.Component<Props, State> {
-  static defaultProps = { foo: "foo" };
+
+  static defaultProps: typeof defaultProps
   messageBoxRef = React.createRef<HTMLTextAreaElement>()
-  state = {};
+
+  constructor(props: Props) {
+    super(props)
+    this.state = { value: "", textAreaRows: 1 } as State;
+  }
 
   componentDidMount() {
-    const textarea = document.getElementById("textarea")
-    textarea?.addEventListener("keydown", (e) => {
-      if (e.repeat) {
-        console.log(`Key "${e.key}" input [event: input]`);
+    const textarea = document.getElementById("textarea") as HTMLTextAreaElement
+    textarea.addEventListener("keydown", (e) => {
+      if (e.key == "Enter") {
+        console.log("Enter")
+        this.setState({ value: "", textAreaRows: 1 })
       }
-    });
+    }, true)
+  }
 
+  onChange(e: Event) {
+
+    this.setState({ value: e.target.value })
   }
 
   render() {
@@ -22,11 +53,13 @@ export default class MessageBox extends React.Component<Props, State> {
       <div className={"relative max-w-full min-w-full h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
         <div className="relative z-10 w-[96%] m-[6px] bottom-[10px] flex flex-row justify-center items-start bg-transparent">
           <textarea
+            onChange={this.onChange}
+            value={this.state.value}
             id="textarea"
             autoComplete="off"
-            spellCheck="false"
             placeholder="Type a message"
-            className="peer field-sizing-content sm:flex overflow-hidden pt-[10px] w-full sm:min-h-[100%] sm:max-h-[200px] overflow-y-scroll scrollbar-thin font-normal text-lg text-black  font-sans rounded-3xl rounded-r-none border-[1px] border-custom-blue-dark/35 border-r-0 bg-white sm:bg-gray-100 pl-10 pr-10 placeholder-gray-500/80 outline-none ring-0 focus:ring-0 focus:outline-none resize-none selection:bg-custom-blue/90 selection:text-white">
+            rows={this.state.textAreaRows}
+            className={"peer no_resize sm:flex overflow-hidden pt-[0px] items-center w-full sm:min-h-[100%] sm:max-h-[200px] scrollbar-thin font-normal text-lg text-black  font-sans rounded-3xl rounded-r-none border-[1px] border-custom-blue-dark/35 border-r-0 bg-white sm:bg-gray-100 pl-10 pr-10 placeholder-gray-500/80 outline-none ring-0 focus:ring-0 focus:outline-none resize-none selection:bg-custom-blue/90 selection:text-white"}>
           </textarea>
           <div className="relative sm:flex z-10 flex flex-row justify-center items-end p-[5px] min-h-[100%] w-[52px] border-[1px] border-l-0 border-custom-blue/30 bg-gray-100 rounded-r-3xl">
             <div className="group p-[6px] flex flex-row justify-center items-center rounded-full sm:border-[1px] sm:border-transparent bg-custom-blue/20 hover:border-custom-blue/45 active:bg-custom-blue transition">
