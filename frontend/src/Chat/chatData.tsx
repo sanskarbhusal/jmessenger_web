@@ -1,8 +1,9 @@
 //Defing structure of the chatData object and it's nested objects
+
 interface Message {
-    contentType: "text" | "file" | "photo" | "url" //Only implement text for now. We don't have time to develop every freakin' feature.
+    contentType: "text" | "file" | "photo" | "url"; //Only implement text for now. We don't have time to develop every freakin' feature.
     content: string; //Since, only text will be implemented, string is okay for now.
-    sender: "You" | "chat" //Required to distinguish messages that are of the user from the chat's.
+    sender: "You" | "chat"; //Required to distinguish messages that are of the user from the chat's.
     timestamp: string; // ISO 8601 time format. 
 }
 
@@ -88,12 +89,33 @@ const chatData: ChatData = {
 // const json = JSON.stringify(chatData)
 // console.log(json)
 
-//Query processor
-function AddChat(chatName: string, chatType: "private" | "group", chatId: string) {
-    chatData.chatList.push({ chatName: chatName, chatType: chatType, chatId: chatId, history: [{} as Message] })
+//Query processor (continuing)
+
+function getChatHistory(chatId: string): Message[] {
+    const chat = chatData.chatList.find((element) => {
+        return element.chatId == chatId ? true : false
+    })
+    if (!chat == undefined) {
+        return chat!.history
+    } else {
+        return [{
+            contentType: "text",
+            content: "[_default_text_on_behalf_of_you]",
+            sender: "You",
+            timestamp: "look up calander"
+        },
+        {
+            contentType: "text",
+            content: `[_default_text_from_${chatId}]`,
+            sender: "chat",
+            timestamp: "look up calander"
+        }
+
+        ]
+    }
 }
 
-const query = { get addChat() { return AddChat } }
+const query = { getChatHistory }
 export { query }
 export type { Message, Chat, ChatData }
 export default chatData

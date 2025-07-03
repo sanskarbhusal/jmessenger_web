@@ -1,5 +1,7 @@
 import React from "react";
 import { LiaCheckDoubleSolid as DoubleCheckIcon } from "react-icons/lia";
+import { CgSpinner as SpinnerIcon } from "react-icons/cg";
+
 //import { LiaCheckSolid as singleCheck } from "react-icons/lia";
 
 
@@ -10,7 +12,12 @@ function removeSeconds(time: string): string {
   return hhmm + " " + meridiem
 }
 
-type State = {};
+type State = {
+  isMessageUploaded: boolean
+  isMessageDelivered: boolean
+  doubleTickIconColor: string
+};
+
 type Props = Required<typeof ChatBubble.defaultProps> & {
   type?: "text" | "file" | "photo" | "url"
   content?: string;
@@ -18,20 +25,32 @@ type Props = Required<typeof ChatBubble.defaultProps> & {
   timestamp?: string;
 };
 
-// function temp() {
-//   return (
-//     <div className="
-
-//    ">
-//     </div>
-//   )
-// }
-
+function temp() {
+  return (
+    <div className="
+   ">
+    </div>
+  )
+}
 
 export default class ChatBubble extends React.Component<Props, State> {
 
   static defaultProps = { foo: "foo" };
-  state = {};
+
+  state = {
+    isMessageUploaded: false,
+    isMessageDelivered: false,
+    doubleTickIconColor: "",
+  };
+
+  componentDidMount() {
+    //Manipulate sate of tick and spinner based on webserver's response.
+    if (this.state.isMessageDelivered) {
+      this.setState({ doubleTickIconColor: "text-custom-blue/90" })
+    } else {
+      this.setState({ doubleTickIconColor: "text-gray-400" })
+    }
+  }
 
   render() {
     const iso = new Date().toISOString()
@@ -39,14 +58,15 @@ export default class ChatBubble extends React.Component<Props, State> {
     const time = removeSeconds(utc.toLocaleTimeString())
 
     return (
-      <div className="sm:w-[45%] group sm:self-end sm:bg-transparent sm:rounded-xl">
-        <div className="w-full h-full flex flex-col bg-transparent sm:border border-custom-blue/30 rounded-xl sm:rounded-br-none selection:bg-custom-blue/90 selection:text-white">
-          <div className="pl-3 pt-2 w-full h-full flex  whitespace-break-spaces font-normal text-base rounded-xl text-pretty drop-shadow-sm">
-            Web frontend is so easy. Lots of complicated UI programming and character encoding/decoding is abstrated. Like for example this 😆 emoji works out of the box. You just copy the emoji from any platfrom and the emoji data is decoded and rendered properly in the browser. You need not be a programming wizard to be able to show emojis.
+      <div className="sm:max-w-[45%] group self-start bg-custom-blue/5 sm:rounded-xl">
+        <div className="w-full h-full flex flex-col bg-transparent sm:border border-custom-blue/30 rounded-xl selection:bg-custom-blue/90 selection:text-white">
+          <div className="pl-2 pr-4 pt-2 w-full h-full flex  whitespace-break-spaces font-normal text-base rounded-xl text-pretty drop-shadow-sm">
+            {this.props.content}
           </div>
           <div className="flex flex-row justify-end items-end gap-1 pr-1">
             <div className="flex flex-row items-center font-medium text-xs text-gray-500 select-none">{time}</div>
-            <DoubleCheckIcon className="text-custom-blue/90 sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit" />
+            <SpinnerIcon className={"sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit animate-spin " + " " + this.state.doubleTickIconColor} />
+            <DoubleCheckIcon className={" sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit" + " " + this.state.doubleTickIconColor} />
           </div>
         </div>
       </div>

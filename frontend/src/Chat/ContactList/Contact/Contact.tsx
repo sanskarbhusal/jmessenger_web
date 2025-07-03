@@ -26,7 +26,9 @@ export default class Contact extends React.Component<Props, State> {
   }
 
   handleClick() {
-    this.context.swap()
+    this.context.swap() //for mobile layout
+    this.context.update()
+
   }
 
   render() {
@@ -61,4 +63,5 @@ export default class Contact extends React.Component<Props, State> {
     );
   }
 }
+
 export type { Props as ContactPropsType }
