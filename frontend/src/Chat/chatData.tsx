@@ -4,6 +4,8 @@ interface Message {
     contentType: "text" | "file" | "photo" | "url"; //Only implement text for now. We don't have time to develop every freakin' feature.
     content: string; //Since, only text will be implemented, string is okay for now.
     sender: "You" | "chat"; //Required to distinguish messages that are of the user from the chat's.
+    isMessageUploaded: boolean;
+    isMessageDelivered: boolean;
     timestamp: string; // ISO 8601 time format. 
 }
 
@@ -27,14 +29,18 @@ const chat1: Chat = {
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
-            content: "Hi, sanskar",
+            content: "Hi. I'm Suman.",
             sender: "chat",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "2025-01-13"
         },
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hello, Suman!",
             sender: "You",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "2025-01-14"
         }
     ],
@@ -47,14 +53,19 @@ const chat2: Chat = {
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
-            content: "Hi, sanskar",
+            content: "Hi. I'm Santosh",
             sender: "chat",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "2025-02-15"
+
         },
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hi, Santosh",
             sender: "You",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "2025-02-16"
         }
     ],
@@ -67,14 +78,18 @@ const chat3: Chat = {
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
-            content: "Hi, sanskar",
+            content: "Hi. I'm Sanskar",
             sender: "chat",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "2025-03-17"
         },
         {
             contentType: "text", //remember that we only will implement text type for now.
             content: " Web frontend is so easy. Lots of complicated graphics programming and data encoding/decoding is abstrated and automated. Like for example this emoji works out of the box 😆. You just copy the emojy from any platfrom and the emoji data is decoded and rendered properly in the browser. You need not be a programming wizard to be able to show emojis.",
             sender: "You",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "2025-03-18"
         }
     ]
@@ -102,12 +117,16 @@ function getChatHistory(chatId: string): Message[] {
             contentType: "text",
             content: "[_default_text_on_behalf_of_you]",
             sender: "You",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "look up calander"
         },
         {
             contentType: "text",
             content: `[_default_text_from_${chatId}]`,
             sender: "chat",
+            isMessageUploaded: false,
+            isMessageDelivered: false,
             timestamp: "look up calander"
         }
 

@@ -15,40 +15,54 @@ function removeSeconds(time: string): string {
 type State = {
   isMessageUploaded: boolean
   isMessageDelivered: boolean
-  doubleTickIconColor: string
+  doubleTickColor: string
+  doubleTickVisibility: string
+  spinnerVisibility: string
+  align_self: string
 };
 
 type Props = Required<typeof ChatBubble.defaultProps> & {
-  type?: "text" | "file" | "photo" | "url"
-  content?: string;
-  sender?: "you" | "chat"
-  timestamp?: string;
+  contentType: "text" | "file" | "photo" | "url"
+  content: string;
+  sender: "You" | "chat"
+  isMessageUploaded: boolean
+  isMessageDelivered: boolean
+  timestamp: string;
 };
 
-function temp() {
-  return (
-    <div className="
-   ">
-    </div>
-  )
-}
+// function temp() {
+//   return (
+//     <div className="
+// text-gray-400
+//    ">
+//     </div>
+//   )
+// }
 
 export default class ChatBubble extends React.Component<Props, State> {
 
   static defaultProps = { foo: "foo" };
 
   state = {
-    isMessageUploaded: false,
-    isMessageDelivered: false,
-    doubleTickIconColor: "",
+    isMessageUploaded: this.props.isMessageUploaded,
+    isMessageDelivered: this.props.isMessageDelivered,
+    doubleTickColor: "text-gray-400",
+    doubleTickVisibility: "hidden",
+    spinnerVisibility: "block",
+    align_self: ""
   };
 
   componentDidMount() {
-    //Manipulate sate of tick and spinner based on webserver's response.
-    if (this.state.isMessageDelivered) {
-      this.setState({ doubleTickIconColor: "text-custom-blue/90" })
+    //Simulating the state of double tick and spinner based on webserver's response.
+    if (this.state.isMessageUploaded) {
+      this.setState({ spinnerVisibility: "hidden", doubleTickVisibility: "block" })
+      if (this.state.isMessageDelivered) {
+        this.setState({ doubleTickColor: "text-custom-blue/90" })
+      } else {
+        this.setState({ doubleTickColor: "text-gray-400" })
+      }
     } else {
-      this.setState({ doubleTickIconColor: "text-gray-400" })
+      this.setState({ spinnerVisibility: "block", doubleTickVisibility: "hidden" })
     }
   }
 
@@ -65,8 +79,8 @@ export default class ChatBubble extends React.Component<Props, State> {
           </div>
           <div className="flex flex-row justify-end items-end gap-1 pr-1">
             <div className="flex flex-row items-center font-medium text-xs text-gray-500 select-none">{time}</div>
-            <SpinnerIcon className={"sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit animate-spin " + " " + this.state.doubleTickIconColor} />
-            <DoubleCheckIcon className={" sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit" + " " + this.state.doubleTickIconColor} />
+            <SpinnerIcon className={"sm:group-hover:text-gray-400 font-bold text-md text-gray-400 h-fit w-fit animate-spin " + " " + this.state.spinnerVisibility} />
+            <DoubleCheckIcon className={" sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit" + " " + this.state.doubleTickColor + " " + this.state.doubleTickVisibility} />
           </div>
         </div>
       </div>
