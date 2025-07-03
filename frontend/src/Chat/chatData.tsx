@@ -88,5 +88,12 @@ const chatData: ChatData = {
 // const json = JSON.stringify(chatData)
 // console.log(json)
 
-export default chatData
+//Query processor
+function AddChat(chatName: string, chatType: "private" | "group", chatId: string) {
+    chatData.chatList.push({ chatName: chatName, chatType: chatType, chatId: chatId, history: [{} as Message] })
+}
+
+const query = { get addChat() { return AddChat } }
+export { query }
 export type { Message, Chat, ChatData }
+export default chatData
