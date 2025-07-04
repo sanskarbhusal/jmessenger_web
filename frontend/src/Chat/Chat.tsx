@@ -75,7 +75,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
               <NavBar className={"relative" + " " + this.state.z1 + " "} />
               <ContactList className={"relative " + " " + this.state.z1} />
             </div>
-            <ChatBody className={"absolute" + " " + this.state.z2 + " " + ""} />
+            {this.state.currentChatId != "none" && <ChatBody className={"absolute" + " " + this.state.z2 + " " + "" + {}} />}
           </ChatContext.Provider>
         </div>
       </div >
