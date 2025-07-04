@@ -41,7 +41,7 @@ const chat1: Chat = {
             sender: "You",
             isMessageUploaded: false,
             isMessageDelivered: false,
-            timestamp: "2025-01-14"
+            timestamp: "2025-07-04T20:02:51.336Z"
         }
     ],
 }
@@ -57,7 +57,7 @@ const chat2: Chat = {
             sender: "chat",
             isMessageUploaded: false,
             isMessageDelivered: false,
-            timestamp: "2025-02-15"
+            timestamp: "2025-07-04T20:02:51.336Z"
 
         },
         {
@@ -66,7 +66,7 @@ const chat2: Chat = {
             sender: "You",
             isMessageUploaded: false,
             isMessageDelivered: false,
-            timestamp: "2025-02-16"
+            timestamp: "2025-07-04T20:02:51.336Z"
         }
     ],
 }
@@ -82,7 +82,7 @@ const chat3: Chat = {
             sender: "chat",
             isMessageUploaded: false,
             isMessageDelivered: false,
-            timestamp: "2025-03-17"
+            timestamp: "2025-07-04T20:02:51.336Z"
         },
         {
             contentType: "text", //remember that we only will implement text type for now.
@@ -90,7 +90,7 @@ const chat3: Chat = {
             sender: "You",
             isMessageUploaded: false,
             isMessageDelivered: false,
-            timestamp: "2025-03-18"
+            timestamp: "2025-07-04T20:02:51.336Z"
         }
     ]
 }

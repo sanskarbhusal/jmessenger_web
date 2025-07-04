@@ -1,7 +1,7 @@
 import React from "react";
 import { LiaCheckDoubleSolid as DoubleCheckIcon } from "react-icons/lia";
 import { CgSpinner as SpinnerIcon } from "react-icons/cg";
-import { removeSeconds } from "../../../utils.tsx"
+import { getTime } from "../../../utils.tsx"
 
 //import { LiaCheckSolid as singleCheck } from "react-icons/lia";
 
@@ -68,7 +68,7 @@ export default class ChatBubble extends React.Component<Props, State> {
   render() {
     const iso = new Date().toISOString()
     const utc = new Date(iso)
-    const time = removeSeconds(utc.toLocaleTimeString())
+    const time = getTime(utc.toLocaleTimeString())
 
     return (
       <div className={"sm:max-w-[45%] group sm:rounded-xl" + " " + this.state.bubbleAlignment + " " + this.state.bubbleColor}>

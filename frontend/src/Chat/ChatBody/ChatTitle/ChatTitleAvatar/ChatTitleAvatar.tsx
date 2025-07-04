@@ -1,23 +1,33 @@
 import React from "react";
 import chatContext from "../../../ChatContext.tsx"
 
-type Props = Required<typeof ChatTitleAvatar.defaultProps> & {
+type Props = {
   className?: string;
 }
-type State = {
 
+type State = {
+  status: string
+  statusColor: string
 }
 
 export default class ChatTitleAvatar extends React.Component<Props, State> {
-  static defaultProps = {};
+
   declare context: React.ContextType<typeof chatContext>
   static contextType = chatContext
-  obj = {
-    chatName: "Sanskar",
-    lastPersonToMessage: "Someone",
-    lastMessage: "Hi, whats up!",
-    dateOfLastMessage: "today at 9:28 AM",
-  };
+  interval
+  constructor(props: Props) {
+    super(props)
+    this.state = { status: "offline", statusColor: "text-gray-500" }
+    this.interval = 1
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => { this.setState((prev) => { const status = prev.status == "offline" ? "online" : "offline"; return { status: status } }) }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
   render() {
     return (
@@ -27,8 +37,8 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[18px] flex flex-col">
           <div className="font-medium text-lg">{this.context.getCurrentChat().chatName}</div>
-          <div className="relative top-[-2px] text-gray-500 font-medium text-xs">
-            {"last seen " + this.obj.dateOfLastMessage}
+          <div className={"relative top-[-2px] text-gray-500 font-medium text-xs" + " " + this.state.statusColor}>
+            {this.state.status + "  <--Simulating status polling from the server. Currently the polling interval is 500ms"}
           </div>
         </div>
         <div id="highlights"></div>

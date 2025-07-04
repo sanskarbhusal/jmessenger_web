@@ -63,7 +63,6 @@ class Chat extends React.Component<RouteComponentProps, State> {
   }
 
   render() {
-    console.log("Chat rendered")
     return (
       <div className="w-full h-full bg-white sm:bg-custom-blue/10 flex flex-row justify-center items-center drop-shadow-2xl">
         <div
