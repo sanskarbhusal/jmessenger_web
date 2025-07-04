@@ -18,10 +18,11 @@ type State = {
   doubleTickColor: string
   doubleTickVisibility: string
   spinnerVisibility: string
-  align_self: string
+  bubbleAlignment: string
+  bubbleColor: string
 };
 
-type Props = Required<typeof ChatBubble.defaultProps> & {
+type Props = {
   contentType: "text" | "file" | "photo" | "url"
   content: string;
   sender: "You" | "chat"
@@ -41,15 +42,14 @@ type Props = Required<typeof ChatBubble.defaultProps> & {
 
 export default class ChatBubble extends React.Component<Props, State> {
 
-  static defaultProps = { foo: "foo" };
-
   state = {
     isMessageUploaded: this.props.isMessageUploaded,
     isMessageDelivered: this.props.isMessageDelivered,
     doubleTickColor: "text-gray-400",
     doubleTickVisibility: "hidden",
     spinnerVisibility: "block",
-    align_self: ""
+    bubbleAlignment: "self-start",
+    bubbleColor: "sm:bg-custom-blue/5"
   };
 
   componentDidMount() {
@@ -64,6 +64,21 @@ export default class ChatBubble extends React.Component<Props, State> {
     } else {
       this.setState({ spinnerVisibility: "block", doubleTickVisibility: "hidden" })
     }
+    switch (this.props.sender) {
+      case "You":
+        this.setState({
+          bubbleAlignment: "self-end",
+          bubbleColor: "bg-custom-blue/5"
+        })
+        break;
+      case "chat":
+        this.setState({
+          bubbleAlignment: "self-start",
+          bubbleColor: "bg-white",
+          doubleTickVisibility: "hidden",
+          spinnerVisibility: "hidden",
+        })
+    }
   }
 
   render() {
@@ -72,9 +87,9 @@ export default class ChatBubble extends React.Component<Props, State> {
     const time = removeSeconds(utc.toLocaleTimeString())
 
     return (
-      <div className="sm:max-w-[45%] group self-start bg-custom-blue/5 sm:rounded-xl">
+      <div className={"sm:max-w-[45%] group sm:rounded-xl" + " " + this.state.bubbleAlignment + " " + this.state.bubbleColor}>
         <div className="w-full h-full flex flex-col bg-transparent sm:border border-custom-blue/30 rounded-xl selection:bg-custom-blue/90 selection:text-white">
-          <div className="pl-2 pr-4 pt-2 w-full h-full flex  whitespace-break-spaces font-normal text-base rounded-xl text-pretty drop-shadow-sm">
+          <div className="pl-2 pr-4 pt-2 w-full h-full flex whitespace-break-spaces font-normal text-base rounded-xl text-pretty drop-shadow-sm">
             {this.props.content}
           </div>
           <div className="flex flex-row justify-end items-end gap-1 pr-1">

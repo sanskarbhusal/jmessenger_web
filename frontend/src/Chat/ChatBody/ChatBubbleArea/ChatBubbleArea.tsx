@@ -1,6 +1,5 @@
 import React from "react";
 import ChatBubble from "./ChatBubble";
-// import type { Chat } from "../../chatData.tsx"
 import chatData from "../../chatData.tsx"
 
 type State = { history: string[] };
