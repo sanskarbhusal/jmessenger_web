@@ -26,9 +26,8 @@ export default class Contact extends React.Component<Props, State> {
   }
 
   handleClick() {
-    this.context.swap() //for mobile layout
-    this.context.update()
-
+    // this.context.swap() //uncomment when working on mobile layout
+    this.context.setCurrentChat(this.props.chatId, this.props.chatName)
   }
 
   render() {
