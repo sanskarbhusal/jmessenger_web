@@ -78,7 +78,7 @@ const chat3: Chat = {
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
-            content: "Hi. I'm Sanskar",
+            content: "Hey, what's your thought on software development? Is computer engineering the correct path to become software engineer?",
             sender: "chat",
             isMessageUploaded: false,
             isMessageDelivered: false,
@@ -86,7 +86,7 @@ const chat3: Chat = {
         },
         {
             contentType: "text", //remember that we only will implement text type for now.
-            content: " Web frontend is so easy. Lots of complicated graphics programming and data encoding/decoding is abstrated and automated. Like for example this emoji works out of the box 😆. You just copy the emojy from any platfrom and the emoji data is decoded and rendered properly in the browser. You need not be a programming wizard to be able to show emojis.",
+            content: "Software is cool. If you can program (without AI), you'll outsmart your way through any software dev job. Regarding computer engineering, I'm not quite sure. It's obviously one the ways to become software engineer, but do remember that there are programmers in the industry that have nothing to do with engineering. So, I guess, it depends on what level of a computer wizard you want to become. Obviously, computer engineers have a dynamic knowledge, but they get that by sacrificing specialization. I see computer engieers through the 'Jack of all, master of none' analogy. Why? because they study every freakin' thing aobut a computer, and on doing that specialization is sacrificed. They never get to learn anything deeply enough to be hired. No wonder most end up as a dish washer in restaurants!",
             sender: "You",
             isMessageUploaded: false,
             isMessageDelivered: false,
@@ -110,7 +110,7 @@ function getChatHistory(chatId: string): Message[] {
     const chat = chatData.chatList.find((element) => {
         return element.chatId == chatId ? true : false
     })
-    if (!chat == undefined) {
+    if (chat != undefined) {
         return chat!.history
     } else {
         return [{
