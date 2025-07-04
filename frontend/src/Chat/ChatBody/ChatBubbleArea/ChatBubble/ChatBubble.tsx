@@ -76,9 +76,9 @@ export default class ChatBubble extends React.Component<Props, State> {
           <div className="pl-2 pr-4 pt-2 w-full h-full flex whitespace-break-spaces font-normal text-base rounded-xl text-pretty drop-shadow-sm">
             {this.props.content}
           </div>
-          <div className="flex flex-row justify-end items-end gap-1 pr-1">
-            <div className="flex flex-row items-center font-medium text-xs text-gray-500 select-none">{time}</div>
-            <SpinnerIcon className={"sm:group-hover:text-gray-400 font-bold text-md text-gray-400 h-fit w-fit animate-spin " + " " + this.state.spinnerVisibility} />
+          <div className="flex flex-row justify-end items-end pr-1">
+            <div className="flex flex-row items-center font-medium text-xs text-gray-500 select-none mr-1">{time}</div>
+            <SpinnerIcon className={"sm:group-hover:text-gray-400 font-bold text-md text-gray-400 h-[14px] w-[14px] animate-spin " + " " + this.state.spinnerVisibility} />
             <DoubleCheckIcon className={" sm:group-hover:text-gray-400 font-bold text-md h-fit w-fit" + " " + this.state.doubleTickColor + " " + this.state.doubleTickVisibility} />
           </div>
         </div>
