@@ -22,7 +22,13 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => { this.setState((prev) => { const status = prev.status == "offline" ? "online" : "offline"; return { status: status } }) }, 1000)
+    this.interval = setInterval(() => {
+      this.setState((prev) => {
+        const status = prev.status == "offline" ? "online" : "offline";
+        const statusColor = status == "offline" ? "text-gray-500" : "text-green-600";
+        return { status: status, statusColor: statusColor }
+      })
+    }, 1000)
   }
 
   componentWillUnmount() {
@@ -37,8 +43,15 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[18px] flex flex-col">
           <div className="font-medium text-lg">{this.context.getCurrentChat().chatName}</div>
-          <div className={"relative top-[-2px] text-gray-500 font-medium text-xs" + " " + this.state.statusColor}>
-            {this.state.status + "  <--Simulating status polling from the server. Currently the polling interval is 500ms"}
+          <div className={"relative top-[-2px] ml-[1px] flex flex-row font-medium text-xs" + " " + this.state.statusColor}>
+            <div className="w-[40px]">
+              {this.state.status}
+            </div>
+            <span className="text-gray-500">
+              {`
+                <--Simulating status polling from the server. Currently the polling interval is 500ms
+            `}
+            </span>
           </div>
         </div>
         <div id="highlights"></div>
