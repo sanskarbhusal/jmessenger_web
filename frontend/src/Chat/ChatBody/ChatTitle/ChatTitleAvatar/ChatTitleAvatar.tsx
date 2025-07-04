@@ -28,7 +28,7 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
         const statusColor = status == "offline" ? "text-gray-500" : "text-green-600";
         return { status: status, statusColor: statusColor }
       })
-    }, 1000)
+    }, 2000)
   }
 
   componentWillUnmount() {
@@ -38,7 +38,7 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
   render() {
     return (
       <div className={"drop-shadow-sm w-fit h-full sm:ml-[18px] font-sans flex flex-row items-center bg-transparent select-none" + " " + this.props.className}>
-        <div className="min-h-[42px] min-w-[42px] bg-gradient-to-l from-custom-blue/50 to-gray-950 flex justify-center items-center  rounded-full">
+        <div className="min-h-[42px] min-w-[42px] bg-gradient-to-l from-custom-blue/25 via-custom-blue-dark/95 to-custom-blue-dark flex justify-center items-center  rounded-full">
           <div className="font-sans drop-shadow-md font-extrabold text-2xl text-white">S</div>
         </div>
         <div className="w-full ml-[18px] flex flex-col">
@@ -49,7 +49,7 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
             </div>
             <span className="text-gray-500">
               {`
-                <--Simulating status polling from the server. Currently the polling interval is 500ms
+                <--Simulating status polling. Currently the polling interval is 2000ms
             `}
             </span>
           </div>
