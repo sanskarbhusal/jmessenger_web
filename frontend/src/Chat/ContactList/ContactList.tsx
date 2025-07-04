@@ -2,7 +2,7 @@ import React from "react";
 import Contact from "./Contact";
 import ChatContext from "../ChatContext.tsx"
 import type { ContactPropsType } from "./Contact/Contact.tsx"
-import { getTime, getDate } from "../utils.tsx"
+import { getDate } from "../utils.tsx"
 
 type Props = Required<typeof ContactList.defaultProps> & { className?: string };
 type State = { msg: string }
