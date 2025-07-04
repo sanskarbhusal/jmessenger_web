@@ -1,16 +1,9 @@
 import React from "react";
 import { LiaCheckDoubleSolid as DoubleCheckIcon } from "react-icons/lia";
 import { CgSpinner as SpinnerIcon } from "react-icons/cg";
+import { removeSeconds } from "../../../utils.tsx"
 
 //import { LiaCheckSolid as singleCheck } from "react-icons/lia";
-
-
-function removeSeconds(time: string): string {
-  const arr = time.split(":")
-  const meridiem = arr.pop()?.split(" ")[1] //AM or, PM
-  const hhmm = arr.join(":")
-  return hhmm + " " + meridiem
-}
 
 type State = {
   isMessageUploaded: boolean
@@ -30,15 +23,6 @@ type Props = {
   isMessageDelivered: boolean
   timestamp: string;
 };
-
-// function temp() {
-//   return (
-//     <div className="
-// text-gray-400
-//    ">
-//     </div>
-//   )
-// }
 
 export default class ChatBubble extends React.Component<Props, State> {
 
