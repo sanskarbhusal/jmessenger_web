@@ -104,7 +104,7 @@ const chatData: ChatData = {
 // const json = JSON.stringify(chatData)
 // console.log(json)
 
-//Query processor (continuing)
+/* Query functions (Currently working) */
 
 function getChatHistory(chatId: string): Message[] {
     const chat = chatData.chatList.find((element) => {
@@ -129,12 +129,22 @@ function getChatHistory(chatId: string): Message[] {
             isMessageDelivered: false,
             timestamp: "look up calander"
         }
-
         ]
     }
 }
 
-const query = { getChatHistory }
+function updateChatHistory(chatId: string, message: Message) {
+    //Extracting the chat object with given chatId
+    const chat = chatData.chatList.find((item) => {
+        return item.chatId == chatId ? true : false
+    })
+    if (chat != null && chat != undefined) {
+        console.log(chat?.chatId)
+        chat.history.push(message)
+    }
+}
+
+const query = { getChatHistory, updateChatHistory }
 export { query }
 export type { Message, Chat, ChatData }
 export default chatData
