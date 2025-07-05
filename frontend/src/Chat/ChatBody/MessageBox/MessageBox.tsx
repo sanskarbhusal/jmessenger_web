@@ -1,15 +1,14 @@
 import React from "react";
 import { BiSolidSend as SendButton } from "react-icons/bi";
-
-const defaultProps = {
-  foo: "foo"
-}
+import ChatContext from "../../ChatContext"
+import { query } from "../../chatData.tsx"
+import type { Message } from "../../chatData.tsx"
 
 type State = {
   value: string
   enterToSend: boolean
 };
-type Props = Required<typeof defaultProps> & { className?: string };
+type Props = { className?: string };
 
 /* class Dummy extends React.Component {
   state = {}
@@ -24,8 +23,10 @@ type Props = Required<typeof defaultProps> & { className?: string };
  */
 export default class MessageBox extends React.Component<Props, State> {
 
-  static defaultProps: typeof defaultProps
   messageBoxRef = React.createRef<HTMLTextAreaElement>()
+
+  declare context: React.ContextType<typeof ChatContext>
+  static contextType = ChatContext
 
   constructor(props: Props) {
     super(props)
@@ -42,6 +43,10 @@ export default class MessageBox extends React.Component<Props, State> {
     // }, true)
   }
 
+  sendMessage() {
+    query.updateChatHistory(this.context.getCurrentChat().chatId, {} as Message)
+  }
+
   render() {
     return (
       <div className={"relative max-w-full min-w-full h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
@@ -51,6 +56,7 @@ export default class MessageBox extends React.Component<Props, State> {
               if (this.state.enterToSend && e.key == "Enter") {
                 e.preventDefault()
                 alert(`You sent ${this.state.value} by pressing Enter`)
+                this.sendMessage()
                 this.setState({ value: "" })
               }
             }
@@ -70,6 +76,7 @@ export default class MessageBox extends React.Component<Props, State> {
                 this.setState((prev) => {
                   if (prev.value != "") {
                     alert(`You sent "${prev.value}" by pressing send button`);
+                    this.sendMessage()
                   }
                   return { value: "" }
                 })
