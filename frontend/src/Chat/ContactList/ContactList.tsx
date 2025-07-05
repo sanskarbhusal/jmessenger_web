@@ -2,6 +2,7 @@ import React from "react";
 import Contact from "./Contact";
 import ChatContext from "../ChatContext.tsx"
 import type { ContactPropsType } from "./Contact/Contact.tsx"
+import { getDate } from "../utils.tsx"
 
 type Props = Required<typeof ContactList.defaultProps> & { className?: string };
 type State = { msg: string }
@@ -18,15 +19,18 @@ export default class ContactList extends React.Component<Props, State> {
   }
 
   Contacts = () => {
+
     const chatList = this.context.chatData.chatList
     const ContactArray = chatList.map((item, index) => {
       const { chatName, chatId, history } = item
       const contactProps: ContactPropsType = {} as ContactPropsType
       const lastElement = history[history.length - 1] //extracting last element
+
       contactProps.chatName = chatName
       contactProps.chatId = chatId
       contactProps.lastMessage = lastElement.content
-      contactProps.dateOfLastMessage = lastElement.timestamp
+      contactProps.dateOfLastMessage = getDate(new Date(lastElement.timestamp).toString())
+
       switch (lastElement.sender) {
         case "You":
           contactProps.lastPersonToMessage = lastElement.sender
