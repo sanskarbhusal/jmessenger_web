@@ -49,7 +49,9 @@ export default class MessageBox extends React.Component<Props, State> {
 
   render() {
     return (
+
       <div className={"relative max-w-full min-w-full h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
+
         <div className="relative z-10 w-[96%] m-[6px] bottom-[10px] flex flex-row justify-center items-start bg-transparent">
           <textarea
             onKeyDown={(e) => {
@@ -86,8 +88,10 @@ export default class MessageBox extends React.Component<Props, State> {
             </div>
           </div>
         </div>
+
         <div className="hidden transition sm:block absolute z-0 bottom-[10px] min-h-[100%] w-[96.8%] blur-sm rounded-3xl bg-gradient-to-bl from-custom-blue-dark/15 to-custom-blue-dark/30 "></div>
       </div >
+
     );
   }
 }
