@@ -1,3 +1,4 @@
+import type { MessageBoxType } from "./ChatBody/MessageBox/MessageBox.tsx"
 //Defing structure of the chatData object and it's nested objects
 
 interface Message {
@@ -133,15 +134,30 @@ function getChatHistory(chatId: string): Message[] {
     }
 }
 
-function updateChatHistory(chatId: string, message: Message) {
+function updateChatHistory(chatId: string, messageBox: MessageBoxType) {
     //Extracting the chat object with given chatId
+    let isUpdated: boolean
+
+    const msg: Message = {
+        contentType: messageBox.contentType,
+        content: messageBox.content,
+        sender: "You",
+        isMessageDelivered: false,
+        isMessageUploaded: false,
+        timestamp: messageBox.timestamp
+    }
+
     const chat = chatData.chatList.find((item) => {
         return item.chatId == chatId ? true : false
     })
     if (chat != null && chat != undefined) {
         console.log(chat?.chatId)
-        chat.history.push(message)
+        chat.history.push(msg)
+        isUpdated = true
+    } else {
+        isUpdated = false
     }
+    return isUpdated
 }
 
 const query = { getChatHistory, updateChatHistory }
