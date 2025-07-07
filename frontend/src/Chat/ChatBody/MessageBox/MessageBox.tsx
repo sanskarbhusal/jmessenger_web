@@ -2,7 +2,12 @@ import React from "react";
 import { BiSolidSend as SendButton } from "react-icons/bi";
 import ChatContext from "../../ChatContext"
 import { query } from "../../chatData.tsx"
-import type { Message } from "../../chatData.tsx"
+
+type MessageBoxType = {
+  contentType: "text"
+  content: string
+  timestamp: string
+}
 
 type State = {
   value: string
@@ -21,30 +26,39 @@ type Props = { className?: string };
   }
 }
  */
+
 export default class MessageBox extends React.Component<Props, State> {
 
   messageBoxRef = React.createRef<HTMLTextAreaElement>()
 
   declare context: React.ContextType<typeof ChatContext>
   static contextType = ChatContext
-
+  textAreaRef;
   constructor(props: Props) {
     super(props)
     this.state = { value: "", enterToSend: true }
+    this.textAreaRef = React.createRef<HTMLTextAreaElement>()
   }
 
   componentDidMount() {
-    // const textarea = document.getElementById("textarea") as HTMLTextAreaElement
-    // textarea.addEventListener("keydown", (e) => {
-    //   if (e.key == "Enter") {
-    //     console.log("Enter")
-    //     this.setState({ value: "" })
-    //   }
-    // }, true)
   }
 
   sendMessage() {
-    query.updateChatHistory(this.context.getCurrentChat().chatId, {} as Message)
+
+    const message: MessageBoxType = {
+      contentType: "text",
+      content: this.state.value,
+      timestamp: new Date().toISOString()
+    }
+    this.setState({ value: "" })
+    console.log(this.textAreaRef.current?.value)
+    const isUpdated = query.updateChatHistory(this.context.getCurrentChat().chatId, message)
+    if (isUpdated) {
+      this.context.forceUpdateChat()
+      console.log("datastore updated")
+    } else {
+      alert("Oopsie daisy happened while updating data store! (MessageBox.tsx)")
+    }
   }
 
   render() {
@@ -52,12 +66,11 @@ export default class MessageBox extends React.Component<Props, State> {
       <div className={"relative max-w-full min-w-full h-[100%] flex flex-col justify-center items-center sm:bg-transparent" + " " + this.props.className}>
         <div className="relative z-10 w-[96%] m-[6px] bottom-[10px] flex flex-row justify-center items-start bg-transparent">
           <textarea
+            ref={this.textAreaRef}
             onKeyDown={(e) => {
               if (this.state.enterToSend && e.key == "Enter") {
                 e.preventDefault()
-                alert(`You sent ${this.state.value} by pressing Enter`)
                 this.sendMessage()
-                this.setState({ value: "" })
               }
             }
             }
@@ -73,13 +86,7 @@ export default class MessageBox extends React.Component<Props, State> {
           <div className="relative sm:flex z-10 flex flex-row justify-center items-end p-[5px] min-h-[100%] w-[52px] border-[1px] border-l-0 border-custom-blue/30 bg-gray-100 rounded-r-3xl">
             <div
               onClick={() => {
-                this.setState((prev) => {
-                  if (prev.value != "") {
-                    alert(`You sent "${prev.value}" by pressing send button`);
-                    this.sendMessage()
-                  }
-                  return { value: "" }
-                })
+                this.sendMessage()
               }}
               className="group p-[6px] flex flex-row justify-center items-center rounded-full sm:border-[1px] sm:border-transparent bg-custom-blue/20 hover:border-custom-blue/45 active:bg-custom-blue transition">
               <SendButton className="h-[27px] w-[27px] text-custom-blue group-active:text-white transition duration-75" />
@@ -91,3 +98,4 @@ export default class MessageBox extends React.Component<Props, State> {
     );
   }
 }
+export type { MessageBoxType }
