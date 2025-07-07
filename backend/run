@@ -1,2 +1,2 @@
 clear
-sudo npx nodemon index.js
+npx tsx --watch index.js
