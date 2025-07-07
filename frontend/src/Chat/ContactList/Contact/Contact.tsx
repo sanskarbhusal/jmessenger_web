@@ -3,6 +3,13 @@ import ChatContext from "../../ChatContext.tsx";
 
 type Props = Required<typeof Contact.defaultProps> & {
   chatName: string
+  // const textarea = document.getElementById("textarea") as HTMLTextAreaElement
+  // textarea.addEventListener("keydown", (e) => {
+  //   if (e.key == "Enter") {
+  //     console.log("Enter")
+  //     this.setState({ value: "" })
+  //   }
+  // }, true)
   chatId: string
   dateOfLastMessage?: string
   lastPersonToMessage?: string

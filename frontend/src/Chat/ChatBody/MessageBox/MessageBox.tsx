@@ -44,18 +44,18 @@ export default class MessageBox extends React.Component<Props, State> {
   }
 
   sendMessage() {
-
+    if (this.state.value == "") {
+      return
+    }
     const message: MessageBoxType = {
       contentType: "text",
       content: this.state.value,
       timestamp: new Date().toISOString()
     }
     this.setState({ value: "" })
-    console.log(this.textAreaRef.current?.value)
     const isUpdated = query.updateChatHistory(this.context.getCurrentChat().chatId, message)
     if (isUpdated) {
       this.context.forceUpdateChat()
-      console.log("datastore updated")
     } else {
       alert("Oopsie daisy happened while updating data store! (MessageBox.tsx)")
     }

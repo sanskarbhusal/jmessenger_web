@@ -151,7 +151,6 @@ function updateChatHistory(chatId: string, messageBox: MessageBoxType) {
         return item.chatId == chatId ? true : false
     })
     if (chat != null && chat != undefined) {
-        console.log(chat?.chatId)
         chat.history.push(msg)
         isUpdated = true
     } else {
