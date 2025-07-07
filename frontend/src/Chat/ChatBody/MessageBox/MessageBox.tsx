@@ -41,6 +41,7 @@ export default class MessageBox extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+
   }
 
   sendMessage() {
