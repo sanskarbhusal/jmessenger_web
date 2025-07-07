@@ -1,0 +1,7 @@
+git switch main
+git merge test
+git switch desktop
+git merge test
+clear
+git switch test
+git branch
