@@ -1,4 +1,4 @@
 clear
 git add --all
-git commit --message "life's shit!"
+git commit -m "automated commit for chat_server branch"
 git branch
