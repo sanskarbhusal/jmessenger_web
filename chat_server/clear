@@ -1,0 +1,2 @@
+clear
+git branch
