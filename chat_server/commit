@@ -1,3 +1,4 @@
+clear
 git add .
 git commit -m "automated commit for auth_server branch"
 git branch
