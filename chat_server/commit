@@ -1,3 +1,4 @@
-git add .
+clear
+git add --all
 git commit --message "life's shit!"
 git branch
