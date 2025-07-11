@@ -35,5 +35,14 @@ app.post("/login", async (req, res) => {
     } catch {
         res.status(500).send({ error: "database exploded!" })
     }
+})
 
+app.post("/", async (req, res) => {
+    try {
+        console.log(req.body)
+        res.status(200).send({ ResponseKey: "ResponseValue" })
+    } catch {
+        console.log("Error while reading request body")
+        res.status(300)
+    }
 })

@@ -1,11 +1,51 @@
 import React from "react";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
-class Register extends React.Component<Props> {
-  onSignUp = () => {
-    if (true) {
-      this.props.history.push("/otp-new-account");
+import register from "./RegisterBackendIntegration.ts"
+
+type RegistrationData = {
+  email: string
+  userName: string
+  password: string
+}
+
+type State = RegistrationData & {
+  confirmedPassword: string
+  passwordMatchError: boolean
+}
+
+class Register extends React.Component<Props, State> {
+
+  confirmPasswordRef = React.createRef<HTMLInputElement>()
+
+  constructor(props: Props) {
+    super(props)
+    this.handleSignUp = this.handleSignUp.bind(this)
+    this.passswordMatchError = this.passswordMatchError.bind(this)
+    this.state = {
+      email: "test",
+      userName: "test",
+      password: "test",
+      confirmedPassword: "test",
+      passwordMatchError: false
+    }
+  }
+
+  handleSignUp = () => {
+    if (this.state.password == this.state.confirmedPassword) {
+      const allGood = register({ email: this.state.email, userName: this.state.userName, password: this.state.userName })
+      if (allGood) {
+        this.props.history.push("/otp-new-account");
+      }
+    } else {
+      this.setState({ passwordMatchError: true })
     }
   };
+
+  passswordMatchError() {
+    return (
+      <p className="text-red-500 text-xs mt-[5px]">Password didn't match!</p>
+    )
+  }
   render() {
     return (
       <div className="h-full w-full flex items-center sm:justify-center sm:bg-custom-blue/10">
@@ -21,6 +61,8 @@ class Register extends React.Component<Props> {
                 Your email
               </label>
               <input
+                onChange={(e) => this.setState({ email: e.target.value })}
+                value={this.state.email}
                 type="email"
                 id="email"
                 placeholder="Email"
@@ -32,6 +74,8 @@ class Register extends React.Component<Props> {
                 Username
               </label>
               <input
+                onChange={(e) => this.setState({ userName: e.target.value })}
+                value={this.state.userName}
                 type="email"
                 id="uname"
                 placeholder="Example: @ram, @ram_bahadur"
@@ -43,6 +87,10 @@ class Register extends React.Component<Props> {
                 Password
               </label>
               <input
+                onChange={(e) => {
+                  this.setState({ password: e.target.value })
+                }}
+                value={this.state.password}
                 type="password"
                 id="pass"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
@@ -51,10 +99,16 @@ class Register extends React.Component<Props> {
             </div>
 
             <div className="flex flex-col w-full">
-              <label htmlFor="confirm-pass" className="mb-2">
-                Confirm password
-              </label>
+              <div className="flex gap-2">
+                <label htmlFor="confirm-pass" className="mb-2">
+                  Confirm password
+                </label>
+                {this.state.passwordMatchError && this.passswordMatchError()}
+              </div>
               <input
+                ref={this.confirmPasswordRef}
+                onChange={(e) => { this.setState({ confirmedPassword: e.target.value, passwordMatchError: false }) }}
+                value={this.state.confirmedPassword}
                 type="password"
                 id="confirm-pass"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
@@ -64,7 +118,7 @@ class Register extends React.Component<Props> {
 
             <div className="w-full mt-2 ">
               <button
-                onClick={this.onSignUp}
+                onClick={this.handleSignUp}
                 className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold "
               >
                 Sign up
@@ -77,3 +131,4 @@ class Register extends React.Component<Props> {
   }
 }
 export default withRouter(Register);
+export type { RegistrationData }
