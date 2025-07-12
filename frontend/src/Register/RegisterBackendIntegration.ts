@@ -9,14 +9,22 @@ function register(registrationData: RegistrationData) {
     const request = new Request(url, { method: method, body: body, headers: headers })
     fetch(request)
         .then((response) => {
-            if (response.status != 200) {
-                console.log("Something went wrong on API server!")
-            }
-            return response.text()
+            return response.status
         })
         .then((response) => {
-            console.log("Response is:")
-            console.log(response)
+            switch (response) {
+                case 204:
+                    console.log("User registered")
+                    break;
+                case 417:
+                    console.log("Username Unavailable")
+                    break;
+                case 500:
+                    console.log("Database error.")
+                    break;
+                default:
+                    console.log("Unknown response from the server")
+            }
         })
         .catch((err) => {
             console.error(err)
@@ -24,8 +32,5 @@ function register(registrationData: RegistrationData) {
 
     return false
 }
-// setInterval(() => {
-//     register({} as State)
-// }, 500)
 
 export default register
