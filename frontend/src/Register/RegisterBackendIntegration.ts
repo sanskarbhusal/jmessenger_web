@@ -7,9 +7,11 @@ function register(registrationData: RegistrationData) {
     const body = JSON.stringify(registrationData)
 
     const request = new Request(url, { method: method, body: body, headers: headers })
+    let status = 0
     fetch(request)
         .then((response) => {
-            return response.status
+            status = response.status
+            return status
         })
         .then((response) => {
             switch (response) {
@@ -29,8 +31,7 @@ function register(registrationData: RegistrationData) {
         .catch((err) => {
             console.error(err)
         })
-
-    return false
+    return status
 }
 
 export default register

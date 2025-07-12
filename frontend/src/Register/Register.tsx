@@ -10,7 +10,8 @@ type RegistrationData = {
 
 type State = RegistrationData & {
   confirmedPassword: string
-  passwordMatchError: boolean
+  passwordDidMatch: boolean
+  validEmail: boolean
 }
 
 class Register extends React.Component<Props, State> {
@@ -26,26 +27,55 @@ class Register extends React.Component<Props, State> {
       userName: "test",
       password: "test",
       confirmedPassword: "test",
-      passwordMatchError: false
+      passwordDidMatch: true,
+      validEmail: true
+    }
+  }
+
+  isValidEmail(email: String): boolean {
+    const splitDomain = email.split("@")
+    if (splitDomain.length != 2) {
+      return false
+    } else if (splitDomain[1].split(".").length != 2) {
+      return false
+    } else if (splitDomain[1].split(".")[0] == "") {
+      return false
+    } else {
+      return true
     }
   }
 
   handleSignUp = () => {
-    if (this.state.password == this.state.confirmedPassword) {
-      const allGood = register({ email: this.state.email, userName: this.state.userName, password: this.state.userName })
-      if (allGood) {
+    let passwordDidMatch = true;
+    let validEmail = true
+
+    if (this.state.password != this.state.confirmedPassword) {
+      passwordDidMatch = false
+    }
+
+    validEmail = (this.isValidEmail(this.state.email))
+    this.setState({ passwordDidMatch: passwordDidMatch, validEmail: validEmail })
+
+    if (this.state.passwordDidMatch && this.state.validEmail) {
+      const status = register({ email: this.state.email, userName: this.state.userName, password: this.state.userName })
+      if (status == 204) {
         this.props.history.push("/otp-new-account");
       }
-    } else {
-      this.setState({ passwordMatchError: true })
     }
   };
 
   passswordMatchError() {
     return (
-      <p className="text-red-500 text-xs mt-[5px]">Password didn't match!</p>
+      <p className="text-red-500 text-xs mt-1">Password didn't match!</p>
     )
   }
+
+  invalidEmailError() {
+    return (
+      <p className="text-red-500 text-xs mt-1">Invalid email</p>
+    )
+  }
+
   render() {
     return (
       <div className="h-full w-full flex items-center sm:justify-center sm:bg-custom-blue/10">
@@ -57,11 +87,14 @@ class Register extends React.Component<Props, State> {
             </div>
 
             <div className="flex flex-col w-full ">
-              <label htmlFor="email" className="mb-2">
-                Your email
-              </label>
+              <div className="flex gap-1">
+                <label htmlFor="email" className="mb-2">
+                  Your email
+                </label>
+                {!this.state.validEmail && this.invalidEmailError()}
+              </div>
               <input
-                onChange={(e) => this.setState({ email: e.target.value })}
+                onChange={(e) => this.setState({ email: e.target.value, validEmail: true })}
                 value={this.state.email}
                 type="email"
                 id="email"
@@ -103,11 +136,11 @@ class Register extends React.Component<Props, State> {
                 <label htmlFor="confirm-pass" className="mb-2">
                   Confirm password
                 </label>
-                {this.state.passwordMatchError && this.passswordMatchError()}
+                {!this.state.passwordDidMatch && this.passswordMatchError()}
               </div>
               <input
                 ref={this.confirmPasswordRef}
-                onChange={(e) => { this.setState({ confirmedPassword: e.target.value, passwordMatchError: false }) }}
+                onChange={(e) => { this.setState({ confirmedPassword: e.target.value, passwordDidMatch: true }) }}
                 value={this.state.confirmedPassword}
                 type="password"
                 id="confirm-pass"
