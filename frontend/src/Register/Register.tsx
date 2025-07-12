@@ -34,6 +34,7 @@ class Register extends React.Component<Props, State> {
 
   isValidEmail(email: String): boolean {
     const splitDomain = email.split("@")
+    console.log(splitDomain)
     if (splitDomain.length != 2) {
       return false
     } else if (splitDomain[1].split(".").length != 2) {
