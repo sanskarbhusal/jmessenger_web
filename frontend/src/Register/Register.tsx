@@ -11,28 +11,24 @@ type RegistrationData = {
 type State = RegistrationData & {
   confirmedPassword: string
   passwordDidMatch: boolean
-  validEmail: boolean
+  isValidEmail: boolean
 }
 
 class Register extends React.Component<Props, State> {
 
-  confirmPasswordRef = React.createRef<HTMLInputElement>()
-
   constructor(props: Props) {
     super(props)
-    this.handleSignUp = this.handleSignUp.bind(this)
-    this.passswordMatchError = this.passswordMatchError.bind(this)
     this.state = {
       email: "test",
       userName: "test",
       password: "test",
       confirmedPassword: "test",
       passwordDidMatch: true,
-      validEmail: true
+      isValidEmail: true
     }
   }
 
-  isValidEmail(email: String): boolean {
+  isValidEmail = (email: string): boolean => {
     const splitDomain = email.split("@")
     if (splitDomain.length != 2) {
       return false
@@ -46,31 +42,37 @@ class Register extends React.Component<Props, State> {
   }
 
   handleSignUp = () => {
-    let passwordDidMatch = true;
-    let validEmail = true
+    const password = this.state.password
+    const confirmedPassword = this.state.confirmedPassword
+    const email = this.state.email
+    let isValidEmail = false
+    let passwordDidMatch = false
 
-    if (this.state.password != this.state.confirmedPassword) {
-      passwordDidMatch = false
+    if (this.isValidEmail(email)) {
+      isValidEmail = true
     }
 
-    validEmail = (this.isValidEmail(this.state.email))
-    this.setState({ passwordDidMatch: passwordDidMatch, validEmail: validEmail })
+    if (password == confirmedPassword) {
+      passwordDidMatch = true
+    }
 
-    if (this.state.passwordDidMatch && this.state.validEmail) {
-      const status = register({ email: this.state.email, userName: this.state.userName, password: this.state.userName })
+    this.setState({ passwordDidMatch: passwordDidMatch, isValidEmail: isValidEmail })
+
+    if (passwordDidMatch && isValidEmail) {
+      const status = register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
       if (status == 204) {
         this.props.history.push("/otp-new-account");
       }
     }
   };
 
-  passswordMatchError() {
+  passswordMatchError = () => {
     return (
       <p className="text-red-500 text-xs mt-1">Password didn't match!</p>
     )
   }
 
-  invalidEmailError() {
+  invalidEmailError = () => {
     return (
       <p className="text-red-500 text-xs mt-1">Invalid email</p>
     )
@@ -91,10 +93,10 @@ class Register extends React.Component<Props, State> {
                 <label htmlFor="email" className="mb-2">
                   Your email
                 </label>
-                {!this.state.validEmail && this.invalidEmailError()}
+                {!this.state.isValidEmail && this.invalidEmailError()}
               </div>
               <input
-                onChange={(e) => this.setState({ email: e.target.value, validEmail: true })}
+                onChange={(e) => this.setState({ email: e.target.value, isValidEmail: true })}
                 value={this.state.email}
                 type="email"
                 id="email"
@@ -139,7 +141,6 @@ class Register extends React.Component<Props, State> {
                 {!this.state.passwordDidMatch && this.passswordMatchError()}
               </div>
               <input
-                ref={this.confirmPasswordRef}
                 onChange={(e) => { this.setState({ confirmedPassword: e.target.value, passwordDidMatch: true }) }}
                 value={this.state.confirmedPassword}
                 type="password"
@@ -151,7 +152,9 @@ class Register extends React.Component<Props, State> {
 
             <div className="w-full mt-2 ">
               <button
-                onClick={this.handleSignUp}
+                onClick={() => {
+                  this.handleSignUp()
+                }}
                 className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold "
               >
                 Sign up
