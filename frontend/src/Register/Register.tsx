@@ -9,6 +9,7 @@ type RegistrationData = {
 }
 
 type State = RegistrationData & {
+  isUsernameAvailable: boolean
   confirmedPassword: string
   passwordDidMatch: boolean
   isValidEmail: boolean
@@ -19,9 +20,10 @@ class Register extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      email: "test",
+      email: "test@t.com",
       userName: "test",
       password: "test",
+      isUsernameAvailable: true,
       confirmedPassword: "test",
       passwordDidMatch: true,
       isValidEmail: true
@@ -41,7 +43,7 @@ class Register extends React.Component<Props, State> {
     }
   }
 
-  handleSignUp = () => {
+  handleSignUp = async () => {
     const password = this.state.password
     const confirmedPassword = this.state.confirmedPassword
     const email = this.state.email
@@ -59,24 +61,27 @@ class Register extends React.Component<Props, State> {
     this.setState({ passwordDidMatch: passwordDidMatch, isValidEmail: isValidEmail })
 
     if (passwordDidMatch && isValidEmail) {
-      const status = register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
-      if (status == 204) {
-        this.props.history.push("/otp-new-account");
+
+      const status = await register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
+
+      switch (status) {
+        case 202:
+          this.props.history.push("/otp-new-account");
+          console.log("Username is available. Switching to otp page")
+          break;
+        case 200:
+          this.setState({ isUsernameAvailable: false })
+          console.log("Username Unavailable")
+          break;
+        default:
+          console.log("Unknown response from the server")
       }
     }
   };
 
-  passswordMatchError = () => {
-    return (
-      <p className="text-red-500 text-xs mt-1">Password didn't match!</p>
-    )
-  }
-
-  invalidEmailError = () => {
-    return (
-      <p className="text-red-500 text-xs mt-1">Invalid email</p>
-    )
-  }
+  usernameNotAvailableError = () => <p className="text-red-500 text-xs mt-1">This username is already taken.</p>
+  passswordMatchError = () => <p className="text-red-500 text-xs mt-1">Password didn't match!</p>
+  invalidEmailError = () => <p className="text-red-500 text-xs mt-1">Invalid email</p>
 
   render() {
     return (
@@ -105,15 +110,18 @@ class Register extends React.Component<Props, State> {
               />
             </div>
             <div className="flex flex-col w-full ">
-              <label htmlFor="uname" className="mb-2">
-                Username
-              </label>
+              <div className="flex gap-1">
+                <label htmlFor="uname" className="mb-2">
+                  Username
+                </label>
+                {!this.state.isUsernameAvailable && this.usernameNotAvailableError()}
+              </div>
               <input
-                onChange={(e) => this.setState({ userName: e.target.value })}
+                onChange={(e) => this.setState({ userName: e.target.value, isUsernameAvailable: true })}
                 value={this.state.userName}
                 type="email"
                 id="uname"
-                placeholder="Example: @ram, @ram_bahadur"
+                placeholder="Example: ram, ram_bahadur"
                 className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] border-solid sm:bg-transparent  border-gray-300 focus:outline-custom-blue"
               />
             </div>

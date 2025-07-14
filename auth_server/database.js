@@ -30,6 +30,7 @@ async function performSingle(callback) {
         error = false
     } catch (err) {
         console.log("Error during database operation.")
+        console.log(err)
     }
     try {
         client.close()

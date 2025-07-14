@@ -23,7 +23,7 @@ const sendTestEmail = async () => {
             from: ZOHO_EMAIL,
             to: recipient,
             subject: "Lottery",
-            text: "Congratulations Prince! You've been selected as a customer of the day. We are distributing",
+            text: "Body text 123",
         });
 
         console.log("✅ Email sent successfully!");

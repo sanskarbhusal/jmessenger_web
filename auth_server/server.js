@@ -1,46 +1,63 @@
 import express from "express"
 import cors from "cors"
+import cookieParser from "cookie-parser"
+import { v4 as uuidv4 } from "uuid"
 import { query, collection } from "./database.js"
-import bcrypt from "bcrypt"
+// import bcrypt from "bcrypt"
 
 const app = express()
-
-// app.use(express.text())
-app.use(express.json())
-
+const port = 3000
 const corsOption = {
     origin: "http://localhost",
+    credentials: true,
     optionsSuccessStatus: 200 //some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-app.use(cors(corsOption))
-const port = 3000
+/* using the middlewares. The text and json middleware are required to  parse
+the html body as text and as json respectively and the cookieParser 
+middleware to parse the cookie into js object
+*/
 
-app.post("/register", cors(corsOption), async (req, res) => {
-    let success = false
+app.use(cors(corsOption))
+app.use(express.text())
+app.use(express.json())
+app.use(cookieParser())
+
+let registrationRequest
+app.post("/register", async (req, res) => {
+
     const queryStatus = await query.performSingle(async () => {
-        const { email, userName, password } = req.body
-        const found = await collection.findOne({ userName: userName })
+
+        const { email, userName, password } = req.body.userName
+        const found = await collection.findOne({ _id: userName })
+
         if (found == null) {
-            const salt = await bcrypt.genSalt()
-            const hashedPassword = await bcrypt.hash(password, salt)
-            await collection.insertOne({ userName: userName, email: email, password: hashedPassword })
-            success = true
-            console.log("inserted")
+            console.log("Requested username is available")
+            const otp_session_id = uuidv4()
+            registrationRequest = { email, userName, password, otp_session_id }
+            //
+            //sending otp          
+            const status = await (async () => {
+                return "not_sent"
+            })()
+
+            res.status(202)
+                .cookie("otpSessionId", otp_session_id, {
+                    httpOnly: true,
+                    sameSite: "strict",
+                    maxAge: 300000,
+                    secure: true
+                })
+                .send()
+            console.log(req.cookies)
         } else {
-            success = false
-            console.log("User already exists")
+            res.status(200).send()
+            console.log("Requested username is not available")
         }
     })
-    if (success) {
-        res.status(204).send()
-    } else {
-        if (queryStatus == "error") {
-            res.status(500)
-        } else {
-            //417 means Expectation failed
-            res.status(417).send({ log: "Username not available" })
-        }
+
+    if (queryStatus == "error") {
+        console.log("Some error in performSingle() query")
     }
 })
 
