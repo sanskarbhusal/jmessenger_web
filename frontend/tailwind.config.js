@@ -28,5 +28,6 @@ export default {
     "bg-white",
     "block",
     "hidden",
+    "w-[40px]"
   ],
 };

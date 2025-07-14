@@ -1,5 +1,6 @@
 import React from "react";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
+import { CgSpinner as SpinnerIcon } from "react-icons/cg";
 import register from "./RegisterBackendIntegration.ts"
 
 type RegistrationData = {
@@ -13,6 +14,8 @@ type State = RegistrationData & {
   confirmedPassword: string
   passwordDidMatch: boolean
   isValidEmail: boolean
+  isSubmitted: boolean
+  buttonWidth: string
 }
 
 class Register extends React.Component<Props, State> {
@@ -26,7 +29,10 @@ class Register extends React.Component<Props, State> {
       isUsernameAvailable: true,
       confirmedPassword: "test",
       passwordDidMatch: true,
-      isValidEmail: true
+      isValidEmail: true,
+      isSubmitted: false,
+      buttonWidth: "full"
+
     }
   }
 
@@ -41,6 +47,10 @@ class Register extends React.Component<Props, State> {
     } else {
       return true
     }
+  }
+
+  loadingSpinner = () => {
+    return (<SpinnerIcon className="animate-spin h-[40px] w-auto"></SpinnerIcon>)
   }
 
   handleSignUp = async () => {
@@ -161,14 +171,15 @@ class Register extends React.Component<Props, State> {
               />
             </div>
 
-            <div className="w-full mt-2 ">
+            <div className={"w-" + this.state.buttonWidth + " " + "mt-2 flex justify-center "}>
               <button
                 onClick={() => {
+                  this.setState({ isSubmitted: true, buttonWidth: "[40px]" })
                   this.handleSignUp()
                 }}
-                className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold "
+                className="flex justify-center items-center font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold transition-all"
               >
-                Sign up
+                {this.state.isSubmitted ? this.loadingSpinner() : "Submit"}
               </button>
             </div>
           </div>
