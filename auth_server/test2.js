@@ -1,11 +1,32 @@
-import express from "express"
-import cookieParser from "cookie-parser"
+import nodemailer from "nodemailer"
+import dotenv from "dotenv"
+import { getHtml } from "./EmailBody.js"
 
-const app = express()
-app.use(cookieParser())
-app.get("/", (req, res) => {
-    // res.cookie("cookieName", "10,000 ms", { maxAge: 10000 }).send()
-    console.log(typeof null)
+dotenv.config()
+
+const user = process.env.zohoMail
+const pass = process.env.zohoPassword
+const transporter = nodemailer.createTransport({
+    host: "smtp.zoho.com",
+    port: 465,
+    secure: true,
+    auth: {
+        user: user,
+        pass: pass
+    }
 })
 
-app.listen(2000, () => console.log("localhost:2000"))
+const info = await (async () => {
+    try {
+        await transporter.sendMail({
+            from: 'jmessenger@sanskarbhusal.com.np',
+            to: "sanskarbhusal123@gmail.com",
+            subject: "Verify your JMessenger account",
+            html: getHtml("sanskar", 63488)
+        })
+    } catch (err) {
+        console.log(err)
+    }
+})()
+
+console.log(info)

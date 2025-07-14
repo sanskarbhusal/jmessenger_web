@@ -1,8 +1,12 @@
 import nodemailer from "nodemailer";
+import { getHtml } from "./EmailBody.js";
+import dotenv from "dotenv"
+
+dotenv().config()
 
 // 🔐 Replace these with your actual test credentials
 const ZOHO_EMAIL = "jmessenger@sanskarbhusal.com.np";
-const ZOHO_APP_PASSWORD = "3vz68j3kYzm5";
+const ZOHO_APP_PASSWORD = "Wjju5Mt2E9dz";
 
 // 📨 Change this to where you want the test email to go
 const recipient = "sanskarbhusal123@gmail.com"; // or someone else
@@ -12,8 +16,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: ZOHO_EMAIL,
-        pass: ZOHO_APP_PASSWORD,
+        user: process.env.zohoMail,
+        pass: process.env.zohoPassword,
     },
 });
 
@@ -22,8 +26,8 @@ const sendTestEmail = async () => {
         const info = await transporter.sendMail({
             from: ZOHO_EMAIL,
             to: recipient,
-            subject: "Lottery",
-            text: "Body text 123",
+            subject: "Verify your JMessenger account",
+            html: getHtml("sanskar")
         });
 
         console.log("✅ Email sent successfully!");

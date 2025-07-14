@@ -20,8 +20,8 @@ class Register extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      email: "test@t.com",
-      userName: "test",
+      email: "200333sanskar@cosmoscollege.edu.np",
+      userName: "sanskar",
       password: "test",
       isUsernameAvailable: true,
       confirmedPassword: "test",
@@ -34,7 +34,7 @@ class Register extends React.Component<Props, State> {
     const splitDomain = email.split("@")
     if (splitDomain.length != 2) {
       return false
-    } else if (splitDomain[1].split(".").length != 2) {
+    } else if (splitDomain[1].split(".").length < 2) {
       return false
     } else if (splitDomain[1].split(".")[0] == "") {
       return false
@@ -62,16 +62,19 @@ class Register extends React.Component<Props, State> {
 
     if (passwordDidMatch && isValidEmail) {
 
-      const status = await register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
+      const response = await register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
 
-      switch (status) {
-        case 202:
-          this.props.history.push("/otp-new-account");
-          console.log("Username is available. Switching to otp page")
-          break;
+      switch (response.status) {
         case 200:
           this.setState({ isUsernameAvailable: false })
-          console.log("Username Unavailable")
+          console.log(response.text)
+          break;
+        case 202:
+          this.props.history.push("/otp-new-account");
+          console.log(response.text)
+          break;
+        case 500:
+          console.log(response.text)
           break;
         default:
           console.log("Unknown response from the server")

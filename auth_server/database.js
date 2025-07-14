@@ -38,7 +38,8 @@ async function performSingle(callback) {
     } catch (err) {
         console.log("Error while closing database connection.")
     }
-    return error ? "error" : "done"
+    const status = error ? "500" : "200"
+    return status
 }
 
 async function performBatch(callbacks) {
