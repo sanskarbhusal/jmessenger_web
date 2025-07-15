@@ -78,7 +78,7 @@ class Login extends React.Component<Props> {
               Log in
             </button>
             <NavLink
-              className=" no-underline hover:underline pt-[4px] text-base text-custom-blue"
+              className=" no-underline hover:underline mt-[10px] text-base text-custom-blue"
               to="/register"
             >
               Don't have an account?

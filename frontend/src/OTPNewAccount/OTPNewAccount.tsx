@@ -38,7 +38,7 @@ class OTPNewPassword extends React.Component<Props> {
             </div>
             <div
               id="otp-instruction"
-              className="w-[190px] h-fit text-left sm:text-center font-mono text-custom-blue flex flex-row justify-center items-center"
+              className="w-[190px] h-fit text-left sm:text-center font-mono text-custom-blue flex flex-row justify-center items-center ping"
             >
               {this.state.message}
             </div>
