@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import { v4 as uuidv4 } from "uuid"
 import { query, collection } from "./database.js"
 import { getHtml } from "./EmailBody.js"
+
 // import bcrypt from "bcrypt"
 
 dotenv.config()
@@ -24,13 +25,14 @@ middleware to parse the cookie into js object
 */
 
 app.use(cors(corsOption))
-app.use(express.text())
+// app.use(express.text())
 app.use(express.json())
 app.use(cookieParser())
 
 
 //global registration request pool (array of objects)
 let registrationRequests = []
+let otpSessions = []
 
 async function sendOtp(userName, otp, email) {
     const transporter = nodemailer.createTransport({
@@ -76,22 +78,23 @@ app.post("/register", async (req, res) => {
     else {
         if (isAccountFound == null) {
             console.log("Requested username is available")
-            const otp_session_id = uuidv4()
+            const otpSessionId = uuidv4()
             const otp = Math.floor(Math.random() * 1000000)
-            const registrationRequest = { email, userName, password, otp, otp_session_id }
+            const registrationRequest = { email, userName, password, otp, otpSessionId }
             // const otpMail = await sendOtp(userName, otp, email)
             const isSent = true
             if (isSent) {
                 registrationRequests.push(registrationRequest)
+                otpSessions.push(otpSessionId)
                 //202 means request accepted
                 res.status(202)
-                    .cookie("otpSessionId", otp_session_id, {
+                    .cookie("otpSessionId", otpSessionId, {
                         httpOnly: true,
-                        sameSite: "strict",
-                        maxAge: 300000,
+                        sameSite: "none",
+                        maxAge: 120000,
                         secure: true
                     })
-                    .send("Server has sent the otp.\nServer is expecting client to go on route 'otp-new-account'")
+                    .send("Server has sent the otp:" + otp)
             }
         } else {
             res.status(200).send()
@@ -101,8 +104,23 @@ app.post("/register", async (req, res) => {
 })
 
 app.post("/otp-new-account", (req, res) => {
-
-
+    const cookies = req.cookies
+    if (Object.getPrototypeOf(cookies) == null) {
+        console.log("No cookies found. Resend otp")
+        res.status(200).send("OTP expired")
+    } else {
+        const sessionIdFromClient = req.cookies.otpSessionId
+        const otpFromClient = req.body.otp
+        if (otpSessions.includes(sessionIdFromClient)) {
+            let found = registrationRequests.find((item) => sessionIdFromClient == item.otpSessionId && item.otp == otpFromClient)
+            console.log(found)
+            if (found != undefined) {
+                console.log("OTP verified")
+            } else { console.log("OTP not valid") }
+        } else {
+            res.status(400).send("Invalid session ID.")
+        }
+    }
 })
 
 app.listen(port, () => {

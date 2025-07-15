@@ -2,7 +2,7 @@ import React from "react";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
 import { CgSpinner as SpinnerIcon } from "react-icons/cg";
 import validator from "email-validator"
-import register from "./RegisterBackendIntegration.ts"
+import { register } from "../api"
 
 type RegistrationData = {
   email: string
