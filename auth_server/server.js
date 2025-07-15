@@ -48,7 +48,7 @@ async function sendOtp(userName, otp, email) {
         info = await transporter.sendMail({
             from: 'jmessenger@sanskarbhusal.com.np',
             to: email,
-            subject: "Verify your JMessenger Account",
+            subject: "Verify your JMessenger Account ",
             html: getHtml(userName, otp)
         })
         return { info, isSent: true }
@@ -79,8 +79,9 @@ app.post("/register", async (req, res) => {
             const otp_session_id = uuidv4()
             const otp = Math.floor(Math.random() * 1000000)
             const registrationRequest = { email, userName, password, otp, otp_session_id }
-            const otpMail = await sendOtp(userName, otp, email)
-            if (otpMail.isSent) {
+            // const otpMail = await sendOtp(userName, otp, email)
+            const isSent = true
+            if (isSent) {
                 registrationRequests.push(registrationRequest)
                 //202 means request accepted
                 res.status(202)
@@ -99,7 +100,8 @@ app.post("/register", async (req, res) => {
     }
 })
 
-app.post("/otp-new-account", () => {
+app.post("/otp-new-account", (req, res) => {
+
 
 })
 

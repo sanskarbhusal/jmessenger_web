@@ -1,6 +1,7 @@
 import React from "react";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
 import { CgSpinner as SpinnerIcon } from "react-icons/cg";
+import validator from "email-validator"
 import register from "./RegisterBackendIntegration.ts"
 
 type RegistrationData = {
@@ -14,8 +15,7 @@ type State = RegistrationData & {
   confirmedPassword: string
   passwordDidMatch: boolean
   isValidEmail: boolean
-  isSubmitted: boolean
-  buttonWidth: string
+  submitted: boolean
 }
 
 class Register extends React.Component<Props, State> {
@@ -30,27 +30,12 @@ class Register extends React.Component<Props, State> {
       confirmedPassword: "test",
       passwordDidMatch: true,
       isValidEmail: true,
-      isSubmitted: false,
-      buttonWidth: "full"
-
+      submitted: false
     }
   }
 
   isValidEmail = (email: string): boolean => {
-    const splitDomain = email.split("@")
-    if (splitDomain.length != 2) {
-      return false
-    } else if (splitDomain[1].split(".").length < 2) {
-      return false
-    } else if (splitDomain[1].split(".")[0] == "") {
-      return false
-    } else {
-      return true
-    }
-  }
-
-  loadingSpinner = () => {
-    return (<SpinnerIcon className="animate-spin h-[40px] w-auto"></SpinnerIcon>)
+    return validator.validate(email)
   }
 
   handleSignUp = async () => {
@@ -92,16 +77,16 @@ class Register extends React.Component<Props, State> {
     }
   };
 
-  usernameNotAvailableError = () => <p className="text-red-500 text-xs mt-1">This username is already taken.</p>
-  passswordMatchError = () => <p className="text-red-500 text-xs mt-1">Password didn't match!</p>
-  invalidEmailError = () => <p className="text-red-500 text-xs mt-1">Invalid email</p>
+  usernameNotAvailableError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">This username is already taken.</p>
+  passswordMatchError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">Password didn't match!</p>
+  invalidEmailError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">Invalid email</p>
 
   render() {
     return (
       <div className="h-full w-full flex items-center sm:justify-center sm:bg-custom-blue/10">
         <div className="w-fit h-fit sm:bg-white rounded-3xl">
 
-          <div className="w-[77vw] h-[550px] sm:h-fit sm:w-96 font-sans sm:bg-custom-blue/5 flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-3xl pl-[6%] ml-[6%] sm:m-0 sm:p-8 pt-0  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
+          <div className="w-[77vw] h-[550px] sm:h-fit sm:w-96 font-sans sm:bg-custom-blue/5 flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-3xl pl-[6%] ml-[6%] sm:m-0 sm:p-8  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
             <div className="text-2xl font-semibold mt-[-8px]">
               Sign up to JMessenger
             </div>
@@ -118,6 +103,7 @@ class Register extends React.Component<Props, State> {
                 value={this.state.email}
                 type="email"
                 id="email"
+                required
                 placeholder="Email"
                 className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] border-solid sm:bg-transparent border-gray-300 focus:outline-custom-blue"
               />
@@ -170,18 +156,19 @@ class Register extends React.Component<Props, State> {
                 className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
               />
             </div>
-
-            <div className={"w-" + this.state.buttonWidth + " " + "mt-2 flex justify-center "}>
-              <button
-                onClick={() => {
-                  this.setState({ isSubmitted: true, buttonWidth: "[40px]" })
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                if (!this.state.submitted) {
+                  this.setState({ submitted: true })
                   this.handleSignUp()
-                }}
-                className="flex justify-center items-center font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold transition-all"
-              >
-                {this.state.isSubmitted ? this.loadingSpinner() : "Submit"}
-              </button>
-            </div>
+                }
+              }}
+              className="focus:w-[40px] group flex justify-center items-center font-sans text-base mt-3 active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 sm:rounded-3xl w-full font-semibold transition-all duration-200"
+            >
+              <div className="group-focus:hidden">Submit</div>
+              <SpinnerIcon className="hidden group-focus:block w-[40px] h-auto animate-spin" />
+            </button>
           </div>
         </div>
       </div>

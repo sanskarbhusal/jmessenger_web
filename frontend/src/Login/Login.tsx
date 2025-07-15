@@ -71,23 +71,18 @@ class Login extends React.Component<Props> {
                 </NavLink>
               </div>
             </div>
-
-            <div className="w-full">
-              <button
-                onClick={this.onLogin}
-                className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-sans text-base font-semibold"
-              >
-                Log in
-              </button>
-            </div>
-            <div>
-              <NavLink
-                className=" no-underline hover:underline text-base text-custom-blue"
-                to="/register"
-              >
-                Don't have an account?
-              </NavLink>
-            </div>
+            <button
+              onClick={this.onLogin}
+              className="w-full h-10 active:bg-custom-blue-dark bg-custom-blue border-0 text-white mt-3 sm:rounded-3xl font-sans text-base font-semibold"
+            >
+              Log in
+            </button>
+            <NavLink
+              className=" no-underline hover:underline pt-[4px] text-base text-custom-blue"
+              to="/register"
+            >
+              Don't have an account?
+            </NavLink>
           </div>
         </div>
       </div>
