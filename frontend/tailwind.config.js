@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "custom-blue-dark": "darkmagenta", // "#0369A1",
-        "custom-blue": "purple" // "#0284C7",
+        "custom-blue-dark": "black", // "#0369A1",
+        "custom-blue": "rgb(40,40,40)" // "#0284C7",
       },
       gridTemplateColumns: {
         search_bar: "49px 1fr 49px",
