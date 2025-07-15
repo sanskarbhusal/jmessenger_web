@@ -6,8 +6,7 @@ import dotenv from "dotenv"
 import { v4 as uuidv4 } from "uuid"
 import { query, collection } from "./database.js"
 import { getHtml } from "./EmailBody.js"
-
-// import bcrypt from "bcrypt"
+import bcrypt from "bcrypt"
 
 dotenv.config()
 
@@ -81,9 +80,8 @@ app.post("/register", async (req, res) => {
             const otpSessionId = uuidv4()
             const otp = Math.floor(Math.random() * 1000000)
             const registrationRequest = { email, userName, password, otp, otpSessionId }
-            // const otpMail = await sendOtp(userName, otp, email)
-            const isSent = true
-            if (isSent) {
+            const otpMail = await sendOtp(userName, otp, email)
+            if (otpMail.isSent) {
                 registrationRequests.push(registrationRequest)
                 otpSessions.push(otpSessionId)
                 //202 means request accepted
@@ -97,30 +95,57 @@ app.post("/register", async (req, res) => {
                     .send("Server has sent the otp:" + otp)
             }
         } else {
-            res.status(200).send()
+            res.status(200).send("Requested username is not available")
             console.log(`Server has rejected '${userName}' as it's already taken.`)
         }
     }
 })
 
-app.post("/otp-new-account", (req, res) => {
+app.post("/verify-otp", async (req, res) => {
     const cookies = req.cookies
     if (Object.getPrototypeOf(cookies) == null) {
-        console.log("No cookies found. Resend otp")
-        res.status(200).send("OTP expired")
+        res.status(200).send("OTP Session expired")
     } else {
         const sessionIdFromClient = req.cookies.otpSessionId
         const otpFromClient = req.body.otp
         if (otpSessions.includes(sessionIdFromClient)) {
             let found = registrationRequests.find((item) => sessionIdFromClient == item.otpSessionId && item.otp == otpFromClient)
-            console.log(found)
+            let hashedPassword
+
             if (found != undefined) {
-                console.log("OTP verified")
-            } else { console.log("OTP not valid") }
+                try {
+                    const salt = await bcrypt.genSalt()
+                    hashedPassword = await bcrypt.hash(found.password, salt)
+                } catch (err) {
+                    console.log("shity cryptography")
+                    console.log(err)
+                    res.status(500).send("Failed to perform cryptographic operation.")
+                    return
+                }
+
+                const queryStatus = await query.performSingle(async () => {
+                    await collection.insertOne({ _id: found.userName, email: found.email, password: hashedPassword, timestamp: new Date(), timestamp: new Date().toISOString() })
+                })
+
+                if (queryStatus == "200") {
+                    console.log("Account registered under user name:", found.userName, "email:", found.email)
+                    res.status(201).send("OTP verified")
+                } else if (queryStatus == "500") {
+                    res.status(500).send("Database went to depression :(")
+                } else {
+                    res.status(500).send("If this message appears, probably the server went rogue.")
+                }
+            } else {
+                res.status(200).send("Incorrect OTP")
+            }
         } else {
-            res.status(400).send("Invalid session ID.")
+            res.status(400).send("OTP session expired")
         }
     }
+})
+
+app.get("/", async (req, res) => {
+
 })
 
 app.listen(port, () => {

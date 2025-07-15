@@ -8,9 +8,10 @@ class OTPNewPassword extends React.Component<Props> {
   state = {
     message: "Check your email.",
     clicked: false,
-    loadingSpinner: "hidden",
+    otp: "",
     verifyButton: "block",
-    otp: "12345"
+    loadingSpinner: "hidden",
+    otpIsVerified: false
   }
 
   componentDidMount() {
@@ -28,10 +29,30 @@ class OTPNewPassword extends React.Component<Props> {
   }
 
   onClickVerify = async () => {
-    console.log("Clicked")
-    const status = await sendOtp({ otp: this.state.otp })
-    console.log(status)
-    // this.props.history.replace("/registration-status");
+    const response = await sendOtp({ otp: this.state.otp })
+    switch (response.status) {
+      case 200:
+        //incorrect otp, expired otp
+        this.setState({ message: response.text, verifyButton: "block", loadingSpinner: "hidden" })
+        this.verifyButtonRef.current?.blur()
+        break;
+      case 201:
+        //correct otp
+        this.setState({ message: response.text })
+        this.verifyButtonRef.current?.blur()
+        this.props.history.replace("/")
+        break;
+      case 400:
+        //invalid cookie
+        this.setState({ message: response.text, verifyButton: "block", loadingSpinner: "hidden" })
+        this.verifyButtonRef.current?.blur()
+        break;
+      default:
+        this.setState({ message: "Auth server down :(", verifyButton: "block", loadingSpinner: "hidden" })
+        this.verifyButtonRef.current?.blur()
+        console.log("Invalid response from the server")
+        break;
+    }
   };
 
   render() {
@@ -45,7 +66,7 @@ class OTPNewPassword extends React.Component<Props> {
             </div>
             <div
               id="otp-instruction"
-              className="w-[190px] h-fit font-mono"
+              className="w-[190px] h-fit sm:text-center text-left font-mono"
             >
               {this.state.message}
             </div>
@@ -63,7 +84,10 @@ class OTPNewPassword extends React.Component<Props> {
               ref={this.verifyButtonRef}
               onClick={() => {
                 if (!this.state.clicked) {
-                  this.setState({ message: "Verifying, please wait.", clicked: true, verifyButton: "hidden", loadingSpinner: "block" })
+                  if (this.state.otp == "") {
+                    alert("Fyi, submitting emtpy field wastes server resources.")
+                  }
+                  this.setState({ message: "Verifying, wait..." })
                   this.onClickVerify()
                 }
               }}

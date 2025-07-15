@@ -16,22 +16,30 @@ type State = RegistrationData & {
   passwordDidMatch: boolean
   isValidEmail: boolean
   submitted: boolean
+  error: boolean
 }
 
 class Register extends React.Component<Props, State> {
 
+  submitButtonRef = React.createRef<HTMLButtonElement>()
+
   constructor(props: Props) {
     super(props)
     this.state = {
-      email: "200333sanskar@cosmoscollege.edu.np",
-      userName: "sanskar",
-      password: "test",
+      email: "",
+      userName: "",
+      password: "",
       isUsernameAvailable: true,
-      confirmedPassword: "test",
+      confirmedPassword: "",
       passwordDidMatch: true,
       isValidEmail: true,
-      submitted: false
+      submitted: false,
+      error: false
     }
+  }
+
+  stopLoading = () => {
+    this.submitButtonRef.current?.blur()
   }
 
   isValidEmail = (email: string): boolean => {
@@ -56,12 +64,11 @@ class Register extends React.Component<Props, State> {
     this.setState({ passwordDidMatch: passwordDidMatch, isValidEmail: isValidEmail })
 
     if (passwordDidMatch && isValidEmail) {
-
       const response = await register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
 
       switch (response.status) {
         case 200:
-          this.setState({ isUsernameAvailable: false })
+          this.setState({ isUsernameAvailable: false, error: true, submitted: false })
           console.log(response.text)
           break;
         case 202:
@@ -74,6 +81,8 @@ class Register extends React.Component<Props, State> {
         default:
           console.log("Unknown response from the server")
       }
+    } else {
+      this.setState({ error: true })
     }
   };
 
@@ -82,6 +91,9 @@ class Register extends React.Component<Props, State> {
   invalidEmailError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">Invalid email</p>
 
   render() {
+    if (this.state.error) {
+      this.stopLoading()
+    }
     return (
       <div className="h-full w-full flex items-center sm:justify-center sm:bg-custom-blue/10">
         <div className="w-fit h-fit sm:bg-white rounded-3xl">
@@ -99,7 +111,7 @@ class Register extends React.Component<Props, State> {
                 {!this.state.isValidEmail && this.invalidEmailError()}
               </div>
               <input
-                onChange={(e) => this.setState({ email: e.target.value, isValidEmail: true })}
+                onChange={(e) => this.setState({ email: e.target.value, isValidEmail: true, error: false })}
                 value={this.state.email}
                 type="email"
                 id="email"
@@ -116,7 +128,7 @@ class Register extends React.Component<Props, State> {
                 {!this.state.isUsernameAvailable && this.usernameNotAvailableError()}
               </div>
               <input
-                onChange={(e) => this.setState({ userName: e.target.value, isUsernameAvailable: true })}
+                onChange={(e) => this.setState({ userName: e.target.value, isUsernameAvailable: true, error: false })}
                 value={this.state.userName}
                 type="email"
                 id="uname"
@@ -130,7 +142,7 @@ class Register extends React.Component<Props, State> {
               </label>
               <input
                 onChange={(e) => {
-                  this.setState({ password: e.target.value })
+                  this.setState({ password: e.target.value, error: false })
                 }}
                 value={this.state.password}
                 type="password"
@@ -157,8 +169,8 @@ class Register extends React.Component<Props, State> {
               />
             </div>
             <button
-              onClick={(e) => {
-                e.preventDefault()
+              ref={this.submitButtonRef}
+              onClick={() => {
                 if (!this.state.submitted) {
                   this.setState({ submitted: true })
                   this.handleSignUp()

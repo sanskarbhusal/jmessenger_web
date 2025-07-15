@@ -21,7 +21,7 @@ async function register(registrationData: RegistrationData) {
 }
 
 async function sendOtp(otp: object) {
-    const url = "http://localhost:3000/otp-new-account"
+    const url = "http://localhost:3000/verify-otp"
     const method = "POST"
     const headers = { "Content-Type": "application/json" }
     const body = JSON.stringify(otp)

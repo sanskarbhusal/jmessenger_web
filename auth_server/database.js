@@ -31,13 +31,15 @@ async function performSingle(callback) {
     } catch (err) {
         console.log("Error during database operation.")
         console.log(err)
+    } finally {
+        try {
+            await client.close()
+            console.log("Database disconnected.")
+        } catch (err) {
+            console.log("Error while closing database connection.")
+        }
     }
-    try {
-        client.close()
-        console.log("Database disconnected.")
-    } catch (err) {
-        console.log("Error while closing database connection.")
-    }
+
     const status = error ? "500" : "200"
     return status
 }
