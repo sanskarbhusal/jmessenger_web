@@ -93,7 +93,7 @@ app.post("/register", async (req, res) => {
                         maxAge: 120000,
                         secure: true
                     })
-                    .send("Server has sent the otp:" + otp)
+                    .send("OTP sent to: " + email)
             }
         } else {
             res.status(200).send("Requested username is not available")
