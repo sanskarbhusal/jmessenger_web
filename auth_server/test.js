@@ -1,3 +1,1 @@
-
-const found = false &&
-    console.log("result is", found)
+console.log(new Date("2025-07-10T04:56:57.000Z").toLocaleDateString())
