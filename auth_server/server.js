@@ -61,7 +61,6 @@ async function sendOtp(userName, otp, email) {
 }
 
 app.post("/register", async (req, res) => {
-    console.log("Request incoming...")
     const { email, userName, password } = req.body
 
     let isAccountFound
@@ -129,7 +128,7 @@ app.post("/verify-otp", async (req, res) => {
                 })
 
                 if (queryStatus == "200") {
-                    console.log("Account registered under user name:", found.userName, "email:", found.email)
+                    console.log(`Account registered under username '${found.userName}', email'${found.email}`)
                     res.status(201).send("OTP verified")
                 } else if (queryStatus == "500") {
                     res.status(500).send("Database went to depression :(")
@@ -145,8 +144,35 @@ app.post("/verify-otp", async (req, res) => {
     }
 })
 
-app.get("/", async (req, res) => {
+app.post("/login", async (req, res) => {
+    console.log(req.cookies)
 
+    const { userName, password } = req.body
+
+    let queryResult
+    const queryStatus = await query.performSingle(async () => {
+        queryResult = await collection.findOne({ _id: userName })
+    })
+
+    if (queryStatus == "200") {
+        if (queryResult != null) {
+            const passwordDidMatch = await bcrypt.compare(password, queryResult.password)
+            if (passwordDidMatch) {
+                const loginSessionId = uuidv4()
+                res.status(200)
+                    .cookie("loginSessionId", loginSessionId)
+                    .send("Login Successfull")
+            } else {
+                //403: authentic user not authorized to login due to wrong password
+                res.status(403).send("Password didn't match.")
+            }
+        } else {
+            //401 means unauthorized
+            res.status(401).send("Username is not found.")
+        }
+    } else if (queryStatus == "500") {
+        res.status(500).send("Database is depressed :(")
+    }
 })
 
 app.listen(port, () => {

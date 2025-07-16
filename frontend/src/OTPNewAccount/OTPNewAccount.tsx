@@ -1,7 +1,7 @@
 import React from "react";
 import { RouteComponentProps as Props, withRouter } from "react-router-dom";
 import { CgSpinner as SpinnerIcon } from "react-icons/cg";
-import { sendOtp } from "../api"
+import { submitOtp } from "../api"
 
 class OTPNewPassword extends React.Component<Props> {
   verifyButtonRef = React.createRef<HTMLButtonElement>()
@@ -29,7 +29,7 @@ class OTPNewPassword extends React.Component<Props> {
   }
 
   onClickVerify = async () => {
-    const response = await sendOtp({ otp: this.state.otp })
+    const response = await submitOtp({ otp: this.state.otp })
     switch (response.status) {
       case 200:
         //incorrect otp, expired otp
