@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb"
 import dotenv from "dotenv"
 dotenv.config()
-const url = process.env.localInstance
+// const url = process.env.localInstance
+
+const url = process.env.connectionString // url of access controlled db instance
 const dbName = "jmessenger"
 const collectionName = "registration"
 

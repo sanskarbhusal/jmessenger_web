@@ -65,7 +65,7 @@ class Register extends React.Component<Props, State> {
 
     if (passwordDidMatch && isValidEmail) {
       const response = await register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
-
+      this.setState({ submitted: false })
       switch (response.status) {
         case 200:
           this.setState({ isUsernameAvailable: false, error: true, submitted: false })
@@ -82,6 +82,7 @@ class Register extends React.Component<Props, State> {
           console.log("Unknown response from the server")
           console.log("Response is:")
           console.log(response.text)
+          break;
       }
     } else {
       this.setState({ error: true })
