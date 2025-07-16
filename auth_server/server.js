@@ -61,6 +61,7 @@ async function sendOtp(userName, otp, email) {
 }
 
 app.post("/register", async (req, res) => {
+    console.log("Request incoming...")
     const { email, userName, password } = req.body
 
     let isAccountFound

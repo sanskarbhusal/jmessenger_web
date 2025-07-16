@@ -1,7 +1,7 @@
 import type { RegistrationData } from "../Register/Register.tsx"
 
 async function register(registrationData: RegistrationData) {
-    const url = "http://135.13.11.111:3000/register"
+    const url = "https://135.13.11.111:3000/register"
     const method = "POST"
     const headers = { "Content-Type": "application/json" }
     const body = JSON.stringify(registrationData)
@@ -21,7 +21,7 @@ async function register(registrationData: RegistrationData) {
 }
 
 async function sendOtp(otp: object) {
-    const url = "http://135.13.11.111:3000/verify-otp"
+    const url = "https://135.13.11.111:3000/verify-otp"
     const method = "POST"
     const headers = { "Content-Type": "application/json" }
     const body = JSON.stringify(otp)

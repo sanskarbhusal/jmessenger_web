@@ -80,6 +80,8 @@ class Register extends React.Component<Props, State> {
           break;
         default:
           console.log("Unknown response from the server")
+          console.log("Response is:")
+          console.log(response.text)
       }
     } else {
       this.setState({ error: true })
