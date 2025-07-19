@@ -1,5 +1,5 @@
 import React from "react";
-import { login } from "../api"
+import { passwordLogin } from "../api"
 import {
   RouteComponentProps as Props,
   withRouter,
@@ -18,21 +18,25 @@ class Login extends React.Component<Props> {
   }
 
   onLogin = async () => {
-    const response = await login({ userName: this.state.userName, password: this.state.password })
+    const response = await passwordLogin({ userName: this.state.userName, password: this.state.password })
     switch (response.status) {
       case 200:
-        this.props.history.push("/chat")
+        console.log("Successfull")
+        this.props.history.replace("/chat")
         break;
       //userName not found
       case 401:
+        console.log("Username not found.")
         this.setState({ gotError: true, errorType: "userName", errorMessage: response.text, isLoginButtonPressed: false })
         break;
       //password didn't match
       case 403:
+        console.log("Password didn't match.")
         this.setState({ gotError: true, errorType: "password", errorMessage: response.text, isLoginButtonPressed: false })
         break;
       //Database is depressed
       case 500:
+        console.log("Password didn't match.")
         this.setState({ gotError: true, errorMessage: response.text, isLoginButtonPressed: false })
         break;
       default:
@@ -90,6 +94,11 @@ class Login extends React.Component<Props> {
                 type="password"
                 id="password"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                onKeyDown={(e) => {
+                  if (e.key == "Enter") {
+                    this.setState({ gotError: false, isLoginButtonPressed: false })
+                  }
+                }}
                 onChange={(e) => {
                   this.setState({ password: e.target.value, gotError: false, isLoginButtonPressed: false })
                 }}

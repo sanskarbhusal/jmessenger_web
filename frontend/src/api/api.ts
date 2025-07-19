@@ -40,8 +40,8 @@ async function submitOtp(otp: object) {
     return res
 }
 
-async function login(authData: object) {
-    const url = "http://localhost:3000/login"
+async function passwordLogin(authData: object) {
+    const url = "http://localhost:3000/passwordLogin"
     const method = "POST"
     const headers = { "Content-Type": "application/json" }
     const body = JSON.stringify(authData)
@@ -59,4 +59,24 @@ async function login(authData: object) {
         })
     return res
 }
-export { register, submitOtp, login }
+
+async function sessionLogin(authData: object) {
+    const url = "http://localhost:3000/sessionLogin"
+    const method = "POST"
+    const headers = { "Content-Type": "application/json" }
+    const body = JSON.stringify(authData)
+    const request = new Request(url, { method, body, headers, credentials: "include" })
+
+    let res = { status: 0, text: "" }
+    await fetch(request)
+        .then(async (response) => {
+            res.status = response.status
+            res.text = await response.text()
+            //only required if you chain another then
+            return response
+        }).catch((err) => {
+            console.error(err)
+        })
+    return res
+}
+export { register, submitOtp, passwordLogin, sessionLogin }

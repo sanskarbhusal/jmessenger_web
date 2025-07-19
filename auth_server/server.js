@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser"
 import nodemailer from "nodemailer"
 import dotenv from "dotenv"
 import { v4 as uuidv4 } from "uuid"
-import { query, collection } from "./database.js"
+import { query, registrationCollection, loginSessionCollection } from "./database.js"
 import { getHtml } from "./EmailBody.js"
 import bcrypt from "bcrypt"
 
@@ -32,6 +32,7 @@ app.use(cookieParser())
 //global registration request pool (array of objects)
 let registrationRequests = []
 let otpSessions = []
+let loginSessions
 
 async function sendOtp(userName, otp, email) {
     const transporter = nodemailer.createTransport({
@@ -67,7 +68,7 @@ app.post("/register", async (req, res) => {
     let status
 
     status = await query.performSingle(async () => {
-        isAccountFound = await collection.findOne({ _id: userName })
+        isAccountFound = await registrationCollection.findOne({ _id: userName })
     })
 
     if (status == 500) {
@@ -117,14 +118,14 @@ app.post("/verify-otp", async (req, res) => {
                     const salt = await bcrypt.genSalt()
                     hashedPassword = await bcrypt.hash(found.password, salt)
                 } catch (err) {
-                    console.log("shity cryptography")
+                    console.log("cryptography failed.")
                     console.log(err)
                     res.status(500).send("Failed to perform cryptographic operation.")
                     return
                 }
 
                 const queryStatus = await query.performSingle(async () => {
-                    await collection.insertOne({ _id: found.userName, email: found.email, password: hashedPassword, timestamp: new Date(), timestamp: new Date().toISOString() })
+                    await registrationCollection.insertOne({ _id: found.userName, email: found.email, password: hashedPassword, timestamp: new Date(), timestamp: new Date().toISOString() })
                 })
 
                 if (queryStatus == "200") {
@@ -144,24 +145,37 @@ app.post("/verify-otp", async (req, res) => {
     }
 })
 
-app.post("/login", async (req, res) => {
-    console.log(req.cookies)
-
+app.post("/passwordLogin", async (req, res) => {
     const { userName, password } = req.body
 
     let queryResult
     const queryStatus = await query.performSingle(async () => {
-        queryResult = await collection.findOne({ _id: userName })
+        queryResult = await registrationCollection.findOne({ _id: userName })
     })
-
     if (queryStatus == "200") {
         if (queryResult != null) {
             const passwordDidMatch = await bcrypt.compare(password, queryResult.password)
             if (passwordDidMatch) {
                 const loginSessionId = uuidv4()
-                res.status(200)
-                    .cookie("loginSessionId", loginSessionId)
-                    .send("Login Successfull")
+                const queryResult2 = await query.performSingle(async () => {
+                    await loginSessionCollection.deleteOne({ _id: userName })
+                    await loginSessionCollection.insertOne({ _id: userName, loginSessionId })
+                })
+                if (queryResult2 == 200) {
+                    res.status(200)
+                        .cookie("loginSessionId", loginSessionId, {
+                            secure: true,
+                            maxAge: 2592000,
+                            sameSite: "none"
+                        })
+                        .cookie("userName", userName, {
+                            secure: true,
+                            sameSite: "none"
+                        })
+                        .send("Login Successfull")
+                } else {
+                    res.status(500).send("Database is depressed :(")
+                }
             } else {
                 //403: authentic user not authorized to login due to wrong password
                 res.status(403).send("Password didn't match.")
@@ -172,6 +186,32 @@ app.post("/login", async (req, res) => {
         }
     } else if (queryStatus == "500") {
         res.status(500).send("Database is depressed :(")
+    }
+})
+
+app.post("/sessionLogin", async (req, res) => {
+    const userName = req.body.userName
+    const loginSessionIdFromClient = req.body.loginSessionId
+    let queryResult
+    const queryStatus = await query.performSingle(async () => {
+        queryResult = await loginSessionCollection.findOne({
+            _id: userName,
+            loginSessionId: loginSessionIdFromClient
+        })
+    })
+
+    switch (queryStatus) {
+        case "200":
+            if (queryResult != null) {
+                res.status(200).send("Session valid.")
+            } else {
+                //401: Needs authentication
+                res.status(401).send("Session invalid")
+            }
+            break;
+        case "500":
+            res.status(500).send("Database is depressed :(")
+            break;
     }
 })
 

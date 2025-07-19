@@ -12,13 +12,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
       <Route path="/otp-new-password" component={OTPNewPassword} />
       <Route path="/new-password-status" component={NewPasswordStatus} />
       <Route path="/registration-status" component={RegistrationStatus} />
       <Route path="/otp-new-account" component={OTPNewAccount} />
       <Route path="/register" component={Register} />
-      <Route path="/chat" component={Chat} />
+      <Route path="/" component={Chat} />
       <Route path="/forgot-password" component={ForgotPassword} />
     </Switch>
   )
