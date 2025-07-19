@@ -47,11 +47,6 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
             <div className="w-[40px]">
               {this.state.status}
             </div>
-            <span className="text-gray-500">
-              {`
-                <--Simulating status polling. Currently the polling interval is 2000ms
-            `}
-            </span>
           </div>
         </div>
         <div id="highlights"></div>
