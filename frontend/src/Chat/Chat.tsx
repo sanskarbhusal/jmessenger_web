@@ -7,6 +7,7 @@ import ChatContext from "./ChatContext.tsx";
 import chatData from "./chatData.tsx"
 import cookie from "js-cookie"
 import { sessionLogin } from "../api"
+import { io } from "socket.io-client"
 
 type Props = RouteComponentProps & {
   loginSessionId: string
@@ -71,6 +72,8 @@ class Chat extends React.Component<Props, State> {
 
   socketIO = () => {
     console.log("socketIO method called")
+    const socket = io()
+
   }
 
   async componentDidMount() {
