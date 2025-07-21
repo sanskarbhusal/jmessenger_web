@@ -1,13 +1,57 @@
 import React from "react";
+import { passwordLogin } from "../api"
 import {
   RouteComponentProps as Props,
   withRouter,
   NavLink,
 } from "react-router-dom";
+
 class Login extends React.Component<Props> {
-  onLogin = () => {
-    this.props.history.push("/chat");
+  state = {
+    userName: "",
+    password: "",
+    shouldRemember: false,
+    isLoginButtonPressed: false,
+    gotError: false,
+    errorType: "userName/password",
+    errorMessage: ""
+  }
+
+  onLogin = async () => {
+    const response = await passwordLogin({ userName: this.state.userName, password: this.state.password })
+    switch (response.status) {
+      case 200:
+        console.log("Successfull")
+        this.props.history.replace("/chat")
+        break;
+      //userName not found
+      case 401:
+        console.log("Username not found.")
+        this.setState({ gotError: true, errorType: "userName", errorMessage: response.text, isLoginButtonPressed: false })
+        break;
+      //password didn't match
+      case 403:
+        console.log("Password didn't match.")
+        this.setState({ gotError: true, errorType: "password", errorMessage: response.text, isLoginButtonPressed: false })
+        break;
+      //Database is depressed
+      case 500:
+        console.log("Password didn't match.")
+        this.setState({ gotError: true, errorMessage: response.text, isLoginButtonPressed: false })
+        break;
+      default:
+        console.log("Unknown response from the server.")
+        this.setState({ gotError: true, errorMessage: "Server issue.", isLoginButtonPressed: false })
+        break;
+    }
   };
+
+  errorMessage = () => {
+    return (
+      <p className="text-red-500 font-mono text-xs ml-[4px] mt-[4px]">{this.state.errorMessage}</p>
+    )
+  }
+
   render() {
     return (
       <div className="relative h-full w-full flex sm:justify-center items-center sm:bg-custom-blue/10">
@@ -26,24 +70,38 @@ class Login extends React.Component<Props> {
             </div>
 
             <div className="flex flex-col w-full">
-              <label htmlFor="email" className="mb-2 ">
-                Your email
+              <label htmlFor="user-name" className="mb-2 flex">
+                Username
+                {this.state.gotError && this.state.errorType == "userName" && this.errorMessage()}
               </label>
               <input
-                type="email"
-                id="email"
-                placeholder="Email"
+                type="text"
+                spellCheck="false"
+                id="user-name"
+                placeholder="Username"
+                onChange={(e) => {
+                  this.setState({ userName: e.target.value, gotError: false, isLoginButtonPressed: false })
+                }}
                 className=" font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] border-solid sm:bg-transparent border-gray-300 focus:outline-custom-blue "
               />
             </div>
             <div className="flex flex-col w-full">
-              <label htmlFor="password" className="mb-2">
+              <label htmlFor="password" className="mb-2 flex">
                 Password
+                {this.state.gotError && this.state.errorType == "password" && this.errorMessage()}
               </label>
               <input
                 type="password"
                 id="password"
                 placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                onKeyDown={(e) => {
+                  if (e.key == "Enter") {
+                    this.setState({ gotError: false, isLoginButtonPressed: false })
+                  }
+                }}
+                onChange={(e) => {
+                  this.setState({ password: e.target.value, gotError: false, isLoginButtonPressed: false })
+                }}
                 className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] sm:bg-transparent border-gray-300 border-solid focus:outline-custom-blue"
               />
             </div>
@@ -71,23 +129,23 @@ class Login extends React.Component<Props> {
                 </NavLink>
               </div>
             </div>
-
-            <div className="w-full">
-              <button
-                onClick={this.onLogin}
-                className="active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-sans text-base font-semibold"
-              >
-                Log in
-              </button>
-            </div>
-            <div>
-              <NavLink
-                className=" no-underline hover:underline text-base text-custom-blue"
-                to="/register"
-              >
-                Don't have an account?
-              </NavLink>
-            </div>
+            <button
+              onClick={() => {
+                if (!this.state.isLoginButtonPressed) {
+                  this.setState({ isLoginButtonPressed: true })
+                  this.onLogin()
+                }
+              }}
+              className="w-full h-10 active:bg-custom-blue-dark bg-custom-blue border-0 text-white mt-3 sm:rounded-3xl font-sans text-base font-semibold"
+            >
+              Log in
+            </button>
+            <NavLink
+              className=" no-underline hover:underline mt-[10px] text-base text-custom-blue"
+              to="/register"
+            >
+              Don't have an account?
+            </NavLink>
           </div>
         </div>
       </div>

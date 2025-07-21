@@ -34,16 +34,14 @@ class ForgotPassword extends React.Component<Props> {
               />
             </div>
 
-            <div className="w-full mt-2 ">
-              <button
-                onClick={() => {
-                  this.props.history.push("/otp-new-password");
-                }}
-                className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mb-2 sm:rounded-3xl w-full font-semibold "
-              >
-                Next
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                this.props.history.push("/otp-new-password");
+              }}
+              className="font-sans text-base active:bg-custom-blue-dark bg-custom-blue border-0 text-white h-10 mt-3 sm:rounded-3xl w-full font-semibold "
+            >
+              Next
+            </button>
           </div>
 
         </div>
