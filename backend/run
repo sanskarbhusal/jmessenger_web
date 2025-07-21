@@ -1,0 +1,2 @@
+clear
+npx tsx --watch index.js
