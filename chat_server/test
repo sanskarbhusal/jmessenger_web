@@ -1,5 +1,0 @@
-text="Random shit :)"
-id=(function(){return text})()
-console.log(
-(()=>id)()
-)
