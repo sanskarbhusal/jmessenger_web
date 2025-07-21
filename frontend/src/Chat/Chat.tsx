@@ -33,11 +33,6 @@ class Chat extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
-    this.getWidth = this.getWidth.bind(this);
-    this.swap = this.swap.bind(this)
-    this.setCurrentChat = this.setCurrentChat.bind(this)
-    this.getCurrentChat = this.getCurrentChat.bind(this)
-    this.updateUI = this.updateUI.bind(this)
     this.chatData = chatData
     this.state = {
       z1: "z-20",
@@ -49,7 +44,7 @@ class Chat extends React.Component<Props, State> {
     };
   }
 
-  swap() {
+  swap = () => {
     this.setState((prev) => {
       let z1 = prev.z1;
       let z2 = prev.z2;
@@ -62,16 +57,20 @@ class Chat extends React.Component<Props, State> {
     });
   }
 
-  setCurrentChat(chatId: string, chatName: string) {
+  setCurrentChat = (chatId: string, chatName: string) => {
     this.setState({ currentChatId: chatId, currentChatName: chatName })
   }
 
-  getCurrentChat() {
+  getCurrentChat = () => {
     return { chatId: this.state.currentChatId, chatName: this.state.currentChatName }
   }
 
-  updateUI() {
+  updateUI = () => {
     this.forceUpdate()
+  }
+
+  socketIO = () => {
+    console.log("socketIO method called")
   }
 
   async componentDidMount() {
@@ -84,6 +83,7 @@ class Chat extends React.Component<Props, State> {
         case 200:
           //session valid
           console.log(response.text)
+          this.socketIO()
           break;
         //session invalid
         case 401:
