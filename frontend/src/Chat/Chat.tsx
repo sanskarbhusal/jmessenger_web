@@ -73,6 +73,7 @@ class Chat extends React.Component<Props, State> {
   socketIO = () => {
     console.log("socketIO method called")
     const socket = io()
+    console.log(socket)
 
   }
 
