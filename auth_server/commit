@@ -1,0 +1,4 @@
+clear
+git add --all
+git commit -m "commited from backend"
+git branch
