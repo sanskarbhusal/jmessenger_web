@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <label>Enter text to transfer</label>
+    <input id="text" type="text">
+    </input>
+    <button id="button">Send</button>
+    <script>
+        const button = document.getElementById("button")
+        const text = document.getElementById("text")
+        button.addEventListener("click", async () => {
+            const value = text.value
+            const url = "http://192.168.185.121:8080/code"
+            const method = "POST"
+            const headers = { "Content-Type": "text" }
+            const body = value
+            const request = new Request(url, { method: method, body: body, headers: headers, credentials: "include" })
+            await fetch(request)
+                .then(async (response) => {
+                    alert("Got response " + request.text())
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        })
+    </script>
+</body>
+
+</html>

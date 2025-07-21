@@ -1,9 +1,10 @@
 import { MongoClient } from "mongodb"
 import dotenv from "dotenv"
 dotenv.config()
-const url = process.env.localInstance
+// const url = process.env.localInstance
+
+const url = process.env.connectionString // url of access controlled db instance
 const dbName = "jmessenger"
-const collectionName = "registration"
 
 const client = new MongoClient(url)
 
@@ -11,7 +12,8 @@ const client = new MongoClient(url)
 const db = client.db(dbName)
 
 // set the collection on the specified database to use
-const collection = db.collection(collectionName)
+const registrationCollection = db.collection("registration")
+const loginSessionCollection = db.collection("loginSessions")
 
 async function connect() {
     try {
@@ -31,13 +33,15 @@ async function performSingle(callback) {
     } catch (err) {
         console.log("Error during database operation.")
         console.log(err)
+    } finally {
+        try {
+            await client.close()
+            console.log("Database disconnected.")
+        } catch (err) {
+            console.log("Error while closing database connection.")
+        }
     }
-    try {
-        client.close()
-        console.log("Database disconnected.")
-    } catch (err) {
-        console.log("Error while closing database connection.")
-    }
+
     const status = error ? "500" : "200"
     return status
 }
@@ -61,6 +65,11 @@ async function performBatch(callbacks) {
 }
 
 async function performTransaction(callbacks) {
+    let transaction = {
+        shouldPerform: true,
+        passData: ""
+    }
+
     await connect()
     let error = false
     console.log("")
@@ -69,7 +78,7 @@ async function performTransaction(callbacks) {
     for (let index in callbacks) {
         try {
             if (!error) {
-                await callbacks[index]()
+                transaction = await callbacks[index](transaction)
             }
             console.log(`Db operation ${++index} ${error ? "Cancelled" : "Success"}`)
         } catch (err) {
@@ -86,6 +95,8 @@ async function performTransaction(callbacks) {
     } catch (err) {
         console.log("Error while closing database connection.")
     }
+    const status = error ? "500" : "200"
+    return status
 }
-const query = { performSingle: performSingle, performBatch: performBatch, performTransaction: performTransaction }
-export { query, collection }
+const query = { performSingle, performBatch, performTransaction }
+export { query, registrationCollection, loginSessionCollection }
