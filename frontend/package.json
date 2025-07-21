@@ -13,12 +13,16 @@
     "deploy-test": "echo 'test.sanskarbhusal.com.np' > dist/CNAME && gh-pages -d dist"
   },
   "dependencies": {
+    "dotenv": "^17.2.0",
+    "email-validator": "^2.0.4",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.19",
     "@types/react-router-dom": "^5.3.3",
@@ -28,6 +32,7 @@
     "globals": "^16.0.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.20.3",
     "typescript": "~5.4.4",
     "vite": "^6.3.1"
   }

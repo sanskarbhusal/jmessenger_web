@@ -1,4 +1,4 @@
 clear
 git add --all
-git commit --message "This is an autmated commit"
+git commit --message "Commited from frontend"
 git branch

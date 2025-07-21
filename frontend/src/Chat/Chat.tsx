@@ -5,7 +5,12 @@ import ChatBody from "./ChatBody";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChatContext from "./ChatContext.tsx";
 import chatData from "./chatData.tsx"
+import cookie from "js-cookie"
+import { sessionLogin } from "../api"
 
+type Props = RouteComponentProps & {
+  loginSessionId: string
+}
 type State = {
   z1: string;
   z2: string;
@@ -13,9 +18,10 @@ type State = {
   swap: () => void;
   currentChatId: string;
   currentChatName: string;
+  loginSessionId: string;
 };
 
-class Chat extends React.Component<RouteComponentProps, State> {
+class Chat extends React.Component<Props, State> {
 
   myRef: React.RefObject<HTMLDivElement>;
   chatData: typeof chatData
@@ -24,7 +30,7 @@ class Chat extends React.Component<RouteComponentProps, State> {
     return screen_width;
   }
 
-  constructor(props: RouteComponentProps) {
+  constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
     this.getWidth = this.getWidth.bind(this);
@@ -38,7 +44,8 @@ class Chat extends React.Component<RouteComponentProps, State> {
       z2: "z-0",
       swap: this.swap,
       currentChatId: "none",
-      currentChatName: "none"
+      currentChatName: "none",
+      loginSessionId: ""
     };
   }
 
@@ -65,6 +72,37 @@ class Chat extends React.Component<RouteComponentProps, State> {
 
   updateUI() {
     this.forceUpdate()
+  }
+
+  async componentDidMount() {
+    const userName = cookie.get("userName")
+    const loginSessionId = cookie.get("loginSessionId")
+    if (userName != undefined && loginSessionId != undefined) {
+      console.log("Found login session. Trying to validate session.")
+      const response = await sessionLogin({ userName, loginSessionId })
+      switch (response.status) {
+        case 200:
+          //session valid
+          console.log(response.text)
+          break;
+        //session invalid
+        case 401:
+          console.log("Invalid session. Redirecting to login page.")
+          this.props.history.replace("/login")
+          console.log(response.text)
+          break;
+        case 500:
+          //Server side error
+          console.log("Failed to validate session.")
+          console.log("Reason to fail: " + response.text)
+          console.log("Redirecting to login page.")
+          this.props.history.replace("/login")
+          break;
+      }
+    } else {
+      console.log("Session not found. Redirecting to login page.")
+      this.props.history.replace("/login")
+    }
   }
 
   render() {
