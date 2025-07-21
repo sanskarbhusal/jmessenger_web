@@ -18,15 +18,15 @@
         const button = document.getElementById("button")
         const text = document.getElementById("text")
         button.addEventListener("click", async () => {
-            console.log(text.value)
+            const value = text.value
             const url = "http://192.168.185.121:8080/code"
             const method = "POST"
             const headers = { "Content-Type": "text" }
-            const body = text.value
+            const body = value
             const request = new Request(url, { method: method, body: body, headers: headers, credentials: "include" })
             await fetch(request)
                 .then(async (response) => {
-                    alert("Got response " + res.text)
+                    alert("Got response " + request.text())
                 })
                 .catch((err) => {
                     console.error(err)
