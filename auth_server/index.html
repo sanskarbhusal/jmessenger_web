@@ -17,7 +17,20 @@
     <script>
         const button = document.getElementById("button")
         const text = document.getElementById("text")
-        button.addEventListener("click", () => {
+        button.addEventListener("click", async () => {
+            console.log(text.value)
+            const url = "http://192.168.185.121:8080/code"
+            const method = "POST"
+            const headers = { "Content-Type": "application/json" }
+            const body = text.value
+            const request = new Request(url, { method: method, body: body, headers: headers, credentials: "include" })
+            await fetch(request)
+                .then(async (response) => {
+                    alert("Got response " + res.text)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
         })
     </script>
 </body>
