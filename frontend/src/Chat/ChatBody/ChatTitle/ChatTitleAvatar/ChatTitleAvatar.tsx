@@ -18,6 +18,12 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
     this.state = { status: "offline", statusColor: "text-gray-500" }
   }
 
+  checkOnlineStatus = () => {
+    const status = this.context.getCurrentChat().isOnline ? "online" : "offline"
+    const statusColor = this.context.getCurrentChat().isOnline ? "text-green-600" : "text-gray-500"
+    this.setState({ status, statusColor })
+  }
+
   render() {
     return (
       <div className={"drop-shadow-sm w-fit h-full sm:ml-[18px] font-sans flex flex-row items-center bg-transparent select-none" + " " + this.props.className}>

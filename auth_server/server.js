@@ -165,7 +165,7 @@ app.post("/passwordLogin", async (req, res) => {
                     res.status(200)
                         .cookie("loginSessionId", loginSessionId, {
                             secure: true,
-                            maxAge: 2592000,
+                            maxAge: 86400000,
                             sameSite: "none"
                         })
                         .cookie("userName", userName, {

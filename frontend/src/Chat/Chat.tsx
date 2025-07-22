@@ -25,6 +25,7 @@ type State = {
   currentChatId: string;
   currentChatName: string;
   loginSessionId: string;
+  isOnline: boolean
 };
 
 class Chat extends React.Component<Props, State> {
@@ -46,7 +47,8 @@ class Chat extends React.Component<Props, State> {
       swap: this.swap,
       currentChatId: "none",
       currentChatName: "none",
-      loginSessionId: ""
+      loginSessionId: "",
+      isOnline: false
     };
   }
 
@@ -68,7 +70,7 @@ class Chat extends React.Component<Props, State> {
   }
 
   getCurrentChat = () => {
-    return { chatId: this.state.currentChatId, chatName: this.state.currentChatName }
+    return { chatId: this.state.currentChatId, chatName: this.state.currentChatName, isOnline: this.state.isOnline }
   }
 
   updateUI = () => {
@@ -76,10 +78,9 @@ class Chat extends React.Component<Props, State> {
   }
 
   connectToChatServer = (authCredential: AuthCredential) => {
-    console.log("socketIO method called")
     const socket = io("http://localhost:4000")
-
-    socket.emit("getOnline", { ...authCredential })
+    socket.emit("isOnline", { ...authCredential }, (response: object) => console.log(response))
+    socket.on("connect", () => console.log(socket.id))
   }
 
   async componentDidMount() {
