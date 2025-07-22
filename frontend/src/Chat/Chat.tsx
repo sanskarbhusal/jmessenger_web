@@ -9,6 +9,11 @@ import cookie from "js-cookie"
 import { sessionLogin } from "../api"
 import { io } from "socket.io-client"
 
+type AuthCredential = {
+  userName: string
+  loginSessionId: string
+}
+
 type Props = RouteComponentProps & {
   loginSessionId: string
 }
@@ -70,11 +75,11 @@ class Chat extends React.Component<Props, State> {
     this.forceUpdate()
   }
 
-  socketIO = () => {
+  connectToChatServer = (authCredential: AuthCredential) => {
     console.log("socketIO method called")
-    const socket = io()
-    console.log(socket)
+    const socket = io("http://localhost:4000")
 
+    socket.emit("getOnline", { ...authCredential })
   }
 
   async componentDidMount() {
@@ -87,7 +92,7 @@ class Chat extends React.Component<Props, State> {
         case 200:
           //session valid
           console.log(response.text)
-          this.socketIO()
+          this.connectToChatServer({ userName, loginSessionId })
           break;
         //session invalid
         case 401:

@@ -11,28 +11,11 @@ type State = {
 }
 
 export default class ChatTitleAvatar extends React.Component<Props, State> {
-
   declare context: React.ContextType<typeof chatContext>
   static contextType = chatContext
-  interval
   constructor(props: Props) {
     super(props)
     this.state = { status: "offline", statusColor: "text-gray-500" }
-    this.interval = 1
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState((prev) => {
-        const status = prev.status == "offline" ? "online" : "offline";
-        const statusColor = status == "offline" ? "text-gray-500" : "text-green-600";
-        return { status: status, statusColor: statusColor }
-      })
-    }, 2000)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
   }
 
   render() {
