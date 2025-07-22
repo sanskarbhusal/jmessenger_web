@@ -79,7 +79,7 @@ class Chat extends React.Component<Props, State> {
 
   connectToChatServer = (authCredential: AuthCredential) => {
     const socket = io("http://localhost:4000")
-    socket.emit("isOnline", { ...authCredential }, (response: object) => console.log(response))
+    socket.emit("registerOnline", { userName: authCredential.userName })
     socket.on("connect", () => console.log(socket.id))
   }
 

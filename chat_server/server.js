@@ -25,8 +25,8 @@ const io = new Server(server, {
 let isOnlineUsersLocked = false
 let onlineUsers = [
     {
-        userName: "test_userName",
-        loginSessionId: "test_login_session_id"
+        userName: "init",
+        loginSessionId: "init"
     }
 ]
 
@@ -34,41 +34,38 @@ function isOnline(userName) {
     let found
     if (!isOnlineUsersLocked) {
         isOnlineUsersLocked = true
-        found = onlineUsers.find((item) => { item.userName == msg.userName })
+        found = onlineUsers.find((item) => item.userName == userName)
         isOnlineUsersLocked = false
     } else {
         console.log("Can't read online users list due to synchronization issue.")
     }
-    return found //returns undefined or, string 
+    return found == undefined ? false : true//returns undefined or, string 
 }
 
 io.on('connection', (socket) => {
 
-    //client sent event listeners
-    console.log(socket.id)
+    //client event listeners
+    const socketId = socket.id
     socket.on("registerOnline", (obj) => {
-        onlineUsers.push({ userName: obj.userName, loginSessionId: obj.loginSessionId, socket: socket })
-    })
-
-    socket.on("isOnline", (obj, ack) => {
-        console.log(obj)
-        if (isOnline(obj.userName)) {
-            ack("true")
+        const userName = obj.userName
+        if (isOnline(userName)) {
+            const index = onlineUsers.findIndex((item) => item.userName == userName)
+            onlineUsers[index] = { userName, socketId }
         } else {
-            ack("false")
+            onlineUsers.push({ userName, socketId })
         }
-    })
-
-    socket.on("sendMsg", (obj) => {
-        console.log(obj)
-
+        console.log(`"${userName}" online`)
+        console.log("Total online ", onlineUsers.length)
     })
 
     socket.on("disconnect", () => {
-        console.log("User disconnected")
+        const found = onlineUsers.find((item) => item.socketId == socketId)
+        if (found != undefined) {
+            console.log(`"${found.userName}" offline`)
+            onlineUsers = onlineUsers.filter((item) => item.socketId != socket.id)
+            console.log("Total online after: ", onlineUsers.length)
+        }
     })
-    //server sent events
-    socket.emit("ping",)
 
 })
 
