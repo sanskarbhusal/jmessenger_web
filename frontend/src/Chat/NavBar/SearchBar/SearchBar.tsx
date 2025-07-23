@@ -1,9 +1,10 @@
 import React from "react";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
 import { RxCross2 as CrossIcon } from "react-icons/rx";
-type Props = Required<typeof SearchBar.defaultProps> & {
-  /* extra props here*/
-};
+import ChatContext from "../../ChatContext.tsx"
+
+type Props = {
+}
 
 type State = {
   isFocused: string;
@@ -19,15 +20,12 @@ interface myInterface {
   inputReference: React.RefObject<HTMLDivElement>;
 }
 
-export default class SearchBar
-  extends React.Component<Props, State>
+export default class SearchBar extends React.Component<Props, State>
   implements myInterface {
-  static defaultProps = {};
+  static contextType = ChatContext
+  declare context: React.ContextType<typeof ChatContext>
   constructor(props: Props) {
     super(props);
-    this.handleMousedown = this.handleMousedown.bind(this);
-    this.doHighlight = this.doHighlight.bind(this);
-    this.doGrayout = this.doGrayout.bind(this);
     this.inputReference = React.createRef<HTMLDivElement>();
   }
 
@@ -51,7 +49,7 @@ export default class SearchBar
     document.removeEventListener("mousedown", this.handleMousedown);
   }
 
-  doHighlight() {
+  doHighlight = () => {
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "block";
       return {
@@ -65,7 +63,7 @@ export default class SearchBar
     });
   }
 
-  doGrayout() {
+  doGrayout = () => {
     this.setState((prev) => {
       const crossIconDisplay = prev.inputText === "" ? "hidden" : "gray-300";
       return {
@@ -79,7 +77,7 @@ export default class SearchBar
     });
   }
 
-  handleMousedown(e: any) {
+  handleMousedown = (e: any) => {
     const container = this.inputReference.current;
     const target = e.target as Node;
     if (container && !container.contains(target)) {
@@ -130,6 +128,15 @@ export default class SearchBar
             spellCheck="false"
             value={this.state.inputText}
             onFocus={this.handleMousedown}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                this.context.getSocket().emit("findUser", { userName: this.state.inputText }, (res: string) => {
+                  if (res == "found") {
+
+                  }
+                })
+              }
+            }}
             onChange={(e) => {
               const crossIconDisplay =
                 e.target.value === "" ? "hidden" : "block";

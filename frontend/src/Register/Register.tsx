@@ -5,6 +5,7 @@ import validator from "email-validator"
 import { register } from "../api"
 
 type RegistrationData = {
+  fullName: string
   email: string
   userName: string
   password: string
@@ -15,6 +16,7 @@ type State = RegistrationData & {
   confirmedPassword: string
   passwordDidMatch: boolean
   isValidEmail: boolean
+  isNameEmpty: boolean
   submitted: boolean
   error: boolean
 }
@@ -26,6 +28,7 @@ class Register extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
+      fullName: "",
       email: "",
       userName: "",
       password: "",
@@ -33,6 +36,7 @@ class Register extends React.Component<Props, State> {
       confirmedPassword: "",
       passwordDidMatch: true,
       isValidEmail: true,
+      isNameEmpty: false,
       submitted: false,
       error: false
     }
@@ -47,25 +51,16 @@ class Register extends React.Component<Props, State> {
   }
 
   handleSignUp = async () => {
-    const password = this.state.password
-    const confirmedPassword = this.state.confirmedPassword
-    const email = this.state.email
-    let isValidEmail = false
-    let passwordDidMatch = false
 
-    if (this.isValidEmail(email)) {
-      isValidEmail = true
-    }
+    const isValidEmail = this.isValidEmail(this.state.email)
+    const passwordDidMatch = this.state.password == this.state.confirmedPassword
+    const isNameEmpty = this.state.fullName == "" ? true : false
 
-    if (password == confirmedPassword) {
-      passwordDidMatch = true
-    }
+    this.setState({ passwordDidMatch: passwordDidMatch, isValidEmail: isValidEmail, isNameEmpty: isNameEmpty, submitted: false })
 
-    this.setState({ passwordDidMatch: passwordDidMatch, isValidEmail: isValidEmail })
-
-    if (passwordDidMatch && isValidEmail) {
-      const response = await register({ email: this.state.email, userName: this.state.userName, password: this.state.password })
-      this.setState({ submitted: false })
+    if (passwordDidMatch && isValidEmail && !isNameEmpty) {
+      const response = await register({ fullName: this.state.fullName, email: this.state.email, userName: this.state.userName, password: this.state.password })
+      console.log("Made backend request.")
       switch (response.status) {
         case 200:
           this.setState({ isUsernameAvailable: false, error: true, submitted: false })
@@ -92,6 +87,7 @@ class Register extends React.Component<Props, State> {
   usernameNotAvailableError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">This username is already taken.</p>
   passswordMatchError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">Password didn't match!</p>
   invalidEmailError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">Invalid email</p>
+  noNameError = () => <p className="text-red-500 font-mono text-xs mt-[3px]">Empty</p>
 
   render() {
     if (this.state.error) {
@@ -104,6 +100,24 @@ class Register extends React.Component<Props, State> {
           <div className="w-[77vw] h-[550px] sm:h-fit sm:w-96 font-sans sm:bg-custom-blue/5 flex flex-col gap-5 justify-center items-left sm:items-center sm:rounded-3xl pl-[6%] ml-[6%] sm:m-0 sm:p-8  sm:border-custom-blue-dark/5 sm:border-1 sm:shadow-2xl sm:shadow-custom-blue/20 border border-solid border-l-1 border-b-0 border-t-0 border-r-0 border-custom-blue">
             <div className="text-2xl font-semibold mt-[-8px]">
               Sign up to JMessenger
+            </div>
+            <div className="flex flex-col w-full ">
+              <div className="flex gap-1">
+                <label htmlFor="full-name" className="mb-2">
+                  Full name
+                </label>
+                {this.state.isNameEmpty && this.noNameError()}
+              </div>
+              <input
+                onChange={(e) => {
+                  this.setState({ isNameEmpty: false, fullName: e.target.value, error: false })
+                }}
+                id="full-name"
+                type="text"
+                required
+                placeholder="Full name"
+                className="font-sans text-base p-2 sm:pl-[18px] sm:rounded-3xl border-[1px] border-solid sm:bg-transparent border-gray-300 focus:outline-custom-blue"
+              />
             </div>
 
             <div className="flex flex-col w-full ">

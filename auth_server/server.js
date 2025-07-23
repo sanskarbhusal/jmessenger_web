@@ -32,9 +32,8 @@ app.use(cookieParser())
 //global registration request pool (array of objects)
 let registrationRequests = []
 let otpSessions = []
-let loginSessions
 
-async function sendOtp(userName, otp, email) {
+async function sendOtp(fullName, otp, email) {
     const transporter = nodemailer.createTransport({
         host: "smtp.zoho.com",
         port: 465,
@@ -51,7 +50,7 @@ async function sendOtp(userName, otp, email) {
             from: 'jmessenger@sanskarbhusal.com.np',
             to: email,
             subject: "Verify your JMessenger Account ",
-            html: getHtml(userName, otp)
+            html: getHtml(fullName, otp)
         })
         return { info, isSent: true }
     } catch (err) {
@@ -62,8 +61,8 @@ async function sendOtp(userName, otp, email) {
 }
 
 app.post("/register", async (req, res) => {
-    const { email, userName, password } = req.body
-
+    const { email, userName, password, fullName } = req.body
+    console.log("Registeration request of:", req.body)
     let isAccountFound
     let status
 
@@ -80,8 +79,8 @@ app.post("/register", async (req, res) => {
             console.log("Requested username is available")
             const otpSessionId = uuidv4()
             const otp = Math.floor(Math.random() * 1000000)
-            const registrationRequest = { email, userName, password, otp, otpSessionId }
-            const otpMail = await sendOtp(userName, otp, email)
+            const registrationRequest = { fullName, email, userName, password, otp, otpSessionId }
+            const otpMail = await sendOtp(fullName, otp, email)
             if (otpMail.isSent) {
                 registrationRequests.push(registrationRequest)
                 otpSessions.push(otpSessionId)
@@ -125,7 +124,7 @@ app.post("/verify-otp", async (req, res) => {
                 }
 
                 const queryStatus = await query.performSingle(async () => {
-                    await registrationCollection.insertOne({ _id: found.userName, email: found.email, password: hashedPassword, timestamp: new Date(), timestamp: new Date().toISOString() })
+                    await registrationCollection.insertOne({ fullName: found.fullName, _id: found.userName, email: found.email, password: hashedPassword, timestamp: new Date(), timestamp: new Date().toISOString() })
                 })
 
                 if (queryStatus == "200") {

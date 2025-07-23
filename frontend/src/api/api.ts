@@ -80,6 +80,4 @@ async function sessionLogin(authData: object) {
     return res
 }
 
-
-
 export { register, submitOtp, passwordLogin, sessionLogin }

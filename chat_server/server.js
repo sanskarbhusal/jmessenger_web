@@ -2,12 +2,15 @@ import express from "express"
 import { createServer } from "node:http"
 import { Server } from "socket.io"
 import cors from "cors"
+import dotenv from "dotenv"
+import { query, registrationCollection } from "./database.js"
+
+dotenv.config()
 
 const corsOption = {
-    origin: "http://localhost",
+    origin: process.env.allowedOrigin,
     credentials: true,
     optionsSucessStatus: 200
-
 }
 
 const app = express()
@@ -15,7 +18,7 @@ app.use(cors(corsOption))
 const server = createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost",
+        origin: process.env.allowedOrigin,
         methods: ["POST", "GET"]
     }
 })
@@ -79,15 +82,34 @@ io.on('connection', (socket) => {
         ack(response)
     })
 
-    //Working...
-    socket.on("getContactList", (obj) => {
+    //Server side done. Client side is remaining
+    socket.on("findUser", async (obj, ack) => {
+        console.log("findUser event generated")
         const userName = obj.userName
-        console.log("Requested contactList")
+        let queryResult
+        const queryStatus = await query.performSingle(async () => {
+            queryResult = await registrationCollection.findOne({ _id: userName })
+        })
+        console.log(queryStatus, queryResult)
+        switch (queryStatus) {
+            case "200":
+                if (queryResult != null) {
+                    ack("found")
+                } else {
+                    ack("not_found")
+                }
+                break;
+            case "500":
+                console.log("'findUser' event listener: Database query broke.")
+                ack("database is depressed.")
+                break;
+            default:
+                ack("'findUser' event listener: Unknown status returned by database.")
+        }
     })
 })
 
 const port = 4000
-
 server.listen(port, () => {
     console.log("Listening on port: " + port)
 })

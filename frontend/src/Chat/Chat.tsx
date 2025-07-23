@@ -71,8 +71,6 @@ class Chat extends React.Component<Props, State> {
 
   setCurrentChat = (chatId: string, chatName: string) => {
     this.setState({ currentChatId: chatId, currentChatName: chatName, isOnline: false })
-
-
   }
 
   getCurrentChat = () => {
