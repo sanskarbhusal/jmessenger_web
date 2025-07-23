@@ -17,11 +17,33 @@ export default class ChatTitleAvatar extends React.Component<Props, State> {
     super(props)
     this.state = { status: "offline", statusColor: "text-gray-500" }
   }
+  declare interval: number
 
-  checkOnlineStatus = () => {
-    const status = this.context.getCurrentChat().isOnline ? "online" : "offline"
-    const statusColor = this.context.getCurrentChat().isOnline ? "text-green-600" : "text-gray-500"
-    this.setState({ status, statusColor })
+  pollStatus = () => {
+    const userName = this.context.getCurrentChat().chatId
+    this.context.getSocket().emit("isOnline", { userName }, (res: string) => {
+      console.log(res)
+      const status = res == "true" ? "online" : "offline"
+      const statusColor = res == "true" ? "text-green-600" : "text-gray-500"
+      this.setState((prev) => {
+        if (prev.status != status) {
+          return { status, statusColor }
+        } else {
+          return { ...prev }
+        }
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.pollStatus()
+    this.interval = setInterval(() => {
+      this.pollStatus()
+    }, 60000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   render() {

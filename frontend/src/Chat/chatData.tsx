@@ -75,7 +75,7 @@ const chat2: Chat = {
 const chat3: Chat = {
     chatName: "Sanskar",
     chatType: "private",
-    chatId: "003",
+    chatId: "sujal",
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.

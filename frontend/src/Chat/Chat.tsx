@@ -32,15 +32,14 @@ class Chat extends React.Component<Props, State> {
 
   myRef: React.RefObject<HTMLDivElement>;
   chatData: typeof chatData
-  getWidth() {
-    const screen_width = this.myRef.current!.offsetWidth;
-    return screen_width;
-  }
+
+  socket
 
   constructor(props: Props) {
     super(props);
     this.myRef = React.createRef();
     this.chatData = chatData
+    this.socket = io("http://localhost:4000")
     this.state = {
       z1: "z-20",
       z2: "z-0",
@@ -50,6 +49,11 @@ class Chat extends React.Component<Props, State> {
       loginSessionId: "",
       isOnline: false
     };
+  }
+
+  getWidth() {
+    const screen_width = this.myRef.current!.offsetWidth;
+    return screen_width;
   }
 
   swap = () => {
@@ -66,11 +70,17 @@ class Chat extends React.Component<Props, State> {
   }
 
   setCurrentChat = (chatId: string, chatName: string) => {
-    this.setState({ currentChatId: chatId, currentChatName: chatName })
+    this.setState({ currentChatId: chatId, currentChatName: chatName, isOnline: false })
+
+
   }
 
   getCurrentChat = () => {
     return { chatId: this.state.currentChatId, chatName: this.state.currentChatName, isOnline: this.state.isOnline }
+  }
+
+  getSocket = () => {
+    return this.socket
   }
 
   updateUI = () => {
@@ -78,9 +88,8 @@ class Chat extends React.Component<Props, State> {
   }
 
   connectToChatServer = (authCredential: AuthCredential) => {
-    const socket = io("http://localhost:4000")
-    socket.emit("registerOnline", { userName: authCredential.userName })
-    socket.on("connect", () => console.log(socket.id))
+    this.socket.emit("registerOnline", { userName: authCredential.userName })
+    this.socket.on("connect", () => console.log(this.socket.id))
   }
 
   async componentDidMount() {
@@ -122,7 +131,7 @@ class Chat extends React.Component<Props, State> {
           ref={this.myRef}
           className="relative rounded-none 2xl:rounded-lg h-full w-full bg-white bg-gradient-to-bl from-white to-custom-blue-dark/20 2xl:top-[-2px] 2xl:h-[97vh] 2xl:w-[83vw] 2xl:border-[1px] 2xl:border-custom-blue/30 flex flex-col sm:flex-row sm:shadow-inner sm:shadow-custom-blue/10 2xl:shadow-none"
         >
-          <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData, setCurrentChat: this.setCurrentChat, getCurrentChat: this.getCurrentChat, forceUpdateChat: this.updateUI }} >
+          <ChatContext.Provider value={{ swap: this.state.swap, chatData: this.chatData, setCurrentChat: this.setCurrentChat, getCurrentChat: this.getCurrentChat, forceUpdateChat: this.updateUI, getSocket: this.getSocket }} >
             <div className="flex flex-col w-full h-full sm:w-[388px] overflow-y-hidden">
               <NavBar className={"relative" + " " + this.state.z1 + " "} />
               <ContactList className={"relative " + " " + this.state.z1} />

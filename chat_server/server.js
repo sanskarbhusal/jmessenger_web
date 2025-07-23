@@ -45,6 +45,8 @@ function isOnline(userName) {
 io.on('connection', (socket) => {
 
     //client event listeners
+
+    //Done
     const socketId = socket.id
     socket.on("registerOnline", (obj) => {
         const userName = obj.userName
@@ -58,6 +60,7 @@ io.on('connection', (socket) => {
         console.log("Total online ", onlineUsers.length)
     })
 
+    //Done
     socket.on("disconnect", () => {
         const found = onlineUsers.find((item) => item.socketId == socketId)
         if (found != undefined) {
@@ -67,6 +70,20 @@ io.on('connection', (socket) => {
         }
     })
 
+    //Done
+    socket.on("isOnline", (obj, ack) => {
+        //eg.ack(msg) on server
+        console.log(obj.userName)
+        const response = isOnline(obj.userName) ? "true" : "false"
+        console.log(response)
+        ack(response)
+    })
+
+    //Working...
+    socket.on("getContactList", (obj) => {
+        const userName = obj.userName
+        console.log("Requested contactList")
+    })
 })
 
 const port = 4000

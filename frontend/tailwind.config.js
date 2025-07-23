@@ -29,6 +29,8 @@ export default {
     "block",
     "hidden",
     "w-[40px]",
-    "rounded-full"
+    "rounded-full",
+    "text-gray-500",
+    "text-green-600"
   ],
 };
