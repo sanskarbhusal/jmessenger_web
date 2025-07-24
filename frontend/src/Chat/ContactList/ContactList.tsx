@@ -4,41 +4,54 @@ import ChatContext from "../ChatContext.tsx"
 import type { ContactPropsType } from "./Contact/Contact.tsx"
 import { getDate } from "../utils.tsx"
 
-type Props = Required<typeof ContactList.defaultProps> & { className?: string };
+type Props = { className?: string };
 type State = { msg: string }
 
 export default class ContactList extends React.Component<Props, State> {
 
-  static defaultProps = {};
   static contextType = ChatContext
   declare context: React.ContextType<typeof ChatContext>
+  contactList: ContactPropsType[]
 
   constructor(props: Props) {
     super(props)
-    this.state = { msg: "ContactList state updated" } as State
+    this.contactList = [
+      {
+        userName: "",
+        fullName: "",
+        dateOfLastMessage: "",
+        lastMessage: "",
+        lastPersonToMessage: "You"
+      }]
+    this.state = {
+      msg: "ContactList state updated"
+    }
+  }
+
+  fetchContactList = () => {
+    return new Promise<ContactPropsType[]>((resolve, reject) => {
+      this.context.getSocket().emit("getContactList", { userName: "sanskar" }, (res: ContactPropsType[]) => resolve(res))
+    })
+  }
+
+  async componentDidMount() {
+    this.contactList = await this.fetchContactList()
+    console.log(this.contactList)
   }
 
   Contacts = () => {
+    const contactList = this.contactList
+    const ContactArray = contactList.map((item, index) => {
 
-    const chatList = this.context.chatData.chatList
-    const ContactArray = chatList.map((item, index) => {
-      const { chatName, chatId, history } = item
+      const { fullName, userName, dateOfLastMessage, lastPersonToMessage, lastMessage } = item
       const contactProps: ContactPropsType = {} as ContactPropsType
-      const lastElement = history[history.length - 1] //extracting last element
 
-      contactProps.chatName = chatName
-      contactProps.chatId = chatId
-      contactProps.lastMessage = lastElement.content
-      contactProps.dateOfLastMessage = getDate(new Date(lastElement.timestamp).toString())
+      contactProps.fullName = fullName
+      contactProps.userName = userName
+      contactProps.lastMessage = lastMessage
+      contactProps.dateOfLastMessage = getDate(new Date(dateOfLastMessage).toLocaleDateString())
+      contactProps.lastPersonToMessage = lastPersonToMessage
 
-      switch (lastElement.sender) {
-        case "You":
-          contactProps.lastPersonToMessage = lastElement.sender
-          break;
-        case "chat":
-          contactProps.lastPersonToMessage = chatName
-          break;
-      }
       return <Contact key={index} {...contactProps} />
     })
     return ContactArray

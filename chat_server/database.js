@@ -14,6 +14,7 @@ const db = client.db(dbName)
 // set the collection on the specified database to use
 const registrationCollection = db.collection("registration")
 const loginSessionCollection = db.collection("loginSessions")
+const contactListsCollection = db.collection("contactLists")
 
 async function connect() {
     try {
@@ -100,4 +101,4 @@ async function performTransaction(callbacks) {
 }
 
 const query = { performSingle, performBatch, performTransaction }
-export { query, registrationCollection, loginSessionCollection }
+export { query, registrationCollection, loginSessionCollection, contactListsCollection }

@@ -1,12 +1,12 @@
 import React from "react";
 import ChatContext from "../../ChatContext.tsx";
 
-type Props = Required<typeof Contact.defaultProps> & {
-  chatName: string
-  chatId: string
-  dateOfLastMessage?: string
-  lastPersonToMessage?: string
-  lastMessage?: string
+type Props = {
+  fullName: string
+  userName: string
+  dateOfLastMessage: string
+  lastPersonToMessage: "You" | "them"
+  lastMessage: string
 };
 
 type State = {
@@ -14,7 +14,6 @@ type State = {
 
 export default class Contact extends React.Component<Props, State> {
 
-  static defaultProps = {};
   static contextType = ChatContext;
   declare context: React.ContextType<typeof ChatContext>;
 
@@ -27,7 +26,7 @@ export default class Contact extends React.Component<Props, State> {
 
   handleClick() {
     // this.context.swap() //uncomment when working on mobile layout
-    this.context.setCurrentChat(this.props.chatId, this.props.chatName)
+    this.context.setCurrentChat(this.props.userName, this.props.fullName)
   }
 
   render() {
@@ -44,7 +43,7 @@ export default class Contact extends React.Component<Props, State> {
         </div>
         <div className="w-full ml-[8px] flex flex-col sm:drop-shadow-sm">
           <div className="flex flex-row justify-between">
-            <div className="font-medium text-lg select-none mt-[5px]">{this.props.chatName}</div>
+            <div className="font-medium text-lg select-none mt-[5px]">{this.props.fullName}</div>
             <div className="text-gray-500 mr-[28px] mt-[3px] font-medium text-xs">
               {this.props.dateOfLastMessage}
             </div>

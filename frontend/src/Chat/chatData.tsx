@@ -4,34 +4,34 @@ import type { MessageBoxType } from "./ChatBody/MessageBox/MessageBox.tsx"
 interface Message {
     contentType: "text" | "file" | "photo" | "url"; //Only implement text for now. We don't have time to develop every freakin' feature.
     content: string; //Since, only text will be implemented, string is okay for now.
-    sender: "You" | "chat"; //Required to distinguish messages that are of the user from the chat's.
+    sender: "You" | "them"; //Required to distinguish messages that are of the user from the chat's.
     isMessageUploaded: boolean;
     isMessageDelivered: boolean;
     timestamp: string; // ISO 8601 time format. 
 }
 
 interface Chat {
-    chatName: string //Full name that the chat (not the user).
+    fullName: string //Full name that the chat (not the user).
     chatType: "private" | "group"
-    chatId: string //This should hold the unique id representing the chat (not the user)
+    userName: string //This should hold the unique id representing the chat (not the user)
     history: Message[] //"history" is an array because, messages are stacked based on time. Array serves the purpose of stack.
 }
 
 interface ChatData {
-    userId: string //UserId is fetched from local storage. It's stored there during login.
+    userName: string //UserId is fetched from local storage. It's stored there during login.
     chatList: Chat[]
 }
 
 // Hard coding a dummy chatData object for testing
 const chat1: Chat = {
-    chatName: "Suman",
+    fullName: "Suman",
     chatType: "private",
-    chatId: "001",
+    userName: "001",
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hi. I'm Suman.",
-            sender: "chat",
+            sender: "them",
             isMessageUploaded: false,
             isMessageDelivered: false,
             timestamp: "2025-01-13"
@@ -48,14 +48,14 @@ const chat1: Chat = {
 }
 
 const chat2: Chat = {
-    chatName: "Santosh",
+    fullName: "Santosh",
     chatType: "private",
-    chatId: "002",
+    userName: "002",
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hi. I'm Santosh",
-            sender: "chat",
+            sender: "them",
             isMessageUploaded: false,
             isMessageDelivered: false,
             timestamp: "2025-07-04T20:02:51.336Z"
@@ -73,14 +73,14 @@ const chat2: Chat = {
 }
 
 const chat3: Chat = {
-    chatName: "Sanskar",
+    fullName: "Sanskar",
     chatType: "private",
-    chatId: "sujal",
+    userName: "sujal",
     history: [
         {
             contentType: "text", //remember, we only will implement text type for now.
             content: "Hey, what's your thought on software development? Is computer engineering the correct path to become software engineer?",
-            sender: "chat",
+            sender: "them",
             isMessageUploaded: false,
             isMessageDelivered: false,
             timestamp: "2025-07-04T20:02:51.336Z"
@@ -97,7 +97,7 @@ const chat3: Chat = {
 }
 
 const chatData: ChatData = {
-    userId: "@sanskar",
+    userName: "sanskar",
     chatList: [chat1, chat2, chat3]
 }
 
@@ -107,9 +107,9 @@ const chatData: ChatData = {
 
 /* Query functions (Currently working) */
 
-function getChatHistory(chatId: string): Message[] {
+function getChatHistory(userName: string): Message[] {
     const chat = chatData.chatList.find((element) => {
-        return element.chatId == chatId ? true : false
+        return element.userName == userName ? true : false
     })
     if (chat != undefined) {
         return chat!.history
@@ -124,8 +124,8 @@ function getChatHistory(chatId: string): Message[] {
         },
         {
             contentType: "text",
-            content: `[_default_text_from_${chatId}]`,
-            sender: "chat",
+            content: `[_default_text_from_${userName}]`,
+            sender: "them",
             isMessageUploaded: false,
             isMessageDelivered: false,
             timestamp: "look up calander"
@@ -134,7 +134,7 @@ function getChatHistory(chatId: string): Message[] {
     }
 }
 
-function updateChatHistory(chatId: string, messageBox: MessageBoxType) {
+function updateChatHistory(userName: string, messageBox: MessageBoxType) {
     //Extracting the chat object with given chatId
     let isUpdated: boolean
 
@@ -148,7 +148,7 @@ function updateChatHistory(chatId: string, messageBox: MessageBoxType) {
     }
 
     const chat = chatData.chatList.find((item) => {
-        return item.chatId == chatId ? true : false
+        return item.userName == userName ? true : false
     })
     if (chat != null && chat != undefined) {
         chat.history.push(msg)

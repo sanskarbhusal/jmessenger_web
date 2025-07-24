@@ -3,7 +3,7 @@ import { createServer } from "node:http"
 import { Server } from "socket.io"
 import cors from "cors"
 import dotenv from "dotenv"
-import { query, registrationCollection } from "./database.js"
+import { query, registrationCollection, contactListsCollection } from "./database.js"
 
 dotenv.config()
 
@@ -105,6 +105,31 @@ io.on('connection', (socket) => {
                 break;
             default:
                 ack("'findUser' event listener: Unknown status returned by database.")
+        }
+    })
+
+    //working...
+    socket.on("getContactList", async (obj, ack) => {
+        const userName = obj.userName
+        console.log("getChatList event sent for userName: ", userName)
+        let queryResult
+        const queryStatus = await query.performSingle(async () => {
+            queryResult = await contactListsCollection.findOne({ _id: userName })
+        })
+        switch (queryStatus) {
+            case "200":
+                if (queryResult != null) {
+                    ack(queryResult.contactList)
+                }
+                break;
+            case "500":
+                console.log("'getChatList' event listener: db query returned 500 status")
+                ack("Database is depressed.")
+                break;
+            default:
+                console.log("'getChatList' event listener: db query returned unknown status")
+                ack("Don't know wtf has happened!")
+                break;
         }
     })
 })
