@@ -19,7 +19,7 @@ type State = {
 type Props = {
   contentType: "text" | "file" | "photo" | "url"
   content: string;
-  sender: "You" | "chat"
+  sender: "You" | "them"
   isMessageUploaded: boolean
   isMessageDelivered: boolean
   timestamp: string;
@@ -59,7 +59,7 @@ export default class ChatBubble extends React.Component<Props, State> {
           bubbleColor: "bg-custom-blue/5"
         })
         break;
-      case "chat":
+      case "them":
         this.setState({
           bubbleAlignment: "self-start",
           bubbleColor: "bg-white",
