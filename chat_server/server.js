@@ -78,19 +78,16 @@ io.on('connection', (socket) => {
         //eg.ack(msg) on server
         console.log(obj.userName)
         const response = isOnline(obj.userName) ? "true" : "false"
-        console.log(response)
         ack(response)
     })
 
     //Server side done. Client side is remaining
     socket.on("findUser", async (obj, ack) => {
-        console.log("findUser event generated")
         const userName = obj.userName
         let queryResult
         const queryStatus = await query.performSingle(async () => {
             queryResult = await registrationCollection.findOne({ _id: userName })
         })
-        console.log(queryStatus, queryResult)
         switch (queryStatus) {
             case "200":
                 if (queryResult != null) {
@@ -120,6 +117,8 @@ io.on('connection', (socket) => {
             case "200":
                 if (queryResult != null) {
                     ack(queryResult.contactList)
+                } else {
+                    ack("no contact list found for the user: " + userName)
                 }
                 break;
             case "500":

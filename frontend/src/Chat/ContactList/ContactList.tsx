@@ -5,42 +5,44 @@ import type { ContactPropsType } from "./Contact/Contact.tsx"
 import { getDate } from "../utils.tsx"
 
 type Props = { className?: string };
-type State = { msg: string }
+type State = {
+  msg: string,
+  contactList: ContactPropsType[]
+}
 
 export default class ContactList extends React.Component<Props, State> {
 
   static contextType = ChatContext
   declare context: React.ContextType<typeof ChatContext>
-  contactList: ContactPropsType[]
-
   constructor(props: Props) {
     super(props)
-    this.contactList = [
-      {
-        userName: "",
-        fullName: "",
-        dateOfLastMessage: "",
-        lastMessage: "",
-        lastPersonToMessage: "You"
-      }]
+
     this.state = {
-      msg: "ContactList state updated"
+      msg: "ContactList state updated",
+      contactList: [
+        {
+          userName: "",
+          fullName: "",
+          dateOfLastMessage: "",
+          lastMessage: "",
+          lastPersonToMessage: "You"
+        }]
     }
   }
 
   fetchContactList = () => {
-    return new Promise<ContactPropsType[]>((resolve, reject) => {
+    return new Promise<ContactPropsType[]>((resolve) => {
       this.context.getSocket().emit("getContactList", { userName: "sanskar" }, (res: ContactPropsType[]) => resolve(res))
     })
   }
 
   async componentDidMount() {
-    this.contactList = await this.fetchContactList()
-    console.log(this.contactList)
+    this.setState({ contactList: await this.fetchContactList() })
+    console.log(this.state.contactList)
   }
 
   Contacts = () => {
-    const contactList = this.contactList
+    const contactList = this.state.contactList
     const ContactArray = contactList.map((item, index) => {
 
       const { fullName, userName, dateOfLastMessage, lastPersonToMessage, lastMessage } = item
@@ -49,7 +51,7 @@ export default class ContactList extends React.Component<Props, State> {
       contactProps.fullName = fullName
       contactProps.userName = userName
       contactProps.lastMessage = lastMessage
-      contactProps.dateOfLastMessage = getDate(new Date(dateOfLastMessage).toLocaleDateString())
+      contactProps.dateOfLastMessage = getDate(new Date(dateOfLastMessage).toDateString())
       contactProps.lastPersonToMessage = lastPersonToMessage
 
       return <Contact key={index} {...contactProps} />
